@@ -1,0 +1,25 @@
+﻿<Window x:Class="WPF_MAIN"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GPOSE_ASSIST"
+        mc:Ignorable="d"
+        Title="WPF_MAIN" Height="64" Width="64" WindowStartupLocation="Manual" FontSize="15" FontFamily="Meiryo" WindowStyle="None"
+        AllowsTransparency="True"
+        Background="#100000FF"
+        Topmost="True" 
+        ShowInTaskbar="False">
+    <Grid>
+        <Grid.ContextMenu>
+            <ContextMenu x:Name="MENU_WINDOW">
+                <MenuItem x:Name="MNI_SETTING" Header="Setting" />
+                <Separator />
+                <MenuItem x:Name="MNI_EXIT" Header="Exit" />
+            </ContextMenu>
+        </Grid.ContextMenu>
+        <Button x:Name="PCB_BUTTON_MAIN" HorizontalAlignment="Right" VerticalAlignment="Top" Width="64" Height="64" Margin="0,0,0,0" ToolTip="ガイドを表示します。" Background="#00000000" BorderBrush="#00000000">
+            <Image Source="/RES/IMG/BTN_MAIN.png" Margin="-2,-2,-2,-2" OpacityMask="#E0000000"/>
+        </Button>
+    </Grid>
+</Window>

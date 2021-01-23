@@ -1,0 +1,72 @@
+﻿<Window x:Class="WPF_TRIM"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GPOSE_ASSIST"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="#100000FF"
+        ResizeMode="CanResizeWithGrip"
+        Topmost="True" 
+        Title="WPF_TRIM" Height="400" Width="600" WindowStartupLocation="CenterScreen" ShowInTaskbar="False"
+        >
+    <Grid>
+        <Grid.ContextMenu>
+            <ContextMenu x:Name="MENU_WINDOW">
+                <MenuItem x:Name="MNI_CAPT" Header="撮影" />
+                <MenuItem x:Name="MNI_CAPT_SNS" Header="撮影(SNS向)" />
+                <Separator />
+                <MenuItem x:Name="MNI_FIT_WINDOW" Header="画面の位置に合わせる" />
+                <Separator />
+                <MenuItem Header="アスペクト比">
+                    <MenuItem x:Name="MNI_RATE_FREE" Header="フリー" IsCheckable="True" />
+                    <MenuItem x:Name="MNI_RATE_1_1" Header="1:1" IsCheckable="True" />
+                    <MenuItem x:Name="MNI_RATE_2_3" Header="2:3(デジタル写真サイズ比)" IsCheckable="True" />
+                    <MenuItem x:Name="MNI_RATE_3_2" Header="3:2(デジタル写真サイズ比)" IsCheckable="True" />
+                    <MenuItem x:Name="MNI_RATE_3_4" Header="3:4(映像サイズ比)" IsCheckable="True" />
+                    <MenuItem x:Name="MNI_RATE_4_3" Header="4:3(映像サイズ比)" IsCheckable="True" />
+                    <MenuItem x:Name="MNI_RATE_5_7" Header="1:1.414(用紙サイズ比)" IsCheckable="True" />
+                    <MenuItem x:Name="MNI_RATE_7_5" Header="1.414:1(用紙サイズ比)" IsCheckable="True" />
+                    <MenuItem x:Name="MNI_RATE_5_8" Header="1:1.618(黄金比)" IsCheckable="True" />
+                    <MenuItem x:Name="MNI_RATE_8_5" Header="1.618:1(黄金比)" IsCheckable="True" />
+                    <MenuItem x:Name="MNI_RATE_5_12" Header="1:2.414(白銀比)" IsCheckable="True" />
+                    <MenuItem x:Name="MNI_RATE_12_5" Header="2.414:1(白銀比)" IsCheckable="True" />
+                    <MenuItem x:Name="MNI_RATE_9_16" Header="9:16(映像ワイドサイズ比)" IsCheckable="True" />
+                    <MenuItem x:Name="MNI_RATE_16_9" Header="16:9(映像ワイドサイズ比)" IsCheckable="True" />
+                </MenuItem>
+                <MenuItem Header="構図補助">
+                    <MenuItem x:Name="MNI_COMP_NONE" Header="無し" IsCheckable="True" />
+                    <MenuItem x:Name="MNI_COMP_2DIV" Header="2分割" IsCheckable="True" />
+                    <MenuItem x:Name="MNI_COMP_3DIV" Header="3分割" IsCheckable="True" />
+                    <MenuItem x:Name="MNI_COMP_4DIV" Header="4分割" IsCheckable="True" />
+                    <MenuItem x:Name="MNI_COMP_3DIV_PHI" Header="3分割(φ)" IsCheckable="True" />
+                    <MenuItem x:Name="MNI_COMP_GOLDEN_RECTANGLE_HLL" Header="黄金螺旋-横-左下起点" IsCheckable="True" />
+                    <MenuItem x:Name="MNI_COMP_GOLDEN_RECTANGLE_HUR" Header="黄金螺旋-横-右上起点" IsCheckable="True" />
+                    <MenuItem x:Name="MNI_COMP_GOLDEN_RECTANGLE_HUL" Header="黄金螺旋-横-左上起点" IsCheckable="True" />
+                    <MenuItem x:Name="MNI_COMP_GOLDEN_RECTANGLE_HLR" Header="黄金螺旋-横-右下起点" IsCheckable="True" />
+                    <MenuItem x:Name="MNI_COMP_GOLDEN_RECTANGLE_VLL" Header="黄金螺旋-縦-左下起点" IsCheckable="True" />
+                    <MenuItem x:Name="MNI_COMP_GOLDEN_RECTANGLE_VUR" Header="黄金螺旋-縦-右上起点" IsCheckable="True" />
+                    <MenuItem x:Name="MNI_COMP_GOLDEN_RECTANGLE_VUL" Header="黄金螺旋-縦-左上起点" IsCheckable="True" />
+                    <MenuItem x:Name="MNI_COMP_GOLDEN_RECTANGLE_VLR" Header="黄金螺旋-縦-右下起点" IsCheckable="True" />
+                </MenuItem>
+                <Separator />
+                <MenuItem x:Name="MNI_CLOSE" Header="閉じる" />
+            </ContextMenu>
+        </Grid.ContextMenu>
+
+        <Image x:Name="PCB_COMPOSITION" Height="400" Width="600" Stretch="Fill"/>
+
+        <Label x:Name="LBL_GUIDE" Content="" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="5,5,5,5" Height="100"  Width="100" FontFamily="Lucida Console" Foreground="White"/>
+
+        <CheckBox x:Name="CHK_OPACITY" HorizontalAlignment="Right" Height="20" Margin="5,5,5,5" VerticalAlignment="Top" FlowDirection="RightToLeft" Content="透過" Foreground="White"/>
+
+        <Button x:Name="PCB_BUTTON_SHUTTER" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="16" Height="16" Margin="0,0,5,21" ToolTip="撮影を行います" Background="#00000000" BorderBrush="#00000000">
+            <Image Source="/RES/IMG/CAMERA_NORMAL.png" Margin="-2,-2,-2,-2"/>
+        </Button>
+        <Button x:Name="PCB_BUTTON_SHUTTER_JPEG" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="16" Height="16" Margin="0,0,5,5" ToolTip="撮影を行います（SNS向け）" Background="#00000000" BorderBrush="#00000000">
+            <Image Source="/RES/IMG/CAMERA_JPEG.png" Margin="-2,-2,-2,-2"/>
+        </Button>
+    </Grid>
+</Window>
