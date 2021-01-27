@@ -9,6 +9,8 @@
             Return False
         End If
 
+        Call SUB_INIT_GAPHICS()
+
         Return True
     End Function
 

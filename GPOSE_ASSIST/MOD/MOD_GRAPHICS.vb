@@ -24,45 +24,45 @@ Public Module MOD_GRAPHICS
 
     Delegate Function DelPrintWindow(ByVal hWnd As System.IntPtr, ByVal dc As System.IntPtr, ByVal reservedFlag As Integer) As Boolean
 
-    Private delPRINT_WINDOW As [Delegate]
-    Private mtdPRINT_WINDOW As DelPrintWindow
-    Private lodUSER32 As DynamicLibraryLoader
+    Private DEL_PRINT_WINDOW As [Delegate]
+    Private MTD_PRINT_WINDOW As DelPrintWindow
+    Private LOD_USER32 As DynamicLibraryLoader
 
     Public Sub SUB_INIT_GAPHICS()
         Dim blnRET As Boolean
 
-        lodUSER32 = New DynamicLibraryLoader
+        LOD_USER32 = New DynamicLibraryLoader
 
-        blnRET = lodUSER32.Load("user32.dll")
+        blnRET = LOD_USER32.Load("user32.dll")
 
         If Not blnRET Then
-            lodUSER32 = Nothing
+            LOD_USER32 = Nothing
             Exit Sub
         End If
 
-        delPRINT_WINDOW = lodUSER32.GetDelegate("PrintWindow", GetType(DelPrintWindow))
+        DEL_PRINT_WINDOW = LOD_USER32.GetDelegate("PrintWindow", GetType(DelPrintWindow))
 
-        If delPRINT_WINDOW Is Nothing Then
-            Call lodUSER32.Free()
+        If DEL_PRINT_WINDOW Is Nothing Then
+            Call LOD_USER32.Free()
             Exit Sub
         End If
 
-        mtdPRINT_WINDOW = CType(delPRINT_WINDOW, DelPrintWindow)
+        MTD_PRINT_WINDOW = CType(DEL_PRINT_WINDOW, DelPrintWindow)
     End Sub
 
     Public Sub SUB_END_GAPHICS()
 
-        If Not delPRINT_WINDOW Is Nothing Then
-            delPRINT_WINDOW = Nothing
+        If Not DEL_PRINT_WINDOW Is Nothing Then
+            DEL_PRINT_WINDOW = Nothing
         End If
 
-        If lodUSER32 Is Nothing Then
+        If LOD_USER32 Is Nothing Then
             Exit Sub
         End If
 
-        Call lodUSER32.Free()
+        Call LOD_USER32.Free()
 
-        lodUSER32 = Nothing
+        LOD_USER32 = Nothing
     End Sub
 
     Public Sub SUB_PRINT_WINDOW_TEST(ByRef GRP_BITMAP As Graphics, PRC_TARGET As Process)
@@ -75,7 +75,7 @@ Public Module MOD_GRAPHICS
             Exit Sub
         End If
 
-        If delPRINT_WINDOW Is Nothing Then
+        If DEL_PRINT_WINDOW Is Nothing Then
             Exit Sub
         End If
 
@@ -85,7 +85,7 @@ Public Module MOD_GRAPHICS
         Const CST_FLAG As Integer = (1 Or 2)
         'Const CST_FLAG As Integer = (1)
         Dim BLN_RET As Boolean
-        BLN_RET = mtdPRINT_WINDOW(PRC_TARGET.MainWindowHandle, PTR_GRAPHIC, CST_FLAG)
+        BLN_RET = MTD_PRINT_WINDOW(PRC_TARGET.MainWindowHandle, PTR_GRAPHIC, CST_FLAG)
 
         Call GRP_BITMAP.ReleaseHdc(PTR_GRAPHIC)
     End Sub
