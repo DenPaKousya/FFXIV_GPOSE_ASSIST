@@ -127,6 +127,9 @@ Public Class WPF_TRIM
 #Region "主処理"
     Private Sub SUB_CAPTURE()
         Call MessageBox.Show("未実装")
+
+        Call My.Computer.Audio.Play(My.Resources.SHUTTER_SHORT, Microsoft.VisualBasic.AudioPlayMode.Background)
+
     End Sub
 
     Private Sub SUB_CAPTURE_JPEG()
