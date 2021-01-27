@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GPOSE_ASSIST"
         mc:Ignorable="d"
-        Title="WPF_MAIN" Height="64" Width="64" WindowStartupLocation="Manual" FontSize="15" FontFamily="Meiryo" WindowStyle="None"
+        Title="WPF_MAIN" Height="32" Width="32" WindowStartupLocation="Manual" FontSize="15" FontFamily="Meiryo" WindowStyle="None"
         AllowsTransparency="True"
         Background="#100000FF"
         Topmost="True" 
@@ -18,7 +18,7 @@
                 <MenuItem x:Name="MNI_EXIT" Header="Exit" />
             </ContextMenu>
         </Grid.ContextMenu>
-        <Button x:Name="PCB_BUTTON_MAIN" HorizontalAlignment="Right" VerticalAlignment="Top" Width="64" Height="64" Margin="0,0,0,0" ToolTip="ガイドを表示します。" Background="#00000000" BorderBrush="#00000000">
+        <Button x:Name="PCB_BUTTON_MAIN" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,0,0" ToolTip="ガイドを表示します。" Background="#00000000" BorderBrush="#00000000">
             <Image Source="/RES/IMG/BTN_MAIN.png" Margin="-2,-2,-2,-2" OpacityMask="#E0000000"/>
         </Button>
     </Grid>
