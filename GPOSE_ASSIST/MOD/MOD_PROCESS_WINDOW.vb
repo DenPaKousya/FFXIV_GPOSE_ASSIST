@@ -74,9 +74,9 @@ Public Module MOD_PROCESS_WINDOW
         Return SRT_RET
     End Function
 
-    Public Function FUNC_GET_WINDOW_RECT_WH(ByRef PRC_CRIENT As Process) As RECT_WH
+    Public Function FUNC_GET_WINDOW_RECT_WH(ByRef PRC_WINDOW As Process) As RECT_WH
         Dim SRT_RECT As RECT
-        SRT_RECT = FUNC_GET_WINDOW_RECT(PRC_CRIENT)
+        SRT_RECT = FUNC_GET_WINDOW_RECT(PRC_WINDOW)
 
         Dim SRT_RET As RECT_WH
         SRT_RET = FUNC_CNV_RECT_TO_RECTWH(SRT_RECT)
@@ -84,6 +84,85 @@ Public Module MOD_PROCESS_WINDOW
         Return SRT_RET
     End Function
 
+    Public Function FUNC_GET_LEFT_CLIENT(ByRef PRC_WINDOW As Process) As Integer
+        Dim SRT_WINDOW_WH As RECT_WH
+        SRT_WINDOW_WH = FUNC_GET_WINDOW_RECT_WH(PRC_WINDOW)
+
+        Dim intWINDOW_LEFT As Integer
+        Dim intWINDOW_TOP As Integer
+        intWINDOW_LEFT = SRT_WINDOW_WH.left
+
+        If intWINDOW_LEFT = 0 Then
+            Return 0
+        End If
+
+        intWINDOW_TOP = SRT_WINDOW_WH.top
+
+        Dim intWINDOW_WIDTH As Integer
+        Dim intWINDOW_HEIGHT As Integer
+        intWINDOW_WIDTH = SRT_WINDOW_WH.width
+        intWINDOW_HEIGHT = SRT_WINDOW_WH.height
+
+        Dim SRT_CLIENT_WH As RECT_WH
+        SRT_CLIENT_WH = FUNC_GET_CRIENT_RECT_WH(PRC_WINDOW)
+        Dim intCLIENT_WIDTH As Integer
+        Dim intCLIENT_HEIGHT As Integer
+        intCLIENT_WIDTH = SRT_CLIENT_WH.width
+        intCLIENT_HEIGHT = SRT_CLIENT_WH.height
+
+        Dim intWIDTH_SUB As Integer
+        Dim intHEIGHT_SUB As Integer
+        intWIDTH_SUB = intWINDOW_WIDTH - intCLIENT_WIDTH
+        intHEIGHT_SUB = intWINDOW_HEIGHT - intCLIENT_HEIGHT
+
+        Dim INT_BORDER As Integer
+        INT_BORDER = (intWIDTH_SUB / 2)
+
+        Dim INT_RET As Integer
+        INT_RET = intWINDOW_LEFT + INT_BORDER
+        Return INT_RET
+    End Function
+
+    Public Function FUNC_GET_TOP_CLIENT(ByRef PRC_WINDOW As Process) As Integer
+        Dim SRT_WINDOW_WH As RECT_WH
+        SRT_WINDOW_WH = FUNC_GET_WINDOW_RECT_WH(PRC_WINDOW)
+
+        Dim intWINDOW_LEFT As Integer
+        Dim intWINDOW_TOP As Integer
+        intWINDOW_LEFT = SRT_WINDOW_WH.left
+        intWINDOW_TOP = SRT_WINDOW_WH.top
+
+        If intWINDOW_TOP = 0 Then
+            Return 0
+        End If
+
+        Dim intWINDOW_WIDTH As Integer
+        Dim intWINDOW_HEIGHT As Integer
+        intWINDOW_WIDTH = SRT_WINDOW_WH.width
+        intWINDOW_HEIGHT = SRT_WINDOW_WH.height
+
+        Dim SRT_CLIENT_WH As RECT_WH
+        SRT_CLIENT_WH = FUNC_GET_CRIENT_RECT_WH(PRC_WINDOW)
+        Dim intCLIENT_WIDTH As Integer
+        Dim intCLIENT_HEIGHT As Integer
+        intCLIENT_WIDTH = SRT_CLIENT_WH.width
+        intCLIENT_HEIGHT = SRT_CLIENT_WH.height
+
+        Dim intWIDTH_SUB As Integer
+        Dim intHEIGHT_SUB As Integer
+        intWIDTH_SUB = intWINDOW_WIDTH - intCLIENT_WIDTH
+        intHEIGHT_SUB = intWINDOW_HEIGHT - intCLIENT_HEIGHT
+
+        Dim INT_BORDER As Integer
+        INT_BORDER = (intHEIGHT_SUB / 2)
+
+        Dim INT_RET As Integer
+        INT_RET = intWINDOW_TOP + INT_BORDER
+
+        Return INT_RET
+    End Function
+
+#Region "内部処理"
     Private Function FUNC_GET_RECT_WIDTH(ByRef SRT_RECT As RECT) As Integer
         Dim INT_RET As Integer
 
@@ -112,5 +191,6 @@ Public Module MOD_PROCESS_WINDOW
         Return SRT_RET
     End Function
 
+#End Region
 
 End Module

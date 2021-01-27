@@ -8,6 +8,7 @@ Public Class WPF_TRIM
     Private Enum ENM_WINDOW_EXEC
         DO_CAPTURE = 0
         DO_CAPTURE_JPEG
+        DO_FIT_WINDOW
     End Enum
 
     Private Enum ENM_DIVISION_PATTERN
@@ -96,6 +97,8 @@ Public Class WPF_TRIM
                 Call SUB_CAPTURE()
             Case ENM_WINDOW_EXEC.DO_CAPTURE_JPEG
                 Call SUB_CAPTURE_JPEG()
+            Case ENM_WINDOW_EXEC.DO_FIT_WINDOW
+                Call SUB_FIT_WINDOW()
         End Select
 
         Call Me.DoEvents()
@@ -128,6 +131,49 @@ Public Class WPF_TRIM
 
     Private Sub SUB_CAPTURE_JPEG()
         Call MessageBox.Show("未実装")
+    End Sub
+
+    Private Sub SUB_FIT_WINDOW()
+
+        Dim SRT_CRIENT_RECT_WH As MOD_PROCESS_WINDOW.RECT_WH
+        SRT_CRIENT_RECT_WH = FUNC_GET_CRIENT_RECT_WH(PRC_APP_TARGET)
+
+        Dim INT_CLIENT_WIDTH As Integer
+        INT_CLIENT_WIDTH = SRT_CRIENT_RECT_WH.width
+
+        Dim INT_CLIENT_HEIGHT As Integer
+        INT_CLIENT_HEIGHT = SRT_CRIENT_RECT_WH.height
+
+        Dim INT_CLIENT_LEFT As Integer
+        INT_CLIENT_LEFT = MOD_PROCESS_WINDOW.FUNC_GET_LEFT_CLIENT(PRC_APP_TARGET)
+
+        Dim INT_CLIENT_TOP As Integer
+        INT_CLIENT_TOP = MOD_PROCESS_WINDOW.FUNC_GET_TOP_CLIENT(PRC_APP_TARGET)
+
+        Me.Left = INT_CLIENT_LEFT
+        Me.Top = INT_CLIENT_TOP
+        BLN_SET_SIZE = True
+        Me.Width = INT_CLIENT_WIDTH
+        Me.Height = INT_CLIENT_HEIGHT
+        BLN_SET_SIZE = False
+        Call SUB_SET_RATE(ENM_RATE_CURRENT)
+
+        If ENM_RATE_CURRENT = ENM_WINDOW_RATE.RATE_FREE Then
+            Exit Sub
+        End If
+
+        'アスペクト比フリー以外の場合は位置の調整を行う
+        '余白部分を中央寄せ
+        Dim INT_WIDTH_SUB As Integer
+        INT_WIDTH_SUB = INT_CLIENT_WIDTH - Me.Width
+        Dim INT_HEIGHT_SUB As Integer
+        INT_HEIGHT_SUB = INT_CLIENT_HEIGHT - Me.Height
+
+        If INT_WIDTH_SUB > INT_HEIGHT_SUB Then '左右中央寄せ
+            Me.Left = Me.Left + Math.Truncate(INT_WIDTH_SUB / 2)
+        Else '上下中央寄せ
+            Me.Top = Me.Top + Math.Truncate(INT_HEIGHT_SUB / 2)
+        End If
     End Sub
 #End Region
 
@@ -716,8 +762,20 @@ Public Class WPF_TRIM
 
 #Region "イベント-コンテキストメニュークリック"
 
+    Private Sub MNI_CAPT_Click(sender As Object, e As RoutedEventArgs) Handles MNI_CAPT.Click
+        Call SUB_EXEC_DO(ENM_WINDOW_EXEC.DO_CAPTURE)
+    End Sub
+
+    Private Sub MNI_CAPT_SNS_Click(sender As Object, e As RoutedEventArgs) Handles MNI_CAPT_SNS.Click
+        Call SUB_EXEC_DO(ENM_WINDOW_EXEC.DO_CAPTURE_JPEG)
+    End Sub
+
     Private Sub MNI_CLOSE_Click(sender As Object, e As RoutedEventArgs) Handles MNI_CLOSE.Click
         Call Me.Hide()
+    End Sub
+
+    Private Sub MNI_FIT_WINDOW_Click(sender As Object, e As RoutedEventArgs) Handles MNI_FIT_WINDOW.Click
+        Call SUB_EXEC_DO(ENM_WINDOW_EXEC.DO_FIT_WINDOW)
     End Sub
 
 #Region "縦横比"

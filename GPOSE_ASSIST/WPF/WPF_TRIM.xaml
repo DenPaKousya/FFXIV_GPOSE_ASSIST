@@ -23,18 +23,22 @@
                 <MenuItem Header="アスペクト比">
                     <MenuItem x:Name="MNI_RATE_FREE" Header="フリー" IsCheckable="True" />
                     <MenuItem x:Name="MNI_RATE_1_1" Header="1:1" IsCheckable="True" />
-                    <MenuItem x:Name="MNI_RATE_2_3" Header="2:3(デジタル写真サイズ比)" IsCheckable="True" />
-                    <MenuItem x:Name="MNI_RATE_3_2" Header="3:2(デジタル写真サイズ比)" IsCheckable="True" />
-                    <MenuItem x:Name="MNI_RATE_3_4" Header="3:4(映像サイズ比)" IsCheckable="True" />
-                    <MenuItem x:Name="MNI_RATE_4_3" Header="4:3(映像サイズ比)" IsCheckable="True" />
-                    <MenuItem x:Name="MNI_RATE_5_7" Header="1:1.414(用紙サイズ比)" IsCheckable="True" />
-                    <MenuItem x:Name="MNI_RATE_7_5" Header="1.414:1(用紙サイズ比)" IsCheckable="True" />
-                    <MenuItem x:Name="MNI_RATE_5_8" Header="1:1.618(黄金比)" IsCheckable="True" />
-                    <MenuItem x:Name="MNI_RATE_8_5" Header="1.618:1(黄金比)" IsCheckable="True" />
-                    <MenuItem x:Name="MNI_RATE_5_12" Header="1:2.414(白銀比)" IsCheckable="True" />
-                    <MenuItem x:Name="MNI_RATE_12_5" Header="2.414:1(白銀比)" IsCheckable="True" />
-                    <MenuItem x:Name="MNI_RATE_9_16" Header="9:16(映像ワイドサイズ比)" IsCheckable="True" />
-                    <MenuItem x:Name="MNI_RATE_16_9" Header="16:9(映像ワイドサイズ比)" IsCheckable="True" />
+                    <MenuItem Header="横＞縦">
+                        <MenuItem x:Name="MNI_RATE_3_2" Header="3:2(デジタル写真サイズ比)" IsCheckable="True" />
+                        <MenuItem x:Name="MNI_RATE_4_3" Header="4:3(映像サイズ比)" IsCheckable="True" />
+                        <MenuItem x:Name="MNI_RATE_7_5" Header="1.414:1(用紙サイズ比)" IsCheckable="True" />
+                        <MenuItem x:Name="MNI_RATE_8_5" Header="1.618:1(黄金比)" IsCheckable="True" />
+                        <MenuItem x:Name="MNI_RATE_12_5" Header="2.414:1(白銀比)" IsCheckable="True" />
+                        <MenuItem x:Name="MNI_RATE_16_9" Header="16:9(映像ワイドサイズ比)" IsCheckable="True" />
+                    </MenuItem>
+                    <MenuItem Header="縦＞横">
+                        <MenuItem x:Name="MNI_RATE_2_3" Header="2:3(デジタル写真サイズ比)" IsCheckable="True" />
+                        <MenuItem x:Name="MNI_RATE_3_4" Header="3:4(映像サイズ比)" IsCheckable="True" />
+                        <MenuItem x:Name="MNI_RATE_5_7" Header="1:1.414(用紙サイズ比)" IsCheckable="True" />
+                        <MenuItem x:Name="MNI_RATE_5_8" Header="1:1.618(黄金比)" IsCheckable="True" />
+                        <MenuItem x:Name="MNI_RATE_5_12" Header="1:2.414(白銀比)" IsCheckable="True" />
+                        <MenuItem x:Name="MNI_RATE_9_16" Header="9:16(映像ワイドサイズ比)" IsCheckable="True" />
+                    </MenuItem>
                 </MenuItem>
                 <MenuItem Header="構図補助">
                     <MenuItem x:Name="MNI_COMP_NONE" Header="無し" IsCheckable="True" />
