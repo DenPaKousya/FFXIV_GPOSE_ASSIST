@@ -32,7 +32,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.GPOSE_ASSIST.FRM_MAIN
+            Me.MainForm = Global.GPOSE_ASSIST.Form1
         End Sub
     End Class
 End Namespace
