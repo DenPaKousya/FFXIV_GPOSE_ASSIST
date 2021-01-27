@@ -19,7 +19,7 @@
 #End Region
 
 #Region "APP.CONFIG"
-    Public STR_APP_CONF_PROCESS_NAME As String = ""
+    Public SRT_APP_SETTINGS_VALUE As SRT_APP_SETTINGS
 #End Region
 
 #Region "MAIN.WINDOW"

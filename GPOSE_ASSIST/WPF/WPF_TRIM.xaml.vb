@@ -125,11 +125,51 @@ Public Class WPF_TRIM
 #End Region
 
 #Region "主処理"
+
     Private Sub SUB_CAPTURE()
-        Call MessageBox.Show("未実装")
 
+        Dim BMP_PROCESS_CLIENT As System.Drawing.Bitmap
+        BMP_PROCESS_CLIENT = Nothing
+
+        Dim GRP_PROCESS_CLIENT As System.Drawing.Graphics
+        GRP_PROCESS_CLIENT = Nothing
+
+        Call SUB_PRINT_CLIENT_WINDOW(PRC_APP_TARGET, GRP_PROCESS_CLIENT, BMP_PROCESS_CLIENT)
+
+        Dim SRT_TRIM As RECT_WH
+        SRT_TRIM = FUNC_GET_RECT_ME_TRIMING()
+        Dim BMP_MAKE As System.Drawing.Bitmap
+        BMP_MAKE = FUNC_MAKE_BITMAP_FROM_PRINT(BMP_PROCESS_CLIENT, SRT_TRIM, RotateFlipType.RotateNoneFlipNone)
+
+        Call SUB_FIXED_PHRASE_INIT(Now, SRT_APP_SETTINGS_VALUE.SAVE.FILE.INDEX)
+        Dim SRT_SAVE As SRT_SAVE_IMAGE_PARAM
+        With SRT_SAVE
+            .SAVE_DIR = FUNC_GET_NAME_SAVE_DIR(SRT_APP_SETTINGS_VALUE.SAVE.DIRECTORY, SRT_APP_SETTINGS_VALUE.SAVE.FILE.DIRECTORY)
+            .SAVE_NAME_FILE = FUNC_GET_NAME_SAVE_FILE(SRT_APP_SETTINGS_VALUE.SAVE.FILE.NAME)
+            .TYPE = FUNC_GET_TYPE_IMAGE01_FROM_STRING(SRT_APP_SETTINGS_VALUE.SAVE.FILE.TYPE)
+            .QUALITY = SRT_APP_SETTINGS_VALUE.SAVE.FILE.QUALITY
+
+            .SAVE_NAME_FILE_REAL = FUNC_GET_NAME_FILE_REAL(.SAVE_DIR, .SAVE_NAME_FILE)
+        End With
+        If Not FUNC_SAVE_IMAGE(BMP_MAKE, SRT_SAVE) Then
+            Exit Sub
+        End If
+
+        Dim SRT_SAVE_02 As SRT_SAVE_IMAGE_PARAM
+        With SRT_SAVE_02
+            .SAVE_DIR = SRT_SAVE.SAVE_DIR
+            .SAVE_NAME_FILE = SRT_SAVE.SAVE_NAME_FILE
+            .TYPE = FUNC_GET_TYPE_IMAGE02_FROM_STRING(SRT_APP_SETTINGS_VALUE.SAVE.FILE.TYPE)
+            .QUALITY = SRT_SAVE.QUALITY
+
+            .SAVE_NAME_FILE_REAL = SRT_SAVE.SAVE_NAME_FILE_REAL
+        End With
+        If Not FUNC_SAVE_IMAGE(BMP_MAKE, SRT_SAVE_02) Then
+            Exit Sub
+        End If
+
+        SRT_APP_SETTINGS_VALUE.SAVE.FILE.INDEX += 1
         Call My.Computer.Audio.Play(My.Resources.SHUTTER_SHORT, Microsoft.VisualBasic.AudioPlayMode.Background)
-
     End Sub
 
     Private Sub SUB_CAPTURE_JPEG()
@@ -681,6 +721,45 @@ Public Class WPF_TRIM
 #End Region
 
 #Region "その他"
+
+    Private Function FUNC_GET_RECT_ME_TRIMING() As RECT_WH
+        Dim SRT_RET As RECT_WH
+
+        With SRT_RET
+            Dim SRT_WINDOW_RECT_WH As RECT_WH
+            SRT_WINDOW_RECT_WH = FUNC_GET_WINDOW_RECT_WH(PRC_APP_TARGET)
+
+            Dim SRT_CRIENT_RECT_WH As RECT_WH
+            SRT_CRIENT_RECT_WH = FUNC_GET_CRIENT_RECT_WH(PRC_APP_TARGET)
+
+            Dim INT_BORDER_L As Integer
+            Dim INT_BORDER_T As Integer
+            If SRT_WINDOW_RECT_WH.left = 0 _
+            And SRT_WINDOW_RECT_WH.top = 0 _
+            And SRT_WINDOW_RECT_WH.width = SRT_CRIENT_RECT_WH.width _
+            And SRT_WINDOW_RECT_WH.height = SRT_CRIENT_RECT_WH.height _
+            Then '仮想フルスクリーン
+                INT_BORDER_L = 0
+                INT_BORDER_T = 0
+            Else
+                Dim INT_WIDTH_SUB As Integer
+                INT_WIDTH_SUB = SRT_WINDOW_RECT_WH.width - SRT_CRIENT_RECT_WH.width
+                INT_BORDER_L = SRT_WINDOW_RECT_WH.left + Math.Floor(INT_WIDTH_SUB / 2)
+
+                Dim INT_HEIGHT_SUB As Integer
+                INT_HEIGHT_SUB = SRT_WINDOW_RECT_WH.height - SRT_CRIENT_RECT_WH.height
+                INT_BORDER_T = SRT_WINDOW_RECT_WH.top + Math.Floor(INT_HEIGHT_SUB / 2)
+            End If
+
+            .left = Me.Left - INT_BORDER_L
+            .top = Me.Top - INT_BORDER_T
+            .width = Me.Width
+            .height = Me.Height
+        End With
+
+        Return SRT_RET
+    End Function
+
 
     Private Sub SUB_COMP_ALL_UNCHECKED()
         MNI_COMP_NONE.IsChecked = False

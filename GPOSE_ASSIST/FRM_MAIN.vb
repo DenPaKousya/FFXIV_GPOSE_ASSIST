@@ -16,7 +16,7 @@ Public Class FRM_MAIN
         Dim STR_ERROR As String
         STR_ERROR = ""
         If Not FUNC_APPL_INIT(STR_ERROR) Then
-            Call MessageBox.Show(Me, STR_ERROR, "", MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+            Call MessageBox.Show(Me, STR_ERROR, "", MessageBoxDefaultButton.Button1, MessageBoxIcon.Error)
             Call Application.Exit()
         End If
 
@@ -84,7 +84,7 @@ Public Class FRM_MAIN
     Private Sub SUB_GET_PROCESS()
 
         Dim PRC_TEMP As Process
-        PRC_TEMP = FUNC_GET_PROCESS(STR_APP_CONF_PROCESS_NAME)
+        PRC_TEMP = FUNC_GET_PROCESS(SRT_APP_SETTINGS_VALUE.PROCESS_NAME)
         If PRC_APP_TARGET Is Nothing Then
             PRC_APP_TARGET = PRC_TEMP
         Else

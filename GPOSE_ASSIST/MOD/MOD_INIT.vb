@@ -11,6 +11,10 @@
 
         Call SUB_INIT_GAPHICS()
 
+        If Not FUNC_INIT_EXIF(".\RES\IMG\\SAMPLE.tif") Then
+            STR_ERROR_DETAIL = "EXIFの初期化に失敗しました。"
+            Return False
+        End If
         Return True
     End Function
 
@@ -20,11 +24,50 @@
         STR_TEMP = ""
 
         Try
-            STR_TEMP = FUNC_GET_APP_SETTINGS(CST_APP_CONFIG_PROCESS_NAME)
-            STR_APP_CONF_PROCESS_NAME = CStr(STR_TEMP)
-            If STR_APP_CONF_PROCESS_NAME = "" Then
-                Return False
-            End If
+            With SRT_APP_SETTINGS_VALUE
+                STR_TEMP = FUNC_GET_APP_SETTINGS(CST_APP_CONFIG_PROCESS_NAME)
+                .PROCESS_NAME = CStr(STR_TEMP)
+                If .PROCESS_NAME = "" Then
+                    Return False
+                End If
+
+                'SAVE<
+                STR_TEMP = FUNC_GET_APP_SETTINGS(CST_APP_CONFIG_SAVE_DIRECTORY)
+                .SAVE.DIRECTORY = CStr(STR_TEMP)
+                If .SAVE.DIRECTORY = "" Then
+                    STR_TEMP = System.Environment.GetFolderPath(Environment.SpecialFolder.MyPictures)
+                    .SAVE.DIRECTORY = STR_TEMP & "\" & .PROCESS_NAME & "_CAPTURE"
+                End If
+
+                'SAVE.FILE<
+                STR_TEMP = FUNC_GET_APP_SETTINGS(CST_APP_CONFIG_SAVE_FILE_DIRECTORY)
+                .SAVE.FILE.DIRECTORY = CStr(STR_TEMP)
+
+                STR_TEMP = FUNC_GET_APP_SETTINGS(CST_APP_CONFIG_SAVE_FILE_NAME)
+                .SAVE.FILE.NAME = CStr(STR_TEMP)
+
+                STR_TEMP = FUNC_GET_APP_SETTINGS(CST_APP_CONFIG_SAVE_FILE_TYPE)
+                .SAVE.FILE.TYPE = CStr(STR_TEMP)
+
+                STR_TEMP = FUNC_GET_APP_SETTINGS(CST_APP_CONFIG_SAVE_FILE_QUALITY)
+                If Not STR_TEMP = "" Then
+                    .SAVE.FILE.QUALITY = CInt(STR_TEMP)
+                End If
+
+                STR_TEMP = FUNC_GET_APP_SETTINGS(CST_APP_CONFIG_SAVE_FILE_COPYRIGHT)
+                If Not STR_TEMP = "" Then
+                    .SAVE.FILE.COPYRIGHT = CInt(STR_TEMP)
+                End If
+
+                STR_TEMP = FUNC_GET_APP_SETTINGS(CST_APP_CONFIG_SAVE_FILE_INDEX)
+                If Not STR_TEMP = "" Then
+                    .SAVE.FILE.INDEX = CInt(STR_TEMP)
+                End If
+                '>SAVE.FILE
+                '>SAVE
+
+
+            End With
         Catch ex As Exception
             Return False
         End Try
