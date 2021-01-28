@@ -145,4 +145,26 @@
         Return True
     End Function
 
+
+    'パスからディレクトリパスを抜き出す
+    Public Function FUNC_PATH_TO_DIR_PATH(
+    ByVal STR_PATH As String
+    ) As String
+        Dim INT_LEN As Integer
+        INT_LEN = Len(STR_PATH)
+
+        Dim STR_RET As String
+        STR_RET = ""
+        For i = 1 To INT_LEN
+            Dim STR_CHECK As String
+            STR_CHECK = Mid(STR_PATH, INT_LEN - i, 1)
+            If STR_CHECK = "\" Then
+                STR_RET = Mid(STR_PATH, 1, INT_LEN - i)
+                Exit For
+            End If
+        Next
+
+        Return STR_RET
+    End Function
+
 End Module

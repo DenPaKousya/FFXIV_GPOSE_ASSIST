@@ -15,6 +15,8 @@
         Public SAVE_NAME_FILE As String
         Public TYPE As ENM_IMAGE_TYPE
         Public QUALITY As Integer
+        Public ADD_CL As Boolean
+        Public EXIF As SRT_EXIF_SET
 
         Public SAVE_NAME_FILE_REAL As String
     End Structure
@@ -122,18 +124,15 @@
             EPS_SAVE.Param(0) = EPR_ONE
             'エンコードココマデ
 
+            'コピーライトココカラ
+            If .ADD_CL Then
+                Call SUB_ADD_COPYRIGHT(BMP_SAVE)
+            End If
+            'コピーライトココマデ
+
             'EXIFココカラ
-            Dim DAT_SAVE As DateTime
-            DAT_SAVE = Now
             Dim SRT_EXIF As SRT_EXIF_SET
-            With SRT_EXIF
-                .MAKE = "SQUARE ENIX"
-                .MODEL = "FFXIV"
-                .SOFTWARE = SRT_APP_SETTINGS_VALUE.PROCESS_NAME
-                .MODIFY_DATE = FUNC_EXIF_STRING_DATETIME(DAT_SAVE)
-                .DATE_TIME_ORIGINAL = FUNC_EXIF_STRING_DATETIME(DAT_SAVE)
-                .ISO_SPEED_RATINGS = FUNC_EXIF_INT_DATETIME(DAT_SAVE)
-            End With
+            SRT_EXIF = .EXIF
             Call SUB_SET_EXIF_TO_IMAGE(BMP_SAVE, SRT_EXIF)
             'EXIFココマデ
 
@@ -282,6 +281,45 @@
 
         Return strRET
     End Function
+
+    Private Sub SUB_ADD_COPYRIGHT(ByRef BMP_BASE As Bitmap)
+        Dim INT_WH_LONG As Integer
+        If BMP_BASE.Height > BMP_BASE.Width Then
+            INT_WH_LONG = BMP_BASE.Height
+        Else
+            INT_WH_LONG = BMP_BASE.Width
+        End If
+
+        Dim BLN_LARGE As Boolean
+        BLN_LARGE = (INT_WH_LONG > 1920)
+
+        Dim STR_EXE As String
+        STR_EXE = System.Reflection.Assembly.GetExecutingAssembly().Location
+        Dim STR_DIR As String
+        STR_DIR = FUNC_PATH_TO_DIR_PATH(STR_EXE)
+        Call SUB_INIT_CHANGE_IMAGE(STR_DIR & "\RES\IMG\COPYRIGHT")
+
+        Dim BMP_CR As Bitmap
+        BMP_CR = Nothing
+        If BLN_LARGE Then
+            BMP_CR = FUNC_GET_CHANEG_IMAGE("COPYRIGHT_L.png")
+            If BMP_CR Is Nothing Then
+                BMP_CR = My.Resources.COPYRIGHT_L
+            End If
+        Else
+            BMP_CR = FUNC_GET_CHANEG_IMAGE("COPYRIGHT_S.png")
+            If BMP_CR Is Nothing Then
+                BMP_CR = My.Resources.COPYRIGHT_S
+            End If
+        End If
+
+        Call BMP_CR.MakeTransparent()
+
+        Dim GRP_DRAW As Graphics
+        GRP_DRAW = Graphics.FromImage(BMP_BASE)
+        Call GRP_DRAW.DrawImage(BMP_CR, 0, BMP_BASE.Height - BMP_CR.Height, BMP_CR.Width, BMP_CR.Height)
+        Call GRP_DRAW.Dispose()
+    End Sub
 #End Region
 
 End Module

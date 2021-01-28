@@ -64,6 +64,8 @@ Public Class WPF_TRIM
 
 #Region "画面用・変数"
     Private BLN_WINDOW_EXEC_DO As Boolean = False
+
+    Private TIM_TOPMOST As System.Windows.Threading.DispatcherTimer
 #End Region
 
 #Region "プロパティ用変数"
@@ -148,7 +150,8 @@ Public Class WPF_TRIM
             .SAVE_NAME_FILE = FUNC_GET_NAME_SAVE_FILE(SRT_APP_SETTINGS_VALUE.SAVE.FILE.NAME)
             .TYPE = FUNC_GET_TYPE_IMAGE01_FROM_STRING(SRT_APP_SETTINGS_VALUE.SAVE.FILE.TYPE)
             .QUALITY = SRT_APP_SETTINGS_VALUE.SAVE.FILE.QUALITY
-
+            .ADD_CL = FUNC_CAST_INT_TO_BOOL(SRT_APP_SETTINGS_VALUE.SAVE.FILE.COPYRIGHT)
+            .EXIF = FUNC_GET_EXIF_DEFAULT(SRT_APP_SETTINGS_VALUE.PROCESS_NAME, Now)
             .SAVE_NAME_FILE_REAL = FUNC_GET_NAME_FILE_REAL(.SAVE_DIR, .SAVE_NAME_FILE)
         End With
         If Not FUNC_SAVE_IMAGE(BMP_MAKE, SRT_SAVE) Then
@@ -161,7 +164,8 @@ Public Class WPF_TRIM
             .SAVE_NAME_FILE = SRT_SAVE.SAVE_NAME_FILE
             .TYPE = FUNC_GET_TYPE_IMAGE02_FROM_STRING(SRT_APP_SETTINGS_VALUE.SAVE.FILE.TYPE)
             .QUALITY = SRT_SAVE.QUALITY
-
+            .ADD_CL = True
+            .EXIF = SRT_SAVE.EXIF
             .SAVE_NAME_FILE_REAL = SRT_SAVE.SAVE_NAME_FILE_REAL
         End With
         If Not FUNC_SAVE_IMAGE(BMP_MAKE, SRT_SAVE_02) Then
@@ -173,7 +177,36 @@ Public Class WPF_TRIM
     End Sub
 
     Private Sub SUB_CAPTURE_JPEG()
-        Call MessageBox.Show("未実装")
+        Dim BMP_PROCESS_CLIENT As System.Drawing.Bitmap
+        BMP_PROCESS_CLIENT = Nothing
+
+        Dim GRP_PROCESS_CLIENT As System.Drawing.Graphics
+        GRP_PROCESS_CLIENT = Nothing
+
+        Call SUB_PRINT_CLIENT_WINDOW(PRC_APP_TARGET, GRP_PROCESS_CLIENT, BMP_PROCESS_CLIENT)
+
+        Dim SRT_TRIM As RECT_WH
+        SRT_TRIM = FUNC_GET_RECT_ME_TRIMING()
+        Dim BMP_MAKE As System.Drawing.Bitmap
+        BMP_MAKE = FUNC_MAKE_BITMAP_FROM_PRINT(BMP_PROCESS_CLIENT, SRT_TRIM, RotateFlipType.RotateNoneFlipNone)
+
+        Call SUB_FIXED_PHRASE_INIT(Now, SRT_APP_SETTINGS_VALUE.SAVE.FILE.INDEX)
+        Dim SRT_SAVE As SRT_SAVE_IMAGE_PARAM
+        With SRT_SAVE
+            .SAVE_DIR = FUNC_GET_NAME_SAVE_DIR(SRT_APP_SETTINGS_VALUE.SAVE.DIRECTORY, SRT_APP_SETTINGS_VALUE.SAVE.FILE.DIRECTORY)
+            .SAVE_NAME_FILE = FUNC_GET_NAME_SAVE_FILE(SRT_APP_SETTINGS_VALUE.SAVE.FILE.NAME)
+            .TYPE = ENM_IMAGE_TYPE.JPEG
+            .QUALITY = SRT_APP_SETTINGS_VALUE.SAVE.FILE.QUALITY
+            .ADD_CL = True
+            .EXIF = FUNC_GET_EXIF_DEFAULT(SRT_APP_SETTINGS_VALUE.PROCESS_NAME, Now)
+            .SAVE_NAME_FILE_REAL = FUNC_GET_NAME_FILE_REAL(.SAVE_DIR, .SAVE_NAME_FILE)
+        End With
+        If Not FUNC_SAVE_IMAGE(BMP_MAKE, SRT_SAVE) Then
+            Exit Sub
+        End If
+
+        SRT_APP_SETTINGS_VALUE.SAVE.FILE.INDEX += 1
+        Call My.Computer.Audio.Play(My.Resources.SHUTTER_SHORT, Microsoft.VisualBasic.AudioPlayMode.Background)
     End Sub
 
     Private Sub SUB_FIT_WINDOW()
@@ -827,6 +860,8 @@ Public Class WPF_TRIM
         ' InitializeComponent() 呼び出しの後で初期化を追加します。
 
         AddHandler Me.MouseLeftButtonDown, Sub(sender, e) Me.DragMove() 'ウィンドウをマウスのドラッグで移動できるようにする
+
+        Call SUB_START_TIMER_TOPMOST()
     End Sub
 
 #End Region
@@ -984,6 +1019,49 @@ Public Class WPF_TRIM
         Call SUB_CHK_OPACITY_CHECK_CHANGE()
     End Sub
 
+#End Region
+
+#Region "イベント-タイマー"
+
+#Region "TOPMOST"
+    Private Sub SUB_START_TIMER_TOPMOST()
+        TIM_TOPMOST = New System.Windows.Threading.DispatcherTimer(System.Windows.Threading.DispatcherPriority.Send)
+        AddHandler TIM_TOPMOST.Tick, AddressOf TIM_TOPMOST_TICK
+        TIM_TOPMOST.Interval = TimeSpan.FromMilliseconds(1000)
+        TIM_TOPMOST.IsEnabled = True
+        Call TIM_TOPMOST.Start()
+    End Sub
+
+    Private Sub SUB_STOP_DISPATCHER_TIMER()
+        If Not (TIM_TOPMOST Is Nothing) Then
+            Call TIM_TOPMOST.Stop()
+            TIM_TOPMOST.IsEnabled = False
+            RemoveHandler TIM_TOPMOST.Tick, AddressOf TIM_TOPMOST_TICK
+            TIM_TOPMOST = Nothing
+        End If
+    End Sub
+
+#End Region
+
+    Private Sub TIM_TOPMOST_TICK(sender As Object, e As EventArgs)
+
+        If Not Me.Visibility = Visibility.Visible Then
+            Exit Sub
+        End If
+
+        Dim BLN_FORE_MAIN As Boolean
+        BLN_FORE_MAIN = FUNC_CHECK_FOREGROUND_APPL(PRC_APP_TARGET)
+
+        If BLN_FORE_MAIN Then
+            If Not Me.Topmost Then
+                Me.Topmost = True
+            End If
+        Else
+            If Me.Topmost Then
+                Me.Topmost = False
+            End If
+        End If
+    End Sub
 #End Region
 
     Private Sub WPF_TRIM_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded

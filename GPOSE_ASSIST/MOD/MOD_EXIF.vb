@@ -163,4 +163,55 @@
 
         Return False
     End Function
+
+    Public Function FUNC_GET_EXIF_DEFAULT(ByVal STR_SOFTWARE As String, ByVal DAT_DATE_SAVE As DateTime) As SRT_EXIF_SET
+        Dim SRT_RET As SRT_EXIF_SET
+        With SRT_RET
+            .SOFTWARE = STR_SOFTWARE
+            .MAKE = FUNC_GET_MAKE_DEFAULT(.SOFTWARE)
+            .MODEL = FUNC_GET_MODEL_DEFAULT(.SOFTWARE)
+            .MODIFY_DATE = FUNC_EXIF_STRING_DATETIME(DAT_DATE_SAVE)
+            .DATE_TIME_ORIGINAL = .MODIFY_DATE
+            .ISO_SPEED_RATINGS = FUNC_EXIF_INT_DATETIME(DAT_DATE_SAVE)
+        End With
+
+        Return SRT_RET
+    End Function
+
+#Region "内部処理"
+    Private Function FUNC_GET_MAKE_DEFAULT(ByVal STR_SOFTWARE As String) As String
+        Dim STR_RET As String
+
+        Select Case STR_SOFTWARE
+            Case "ffxiv_dx11"
+                STR_RET = "SQUARE ENIX"
+            Case "chrome"
+                STR_RET = "Google"
+            Case "notepad"
+                STR_RET = "Microsoft"
+            Case Else
+                STR_RET = "Unknown"
+        End Select
+
+        Return STR_RET
+    End Function
+
+    Private Function FUNC_GET_MODEL_DEFAULT(ByVal STR_SOFTWARE As String) As String
+        Dim STR_RET As String
+
+        Select Case STR_SOFTWARE
+            Case "ffxiv_dx11"
+                STR_RET = "FFXIV"
+            Case "chrome"
+                STR_RET = "Google Chrome"
+            Case "notepad"
+                STR_RET = "メモ帳"
+            Case Else
+                STR_RET = "Unknown"
+        End Select
+
+        Return STR_RET
+    End Function
+#End Region
+
 End Module

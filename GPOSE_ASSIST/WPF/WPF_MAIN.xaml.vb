@@ -31,7 +31,7 @@ Public Class WPF_MAIN
             Case ENM_WINDOW_EXEC.APPL_EXIT
                 Call SUB_APPL_EXIT()
             Case ENM_WINDOW_EXEC.APPL_SETTING
-
+                Call SUB_APPL_SETTING()
         End Select
 
         Call Me.DoEvents()
