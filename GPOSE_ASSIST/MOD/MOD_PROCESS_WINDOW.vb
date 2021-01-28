@@ -154,10 +154,10 @@ Public Module MOD_PROCESS_WINDOW
         intHEIGHT_SUB = intWINDOW_HEIGHT - intCLIENT_HEIGHT
 
         Dim INT_BORDER As Integer
-        INT_BORDER = (intHEIGHT_SUB / 2)
+        INT_BORDER = (intWIDTH_SUB / 2) '枠線は横差から算出
 
         Dim INT_RET As Integer
-        INT_RET = intWINDOW_TOP + INT_BORDER
+        INT_RET = intWINDOW_TOP + (intHEIGHT_SUB - INT_BORDER)
 
         Return INT_RET
     End Function

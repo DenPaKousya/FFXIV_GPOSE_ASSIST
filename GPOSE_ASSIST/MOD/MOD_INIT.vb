@@ -66,6 +66,25 @@
                 '>SAVE.FILE
                 '>SAVE
 
+                'GUIDE<
+                'GUIDE.LOCATION<
+                STR_TEMP = FUNC_GET_APP_SETTINGS(CST_APP_CONFIG_GUIDE_LOCATION_ALIGNMENT)
+                .GUIDE.LOCATION.ALIGNMENT = CStr(STR_TEMP)
+                '>GUIDE.LOCATION
+                '>GUIDE
+
+                'TRIM<
+                'TRIM.LOCATION<
+                STR_TEMP = FUNC_GET_APP_SETTINGS(CST_APP_CONFIG_TRIM_LOCATION_LEFT)
+                If Not STR_TEMP = "" Then
+                    .TRIM.LOCATION.LEFT = CInt(STR_TEMP)
+                End If
+                STR_TEMP = FUNC_GET_APP_SETTINGS(CST_APP_CONFIG_TRIM_LOCATION_TOP)
+                If Not STR_TEMP = "" Then
+                    .TRIM.LOCATION.TOP = CInt(STR_TEMP)
+                End If
+                '>TRIM.LOCATION
+                '>TRIM
 
             End With
         Catch ex As Exception

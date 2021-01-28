@@ -4,8 +4,11 @@
     Public Structure SRT_APP_SETTINGS
         Public PROCESS_NAME As String
         Public SAVE As SRT_APP_SETTINGS_SAVE
+        Public GUIDE As SRT_APP_SETTINGS_GUIDE
+        Public TRIM As SRT_APP_SETTINGS_TRIM
     End Structure
 
+#Region "SAVE"
     Public Structure SRT_APP_SETTINGS_SAVE
         Public DIRECTORY As String
         Public FILE As SRT_APP_SETTINGS_SAVE_FILE
@@ -19,6 +22,36 @@
         Public COPYRIGHT As Integer
         Public INDEX As Integer
     End Structure
+
+#End Region
+
+#Region "GUIDE"
+    Public Structure SRT_APP_SETTINGS_GUIDE
+        Public LOCATION As SRT_APP_SETTINGS_GUIDE_LOCATION
+    End Structure
+
+    Public Structure SRT_APP_SETTINGS_GUIDE_LOCATION
+        Public ALIGNMENT As String
+    End Structure
+#End Region
+
+#Region "TRIM"
+    Public Structure SRT_APP_SETTINGS_TRIM
+        Public LOCATION As SRT_APP_SETTINGS_TRIM_LOCATION
+        Public SIZE As SRT_APP_SETTINGS_TRIM_SIZE
+    End Structure
+
+    Public Structure SRT_APP_SETTINGS_TRIM_LOCATION
+        Public LEFT As Integer
+        Public TOP As Integer
+    End Structure
+
+    Public Structure SRT_APP_SETTINGS_TRIM_SIZE
+        Public WIDTH As Integer
+        Public HEIGHT As Integer
+    End Structure
+#End Region
+
 #End Region
 
 #Region "モジュール用・定数"

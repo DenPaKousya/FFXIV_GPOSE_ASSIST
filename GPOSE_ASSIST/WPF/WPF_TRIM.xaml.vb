@@ -84,6 +84,18 @@ Public Class WPF_TRIM
     End Property
 #End Region
 
+#Region "外部呼出"
+    Public Sub SUB_SET_LOCATION_CONTROL(ByVal INT_MOVE_POINT As Integer)
+
+        Dim TIK_CONTROL As System.Windows.Thickness
+        Dim TIK_SET As System.Windows.Thickness
+
+        TIK_CONTROL = CHK_OPACITY.Margin
+        TIK_SET = New Thickness(TIK_CONTROL.Left, TIK_CONTROL.Top + INT_MOVE_POINT, TIK_CONTROL.Right, TIK_CONTROL.Bottom)
+        CHK_OPACITY.Margin = TIK_SET
+    End Sub
+#End Region
+
 #Region "主処理呼出元"
 
     Private Sub SUB_EXEC_DO(ByVal ENM_WINDOW_EXEC As ENM_WINDOW_EXEC)
@@ -765,27 +777,27 @@ Public Class WPF_TRIM
             Dim SRT_CRIENT_RECT_WH As RECT_WH
             SRT_CRIENT_RECT_WH = FUNC_GET_CRIENT_RECT_WH(PRC_APP_TARGET)
 
-            Dim INT_BORDER_L As Integer
-            Dim INT_BORDER_T As Integer
+            Dim INT_BORDER As Integer
+            Dim INT_WIDTH_SUB As Integer
+            Dim INT_HEIGHT_SUB As Integer
+
             If SRT_WINDOW_RECT_WH.left = 0 _
             And SRT_WINDOW_RECT_WH.top = 0 _
             And SRT_WINDOW_RECT_WH.width = SRT_CRIENT_RECT_WH.width _
             And SRT_WINDOW_RECT_WH.height = SRT_CRIENT_RECT_WH.height _
             Then '仮想フルスクリーン
-                INT_BORDER_L = 0
-                INT_BORDER_T = 0
+                INT_WIDTH_SUB = 0
+                INT_BORDER = 0
+                INT_HEIGHT_SUB = 0
             Else
-                Dim INT_WIDTH_SUB As Integer
                 INT_WIDTH_SUB = SRT_WINDOW_RECT_WH.width - SRT_CRIENT_RECT_WH.width
-                INT_BORDER_L = SRT_WINDOW_RECT_WH.left + Math.Floor(INT_WIDTH_SUB / 2)
+                INT_BORDER = SRT_WINDOW_RECT_WH.left + Math.Floor(INT_WIDTH_SUB / 2)
 
-                Dim INT_HEIGHT_SUB As Integer
                 INT_HEIGHT_SUB = SRT_WINDOW_RECT_WH.height - SRT_CRIENT_RECT_WH.height
-                INT_BORDER_T = SRT_WINDOW_RECT_WH.top + Math.Floor(INT_HEIGHT_SUB / 2)
             End If
 
-            .left = Me.Left - INT_BORDER_L
-            .top = Me.Top - INT_BORDER_T
+            .left = Me.Left - INT_BORDER
+            .top = Me.Top - (INT_HEIGHT_SUB - INT_BORDER)
             .width = Me.Width
             .height = Me.Height
         End With
@@ -1083,10 +1095,16 @@ Public Class WPF_TRIM
         End If
         Call SUB_SET_RATE(ENM_RATE_CURRENT)
         Call SUB_PUT_GUIDE()
+
+        SRT_APP_SETTINGS_VALUE.TRIM.SIZE.WIDTH = Me.Width
+        SRT_APP_SETTINGS_VALUE.TRIM.SIZE.HEIGHT = Me.Height
     End Sub
 
     Private Sub WPF_TRIM_LocationChanged(sender As Object, e As EventArgs) Handles Me.LocationChanged
         Call SUB_PUT_GUIDE()
+
+        SRT_APP_SETTINGS_VALUE.TRIM.LOCATION.LEFT = Me.Left
+        SRT_APP_SETTINGS_VALUE.TRIM.LOCATION.TOP = Me.Top
     End Sub
 
     Private Sub WPF_TRIM_KeyUp(sender As Object, e As KeyEventArgs) Handles Me.KeyUp

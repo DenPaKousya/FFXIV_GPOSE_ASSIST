@@ -9,9 +9,9 @@
     <UseWPF>true</UseWPF>
     <MyType>WindowsForms</MyType>
     <ApplicationIcon>RES\ICO\MAIN.ico</ApplicationIcon>
-    <AssemblyVersion>1.0.10.7</AssemblyVersion>
-    <FileVersion>1.0.10.7</FileVersion>
-    <Version>1.0.10</Version>
+    <AssemblyVersion>1.0.13.22</AssemblyVersion>
+    <FileVersion>1.0.13.22</FileVersion>
+    <Version>1.0.13</Version>
     <Authors>DenPaKousya</Authors>
     <Description>Add trimming and guide grid to FFXIV group pose</Description>
     <Product>FFXIV_GPOSE_ASSIST</Product>

@@ -9,6 +9,25 @@
         RIGHT_BOTTOM = 4
     End Enum
 
+    Public Function FUNC_GET_LOCATION_ALIGNMENT_FROM_STRING(ByVal STR_ALIGNMENT As String) As ENM_POSITION_WPF_LOCATION
+        Dim ENM_RET As ENM_POSITION_WPF_LOCATION
+        Select Case STR_ALIGNMENT
+            Case "Center"
+                ENM_RET = ENM_POSITION_WPF_LOCATION.CENTER
+            Case "Left+Top"
+                ENM_RET = ENM_POSITION_WPF_LOCATION.LEFT_TOP
+            Case "Left+Bottom"
+                ENM_RET = ENM_POSITION_WPF_LOCATION.LEFT_BOTTOM
+            Case "Right+Top"
+                ENM_RET = ENM_POSITION_WPF_LOCATION.RIGHT_TOP
+            Case "Right+Bottom"
+                ENM_RET = ENM_POSITION_WPF_LOCATION.RIGHT_BOTTOM
+            Case Else
+                ENM_RET = ENM_POSITION_WPF_LOCATION.UNKNOWN
+        End Select
+        Return ENM_RET
+    End Function
+
     Public Sub SUB_SET_LOCATION_OVERLAY_WPF(
     ByRef WPF_OVERLAY As System.Windows.Window, ENM_POSITION_OVERLAY As ENM_POSITION_WPF_LOCATION
     )

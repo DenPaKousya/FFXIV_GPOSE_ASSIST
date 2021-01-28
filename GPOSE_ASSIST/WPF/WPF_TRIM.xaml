@@ -46,14 +46,21 @@
                     <MenuItem x:Name="MNI_COMP_3DIV" Header="3分割" IsCheckable="True" />
                     <MenuItem x:Name="MNI_COMP_4DIV" Header="4分割" IsCheckable="True" />
                     <MenuItem x:Name="MNI_COMP_3DIV_PHI" Header="3分割(φ)" IsCheckable="True" />
-                    <MenuItem x:Name="MNI_COMP_GOLDEN_RECTANGLE_HLL" Header="黄金螺旋-横-左下起点" IsCheckable="True" />
-                    <MenuItem x:Name="MNI_COMP_GOLDEN_RECTANGLE_HUR" Header="黄金螺旋-横-右上起点" IsCheckable="True" />
-                    <MenuItem x:Name="MNI_COMP_GOLDEN_RECTANGLE_HUL" Header="黄金螺旋-横-左上起点" IsCheckable="True" />
-                    <MenuItem x:Name="MNI_COMP_GOLDEN_RECTANGLE_HLR" Header="黄金螺旋-横-右下起点" IsCheckable="True" />
-                    <MenuItem x:Name="MNI_COMP_GOLDEN_RECTANGLE_VLL" Header="黄金螺旋-縦-左下起点" IsCheckable="True" />
-                    <MenuItem x:Name="MNI_COMP_GOLDEN_RECTANGLE_VUR" Header="黄金螺旋-縦-右上起点" IsCheckable="True" />
-                    <MenuItem x:Name="MNI_COMP_GOLDEN_RECTANGLE_VUL" Header="黄金螺旋-縦-左上起点" IsCheckable="True" />
-                    <MenuItem x:Name="MNI_COMP_GOLDEN_RECTANGLE_VLR" Header="黄金螺旋-縦-右下起点" IsCheckable="True" />
+                    <MenuItem Header="黄金螺旋">
+                        <MenuItem Header="横">
+                            <MenuItem x:Name="MNI_COMP_GOLDEN_RECTANGLE_HLL" Header="黄金螺旋-横-左下起点" IsCheckable="True" />
+                            <MenuItem x:Name="MNI_COMP_GOLDEN_RECTANGLE_HUR" Header="黄金螺旋-横-右上起点" IsCheckable="True" />
+                            <MenuItem x:Name="MNI_COMP_GOLDEN_RECTANGLE_HUL" Header="黄金螺旋-横-左上起点" IsCheckable="True" />
+                            <MenuItem x:Name="MNI_COMP_GOLDEN_RECTANGLE_HLR" Header="黄金螺旋-横-右下起点" IsCheckable="True" />
+                        </MenuItem>
+                        <MenuItem Header="縦">
+                            <MenuItem x:Name="MNI_COMP_GOLDEN_RECTANGLE_VLL" Header="黄金螺旋-縦-左下起点" IsCheckable="True" />
+                            <MenuItem x:Name="MNI_COMP_GOLDEN_RECTANGLE_VUR" Header="黄金螺旋-縦-右上起点" IsCheckable="True" />
+                            <MenuItem x:Name="MNI_COMP_GOLDEN_RECTANGLE_VUL" Header="黄金螺旋-縦-左上起点" IsCheckable="True" />
+                            <MenuItem x:Name="MNI_COMP_GOLDEN_RECTANGLE_VLR" Header="黄金螺旋-縦-右下起点" IsCheckable="True" />
+                        </MenuItem>
+                    </MenuItem>
+                    
                 </MenuItem>
                 <Separator />
                 <MenuItem x:Name="MNI_CLOSE" Header="閉じる" />

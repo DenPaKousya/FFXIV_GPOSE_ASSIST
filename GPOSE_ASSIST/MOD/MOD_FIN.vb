@@ -15,12 +15,37 @@
                 Call FUNC_WRITE_APP_SETTINGS(CST_APP_CONFIG_PROCESS_NAME, STR_TEMP)
 
                 'SAVE<
-
+                STR_TEMP = CStr(.SAVE.DIRECTORY)
+                Call FUNC_WRITE_APP_SETTINGS(CST_APP_CONFIG_SAVE_DIRECTORY, STR_TEMP)
                 'SAVE.FILE<
+                STR_TEMP = CStr(.SAVE.FILE.NAME)
+                Call FUNC_WRITE_APP_SETTINGS(CST_APP_CONFIG_SAVE_FILE_NAME, STR_TEMP)
+                STR_TEMP = CStr(.SAVE.FILE.TYPE)
+                Call FUNC_WRITE_APP_SETTINGS(CST_APP_CONFIG_SAVE_FILE_TYPE, STR_TEMP)
+                STR_TEMP = CStr(.SAVE.FILE.QUALITY)
+                Call FUNC_WRITE_APP_SETTINGS(CST_APP_CONFIG_SAVE_FILE_QUALITY, STR_TEMP)
+                STR_TEMP = CStr(.SAVE.FILE.COPYRIGHT)
+                Call FUNC_WRITE_APP_SETTINGS(CST_APP_CONFIG_SAVE_FILE_COPYRIGHT, STR_TEMP)
                 STR_TEMP = CStr(.SAVE.FILE.INDEX)
                 Call FUNC_WRITE_APP_SETTINGS(CST_APP_CONFIG_SAVE_FILE_INDEX, STR_TEMP)
                 '>SAVE.FILE
                 '>SAVE
+
+                'GUIDE<
+                'GUIDE.LOCATION<
+                STR_TEMP = CStr(.GUIDE.LOCATION.ALIGNMENT)
+                Call FUNC_WRITE_APP_SETTINGS(CST_APP_CONFIG_GUIDE_LOCATION_ALIGNMENT, STR_TEMP)
+                '>GUIDE.LOCATION
+                '>GUIDE
+
+                'TRIM<
+                'TRIM.LOCATION<
+                STR_TEMP = CStr(.TRIM.LOCATION.LEFT)
+                Call FUNC_WRITE_APP_SETTINGS(CST_APP_CONFIG_TRIM_LOCATION_LEFT, STR_TEMP)
+                STR_TEMP = CStr(.TRIM.LOCATION.TOP)
+                Call FUNC_WRITE_APP_SETTINGS(CST_APP_CONFIG_TRIM_LOCATION_TOP, STR_TEMP)
+                '>TRIM.LOCATION
+                '>TRIM
             Catch ex As Exception
                 Return False
             End Try

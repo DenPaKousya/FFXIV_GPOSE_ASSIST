@@ -56,8 +56,15 @@ Public Class WPF_MAIN
 #Region "主処理"
     Private Sub SUB_VIEW_TRIM()
 
+        Dim INT_LEFT_SET As Integer
+        Dim INT_TOP_SET As Integer
+
+        INT_LEFT_SET = SRT_APP_SETTINGS_VALUE.TRIM.LOCATION.LEFT
+        INT_TOP_SET = SRT_APP_SETTINGS_VALUE.TRIM.LOCATION.TOP
+
         If WPF_SHOW_WINDOW Is Nothing Then
             WPF_SHOW_WINDOW = New WPF_TRIM
+            Call WPF_SHOW_WINDOW.SUB_SET_LOCATION_CONTROL(Me.Height)
         End If
 
         Dim BLN_VISIBLE As Boolean
@@ -75,7 +82,14 @@ Public Class WPF_MAIN
             Call WPF_SHOW_WINDOW.Hide()
         Else
             Call WPF_SHOW_WINDOW.Show()
-            Call SUB_SET_LOCATION_OVERLAY_WPF(WPF_SHOW_WINDOW, ENM_POSITION_WPF_LOCATION.LEFT_TOP)
+
+            WPF_SHOW_WINDOW.Left = INT_LEFT_SET
+            WPF_SHOW_WINDOW.Top = INT_TOP_SET
+            Dim BLN_LOCATION_DEFAULT As Boolean
+            BLN_LOCATION_DEFAULT = (WPF_SHOW_WINDOW.Left = 0 And WPF_SHOW_WINDOW.Top = 0)
+            If BLN_LOCATION_DEFAULT Then
+                Call SUB_SET_LOCATION_OVERLAY_WPF(WPF_SHOW_WINDOW, ENM_POSITION_WPF_LOCATION.LEFT_TOP)
+            End If
         End If
     End Sub
 
