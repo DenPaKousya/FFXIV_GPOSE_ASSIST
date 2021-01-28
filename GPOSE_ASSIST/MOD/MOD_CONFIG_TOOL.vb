@@ -39,6 +39,7 @@
     Public Structure SRT_APP_SETTINGS_TRIM
         Public LOCATION As SRT_APP_SETTINGS_TRIM_LOCATION
         Public SIZE As SRT_APP_SETTINGS_TRIM_SIZE
+        Public COMPOTION As SRT_APP_SETTINGS_TRIM_COMPOTION
     End Structure
 
     Public Structure SRT_APP_SETTINGS_TRIM_LOCATION
@@ -49,6 +50,9 @@
     Public Structure SRT_APP_SETTINGS_TRIM_SIZE
         Public WIDTH As Integer
         Public HEIGHT As Integer
+    End Structure
+    Public Structure SRT_APP_SETTINGS_TRIM_COMPOTION
+        Public TYPE As Integer
     End Structure
 #End Region
 

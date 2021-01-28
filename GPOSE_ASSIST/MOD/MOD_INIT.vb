@@ -84,6 +84,22 @@
                     .TRIM.LOCATION.TOP = CInt(STR_TEMP)
                 End If
                 '>TRIM.LOCATION
+                'TRIM.SIZE<
+                STR_TEMP = FUNC_GET_APP_SETTINGS(CST_APP_CONFIG_TRIM_SIZE_WIDTH)
+                If Not STR_TEMP = "" Then
+                    .TRIM.SIZE.WIDTH = CInt(STR_TEMP)
+                End If
+                STR_TEMP = FUNC_GET_APP_SETTINGS(CST_APP_CONFIG_TRIM_SIZE_HEIGHT)
+                If Not STR_TEMP = "" Then
+                    .TRIM.SIZE.HEIGHT = CInt(STR_TEMP)
+                End If
+                '<TRIM.SIZE
+                'TRIM.COMPOTION<
+                STR_TEMP = FUNC_GET_APP_SETTINGS(CST_APP_CONFIG_TRIM_COMPOTION_TYPE)
+                If Not STR_TEMP = "" Then
+                    .TRIM.COMPOTION.TYPE = CInt(STR_TEMP)
+                End If
+                '>TRIM.COMPOTION
                 '>TRIM
 
             End With

@@ -45,6 +45,16 @@
                 STR_TEMP = CStr(.TRIM.LOCATION.TOP)
                 Call FUNC_WRITE_APP_SETTINGS(CST_APP_CONFIG_TRIM_LOCATION_TOP, STR_TEMP)
                 '>TRIM.LOCATION
+                'TRIM.SIZE<
+                STR_TEMP = CStr(.TRIM.SIZE.WIDTH)
+                Call FUNC_WRITE_APP_SETTINGS(CST_APP_CONFIG_TRIM_SIZE_WIDTH, STR_TEMP)
+                STR_TEMP = CStr(.TRIM.SIZE.HEIGHT)
+                Call FUNC_WRITE_APP_SETTINGS(CST_APP_CONFIG_TRIM_SIZE_HEIGHT, STR_TEMP)
+                '>TRIM.SIZE
+                'TRIM.COMPOTION<
+                STR_TEMP = CStr(.TRIM.COMPOTION.TYPE)
+                Call FUNC_WRITE_APP_SETTINGS(CST_APP_CONFIG_TRIM_COMPOTION_TYPE, STR_TEMP)
+                '>TRIM.COMPOTION
                 '>TRIM
             Catch ex As Exception
                 Return False
