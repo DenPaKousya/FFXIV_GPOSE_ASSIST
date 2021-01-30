@@ -181,7 +181,7 @@ Public Class WPF_TRIM
         End If
 
         SRT_APP_SETTINGS_VALUE.SAVE.FILE.INDEX += 1
-        Call My.Computer.Audio.Play(My.Resources.SHUTTER_SHORT, Microsoft.VisualBasic.AudioPlayMode.Background)
+        Call My.Computer.Audio.Play(My.Resources.SHUTTER_02_SHORT, Microsoft.VisualBasic.AudioPlayMode.Background)
     End Sub
 
     Private Sub SUB_CAPTURE_JPEG()

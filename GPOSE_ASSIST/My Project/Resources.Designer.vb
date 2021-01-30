@@ -83,6 +83,15 @@ Namespace My.Resources
         '''<summary>
         '''  System.IO.MemoryStream に類似した型 System.IO.UnmanagedMemoryStream のローカライズされたリソースを検索します。
         '''</summary>
+        Friend ReadOnly Property SHUTTER_02_SHORT() As System.IO.UnmanagedMemoryStream
+            Get
+                Return ResourceManager.GetStream("SHUTTER_02_SHORT", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  System.IO.MemoryStream に類似した型 System.IO.UnmanagedMemoryStream のローカライズされたリソースを検索します。
+        '''</summary>
         Friend ReadOnly Property SHUTTER_SHORT() As System.IO.UnmanagedMemoryStream
             Get
                 Return ResourceManager.GetStream("SHUTTER_SHORT", resourceCulture)
