@@ -189,6 +189,8 @@
                 STR_RET = "Google"
             Case "notepad"
                 STR_RET = "Microsoft"
+            Case "FlowScape"
+                STR_RET = "Pixel Forest Games"
             Case Else
                 STR_RET = "Unknown"
         End Select
@@ -199,16 +201,7 @@
     Private Function FUNC_GET_MODEL_DEFAULT(ByVal STR_SOFTWARE As String) As String
         Dim STR_RET As String
 
-        Select Case STR_SOFTWARE
-            Case "ffxiv_dx11"
-                STR_RET = "FFXIV"
-            Case "chrome"
-                STR_RET = "Google Chrome"
-            Case "notepad"
-                STR_RET = "メモ帳"
-            Case Else
-                STR_RET = "Unknown"
-        End Select
+        STR_RET = FUNC_GET_APPLICATION_NAME(STR_SOFTWARE)
 
         Return STR_RET
     End Function

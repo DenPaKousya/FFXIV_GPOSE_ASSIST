@@ -57,7 +57,10 @@ Public Class FRM_MAIN
 #Region "処理実行"
 
     Public Sub SUB_SETTING()
-        Call MessageBox.Show("未実装")
+        Dim WPF_SHOW As WPF_SETTING
+
+        WPF_SHOW = New WPF_SETTING
+        Call WPF_SHOW.ShowDialog()
     End Sub
 
     Public Sub SUB_EXIT()

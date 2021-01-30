@@ -5,20 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GPOSE_ASSIST"
         mc:Ignorable="d"
-        AllowsTransparency="True"
-        Background="#D0FFFFFF"
-        Title="Setting" Height="300" Width="400" ResizeMode="NoResize">
+        Title="Setting" Height="300" Width="500" ResizeMode="NoResize">
     <Grid>
-        <TabControl Margin="10,10,10,50" Background="#00000000">
+        <TabControl Margin="10,10,10,50">
             <TabItem Header="General">
-                <GroupBox Header="" VerticalAlignment="Top" Margin="5,5,5,0" Height="60" Grid.ColumnSpan="3">
+                <GroupBox Header="Target process" VerticalAlignment="Top" Margin="5,5,5,0" Height="60" Grid.ColumnSpan="3">
                     <Grid>
-                        <Label HorizontalAlignment="Left" Margin="5,5,5,5" Content="Target process"/>
-                        <ComboBox x:Name="CMB_KIND_GAMEPAD" HorizontalAlignment="Left" Margin="90,5,5,5" Width="200">
+                        <ComboBox x:Name="CMB_NAME_PROCESS" HorizontalAlignment="Left" Margin="5,5,5,5" Width="120">
                             <ComboBoxItem Content="ffxiv_dx11"/>
                             <ComboBoxItem Content="chrome"/>
                             <ComboBoxItem Content="notepad"/>
+                            <ComboBoxItem Content="FlowScape"/>
                         </ComboBox>
+                        <Label x:Name="LBL_NAME_APPLICATION" HorizontalAlignment="Left" Margin="130,5,5,5" Content="***"/>
+                        <Label HorizontalAlignment="Left" Margin="230,5,5,5" Content="*Reboot this application after changing"/>
                     </Grid>
                 </GroupBox>
             </TabItem>

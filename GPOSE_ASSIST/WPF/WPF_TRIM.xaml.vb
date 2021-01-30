@@ -784,13 +784,13 @@ Public Class WPF_TRIM
                 INT_HEIGHT_SUB = 0
             Else
                 INT_WIDTH_SUB = SRT_WINDOW_RECT_WH.width - SRT_CRIENT_RECT_WH.width
-                INT_BORDER = SRT_WINDOW_RECT_WH.left + Math.Floor(INT_WIDTH_SUB / 2)
+                INT_BORDER = Math.Floor(INT_WIDTH_SUB / 2)
 
                 INT_HEIGHT_SUB = SRT_WINDOW_RECT_WH.height - SRT_CRIENT_RECT_WH.height
             End If
 
-            .left = Me.Left - INT_BORDER
-            .top = Me.Top - (INT_HEIGHT_SUB - INT_BORDER)
+            .left = (Me.Left - SRT_WINDOW_RECT_WH.left) - (INT_BORDER)
+            .top = (Me.Top - SRT_WINDOW_RECT_WH.top) - (INT_HEIGHT_SUB - INT_BORDER)
             .width = Me.Width
             .height = Me.Height
         End With

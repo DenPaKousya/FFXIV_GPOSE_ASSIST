@@ -14,4 +14,23 @@
 
         Return Nothing
     End Function
+
+    Public Function FUNC_GET_APPLICATION_NAME(ByVal STR_PROCESS_NAME As String) As String
+        Dim STR_RET As String
+
+        Select Case STR_PROCESS_NAME
+            Case "ffxiv_dx11"
+                STR_RET = "FFXIV"
+            Case "chrome"
+                STR_RET = "Google Chrome"
+            Case "notepad"
+                STR_RET = "メモ帳"
+            Case "FlowScape"
+                STR_RET = "FlowScape"
+            Case Else
+                STR_RET = "Unknown"
+        End Select
+
+        Return STR_RET
+    End Function
 End Module
