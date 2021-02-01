@@ -23,8 +23,30 @@
                 </GroupBox>
             </TabItem>
             <TabItem Header="Save">
+                <Grid>
+                    <GroupBox Header="Save Folder" VerticalAlignment="Top" Margin="5,5,5,0" Height="55">
+                        <Grid>
+                            <TextBox x:Name="TXT_SAVE_DIRECTORY" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,5,5" Width="300" Height="20"/>
+                            <Button x:Name="BTN_SAVE_DIRECTORY_DIALOG" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="310,5,5,5" Height="20" Width="50" Content="Browse"/>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Image File" VerticalAlignment="Top" Margin="5,55,5,0" Height="120">
+                        <Grid>
+                            <Label x:Name="LBL_SAVE_FILE_DIRECTORY_GUIDE" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,5,5" Content="Folder Name"/>
+                            <TextBox x:Name="TXT_SAVE_FILE_DIRECTORY" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="80,5,5,5" Width="100" Height="20"/>
+                            <Label x:Name="LBL_SAVE_FILE_DIRECTORY_DESCRIPTION" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,5,5,5" Content="Set Empty Is Not Create A Folder"/>
+
+                            <Label x:Name="LBL_SAVE_FILE_NAME_GUIDE" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,25,5,5" Content="Folder Name"/>
+                            <TextBox x:Name="TXT_SAVE_FILE_NAME" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="80,25,5,5" Width="100" Height="20"/>
+
+                        </Grid>
+                    </GroupBox>
+                </Grid>
             </TabItem>
-            
+            <TabItem Header="Guide">
+            </TabItem>
+            <TabItem Header="Trim">
+            </TabItem>
         </TabControl>
         <Grid VerticalAlignment="Bottom" Margin="5,5,5,5">
             <Button x:Name="BTN_OK" HorizontalAlignment="Right" Margin="5,5,90,5" Height="30" Width="80" Content="OK"/>
