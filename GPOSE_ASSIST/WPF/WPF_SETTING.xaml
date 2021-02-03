@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GPOSE_ASSIST"
         mc:Ignorable="d"
-        Title="Setting" Height="300" Width="500" ResizeMode="NoResize">
+        Title="Setting" Height="350" Width="500" ResizeMode="NoResize">
     <Grid>
         <TabControl Margin="10,10,10,50">
             <TabItem Header="General">
@@ -24,28 +24,116 @@
             </TabItem>
             <TabItem Header="Save">
                 <Grid>
-                    <GroupBox Header="Save Folder" VerticalAlignment="Top" Margin="5,5,5,0" Height="55">
+                    <GroupBox Header="Save Folder" VerticalAlignment="Top" Margin="5,5,5,0">
                         <Grid>
-                            <TextBox x:Name="TXT_SAVE_DIRECTORY" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,5,5" Width="300" Height="20"/>
-                            <Button x:Name="BTN_SAVE_DIRECTORY_DIALOG" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="310,5,5,5" Height="20" Width="50" Content="Browse"/>
+                            <Grid VerticalAlignment="Top" Margin="5,5,5,5">
+                                <TextBox x:Name="TXT_SAVE_DIRECTORY" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Width="300" Height="20"/>
+                                <Button x:Name="BTN_SAVE_DIRECTORY_DIALOG" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="300,0,0,0" Height="20" Width="50" Content="Browse"/>
+                            </Grid>
                         </Grid>
                     </GroupBox>
-                    <GroupBox Header="Image File" VerticalAlignment="Top" Margin="5,55,5,0" Height="120">
+                    <GroupBox Header="Image File" VerticalAlignment="Top" Margin="5,55,5,0">
                         <Grid>
-                            <Label x:Name="LBL_SAVE_FILE_DIRECTORY_GUIDE" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,5,5" Content="Folder Name"/>
-                            <TextBox x:Name="TXT_SAVE_FILE_DIRECTORY" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="80,5,5,5" Width="100" Height="20"/>
-                            <Label x:Name="LBL_SAVE_FILE_DIRECTORY_DESCRIPTION" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,5,5,5" Content="Set Empty Is Not Create A Folder"/>
-
-                            <Label x:Name="LBL_SAVE_FILE_NAME_GUIDE" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,25,5,5" Content="Folder Name"/>
-                            <TextBox x:Name="TXT_SAVE_FILE_NAME" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="80,25,5,5" Width="100" Height="20"/>
-
+                            <Grid VerticalAlignment="Top" Margin="5,5,5,5">
+                                <Label x:Name="LBL_SAVE_FILE_DIRECTORY_GUIDE" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="Folder Name"/>
+                                <TextBox x:Name="TXT_SAVE_FILE_DIRECTORY" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="75,3,0,0" Width="100" Height="20"/>
+                                <Label x:Name="LBL_SAVE_FILE_DIRECTORY_DESCRIPTION" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="175,0,0,0" Content="Set empty is not create a folder"/>
+                            </Grid>
+                            <Grid VerticalAlignment="Top" Margin="5,30,5,5">
+                                <Label x:Name="LBL_SAVE_FILE_NAME_GUIDE" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="File Name"/>
+                                <TextBox x:Name="TXT_SAVE_FILE_NAME" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="75,3,0,0" Width="100" Height="20"/>
+                            </Grid>
+                            <Grid VerticalAlignment="Top" Margin="5,55,5,5">
+                                <Label x:Name="LBL_SAVE_FILE_TYPE_GUIDE" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="File Type"/>
+                                <ComboBox x:Name="CMB_SAVE_FILE_TYPE" HorizontalAlignment="Left" Margin="75,0,0,0" Width="100">
+                                    <ComboBoxItem Content="PNG"/>
+                                    <ComboBoxItem Content="JPEG"/>
+                                    <ComboBoxItem Content="TIFF"/>
+                                    <ComboBoxItem Content="PNG+JPEG"/>
+                                    <ComboBoxItem Content="TIFF+JPEG"/>
+                                </ComboBox>
+                            </Grid>
+                            <Grid VerticalAlignment="Top" Margin="5,80,5,5">
+                                <Label x:Name="LBL_SAVE_FILE_QUALITY_GUIDE" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="File Quality"/>
+                                <ComboBox x:Name="CMB_SAVE_FILE_QUALITY" HorizontalAlignment="Left" Margin="75,0,0,0" Width="100">
+                                    <ComboBoxItem Content="100"/>
+                                    <ComboBoxItem Content="90"/>
+                                    <ComboBoxItem Content="80"/>
+                                    <ComboBoxItem Content="70"/>
+                                    <ComboBoxItem Content="60"/>
+                                    <ComboBoxItem Content="50"/>
+                                    <ComboBoxItem Content="40"/>
+                                    <ComboBoxItem Content="30"/>
+                                    <ComboBoxItem Content="20"/>
+                                    <ComboBoxItem Content="10"/>
+                                </ComboBox>
+                                <Label x:Name="LBL_SAVE_FILE_QUALITY_DESCRIPTION" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="175,0,0,0" Content="Enabled JPEG Only"/>
+                            </Grid>
+                            <Grid VerticalAlignment="Top" Margin="5,105,5,5">
+                                <Label x:Name="LBL_SAVE_FILE_INDEX_GUIDE" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="File Index"/>
+                                <TextBox x:Name="TXT_SAVE_FILE_INDEX" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="75,3,0,0" Width="100" Height="20" TextAlignment="Right"/>
+                            </Grid>
+                            <Grid VerticalAlignment="Top" Margin="5,130,5,5">
+                                <Label x:Name="LBL_SAVE_FILE_COPYRIGHT_GUIDE" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="Copyright"/>
+                                <CheckBox x:Name="CHK_SAVE_FILE_COPYRIGHT" Content="Add" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="75,7,0,0"/>
+                                <Label x:Name="LBL_SAVE_FILE_COPYRIGHT_DESCRIPTION" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="175,0,0,0" Content="Enabled First Capture File"/>
+                            </Grid>
                         </Grid>
                     </GroupBox>
                 </Grid>
             </TabItem>
             <TabItem Header="Guide">
+                <GroupBox Header="Location" VerticalAlignment="Top" Margin="5,5,5,0" Height="60">
+                    <Grid VerticalAlignment="Top" Margin="5,5,5,5">
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="Alignment"/>
+                        <ComboBox x:Name="CMB_GUIDE_LOCATION_ALIGNMENT" HorizontalAlignment="Left" Margin="75,0,0,0" Width="100">
+                            <ComboBoxItem Content="Center"/>
+                            <ComboBoxItem Content="Left+Top"/>
+                            <ComboBoxItem Content="Left+Bottom"/>
+                            <ComboBoxItem Content="Right+Top"/>
+                            <ComboBoxItem Content="Right+Bottom"/>
+                        </ComboBox>
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="175,0,0,0" Content="Right+Top Is Default"/>
+                    </Grid>
+                </GroupBox>
             </TabItem>
             <TabItem Header="Trim">
+                <Grid>
+                <GroupBox Header="Location" VerticalAlignment="Top" Margin="5,5,5,5">
+                    <Grid>
+                        <Grid VerticalAlignment="Top" Margin="5,5,5,5">
+                            <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="Left"/>
+                            <TextBox x:Name="TXT_TRIM_LOACTION_LEFT" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="75,3,0,0" Width="100" Height="20"/>
+                        </Grid>
+                        <Grid VerticalAlignment="Top" Margin="5,30,5,5">
+                            <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="Top"/>
+                            <TextBox x:Name="TXT_TRIM_LOACTION_TOP" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="75,3,0,0" Width="100" Height="20"/>
+                        </Grid>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Header="Compotion" VerticalAlignment="Top" Margin="5,95,5,5">
+                    <Grid>
+                        <Grid VerticalAlignment="Top" Margin="5,5,5,5">
+                            <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="Type"/>
+                            <ComboBox x:Name="CMB_TRIM_COMPOTION_TYPE" HorizontalAlignment="Left" Margin="75,0,0,0" Width="100">
+                                <ComboBoxItem Content="無し"/>
+                                <ComboBoxItem Content="2分割"/>
+                                <ComboBoxItem Content="3分割"/>
+                                <ComboBoxItem Content="4分割"/>
+                                <ComboBoxItem Content="3分割(φ)"/>
+                                <ComboBoxItem Content="黄金螺旋-横-左下起点"/>
+                                <ComboBoxItem Content="黄金螺旋-横-右上起点"/>
+                                <ComboBoxItem Content="黄金螺旋-横-左上起点"/>
+                                <ComboBoxItem Content="黄金螺旋-横-右下起点"/>
+                                <ComboBoxItem Content="黄金螺旋-縦-左下起点"/>
+                                <ComboBoxItem Content="黄金螺旋-縦-右上起点"/>
+                                <ComboBoxItem Content="黄金螺旋-縦-左上起点"/>
+                                <ComboBoxItem Content="黄金螺旋-縦-右下起点"/>
+                            </ComboBox>
+                        </Grid>
+                    </Grid>
+                </GroupBox>
+                </Grid>
             </TabItem>
         </TabControl>
         <Grid VerticalAlignment="Bottom" Margin="5,5,5,5">

@@ -55,8 +55,7 @@ Public Class WPF_SETTING
 
 #Region "主処理"
     Private Sub SUB_OK()
-
-        SRT_APP_SETTINGS_VALUE.PROCESS_NAME = CMB_NAME_PROCESS.Text
+        SRT_APP_SETTINGS_VALUE = FUNC_GET_SETTING_FROM_CONTROL()
         Call SUB_CLOSE()
     End Sub
 
@@ -72,8 +71,59 @@ Public Class WPF_SETTING
     End Sub
 
     Private Sub SUB_CTRL_VALUE_INIT()
-        CMB_NAME_PROCESS.Text = SRT_APP_SETTINGS_VALUE.PROCESS_NAME
+        Call SUB_SET_SETTING_TO_CONTROL(SRT_APP_SETTINGS_VALUE)
     End Sub
+#End Region
+
+#Region "設定←→画面コントロール"
+    Private Sub SUB_SET_SETTING_TO_CONTROL(ByRef SRT_SET As SRT_APP_SETTINGS)
+        With SRT_SET
+            CMB_NAME_PROCESS.Text = .PROCESS_NAME
+        End With
+        With SRT_SET.SAVE
+            TXT_SAVE_DIRECTORY.Text = .DIRECTORY
+            TXT_SAVE_FILE_DIRECTORY.Text = .FILE.DIRECTORY
+            TXT_SAVE_FILE_NAME.Text = .FILE.NAME
+            CMB_SAVE_FILE_TYPE.Text = .FILE.TYPE
+            CMB_SAVE_FILE_QUALITY.Text = .FILE.QUALITY
+            CHK_SAVE_FILE_COPYRIGHT.IsChecked = FUNC_CAST_INT_TO_BOOL(.FILE.COPYRIGHT)
+        End With
+        With SRT_SET.GUIDE
+            CMB_GUIDE_LOCATION_ALIGNMENT.Text = .LOCATION.ALIGNMENT
+        End With
+        With SRT_SET.TRIM
+            TXT_TRIM_LOACTION_LEFT.Text = .LOCATION.LEFT
+            TXT_TRIM_LOACTION_TOP.Text = .LOCATION.TOP
+            CMB_NAME_PROCESS.SelectedIndex = .COMPOTION.TYPE
+        End With
+    End Sub
+
+    Private Function FUNC_GET_SETTING_FROM_CONTROL()
+        Dim SRT_RET As SRT_APP_SETTINGS
+        With SRT_RET
+            .PROCESS_NAME = CMB_NAME_PROCESS.Text
+        End With
+        With SRT_RET.SAVE
+            .DIRECTORY = TXT_SAVE_DIRECTORY.Text
+            .FILE.DIRECTORY = TXT_SAVE_FILE_DIRECTORY.Text
+            .FILE.NAME = TXT_SAVE_FILE_NAME.Text
+            .FILE.TYPE = CMB_SAVE_FILE_TYPE.Text
+            .FILE.QUALITY = FUNC_VALUE_CONVERT_NUMERIC_INT(CMB_SAVE_FILE_QUALITY.Text, 100)
+            .FILE.COPYRIGHT = FUNC_CAST_BOOL_TO_INT(CHK_SAVE_FILE_COPYRIGHT.IsChecked)
+        End With
+        With SRT_RET.GUIDE
+            .LOCATION.ALIGNMENT = CMB_GUIDE_LOCATION_ALIGNMENT.Text
+        End With
+        With SRT_RET.TRIM
+            .LOCATION.LEFT = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_TRIM_LOACTION_LEFT.Text, 0)
+            .LOCATION.TOP = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_TRIM_LOACTION_TOP.Text, 0)
+            .COMPOTION.TYPE = CMB_NAME_PROCESS.SelectedIndex
+            .SIZE.WIDTH = 0
+            .SIZE.HEIGHT = 0
+        End With
+
+        Return SRT_RET
+    End Function
 #End Region
 
 #Region "イベント-コンボチェンジ"
@@ -85,17 +135,6 @@ Public Class WPF_SETTING
         STR_TEMP = CIM_ITEM.Content
         LBL_NAME_APPLICATION.Content = FUNC_GET_APPLICATION_NAME(STR_TEMP)
     End Sub
-#End Region
-
-#Region "イベント-ボタンクリック"
-    Private Sub BTN_OK_Click(sender As Object, e As RoutedEventArgs) Handles BTN_OK.Click
-        Call SUB_EXEC_DO(ENM_WINDOW_EXEC.DO_OK)
-    End Sub
-
-    Private Sub BTN_CANCEL_Click(sender As Object, e As RoutedEventArgs) Handles BTN_CANCEL.Click
-        Call SUB_EXEC_DO(ENM_WINDOW_EXEC.DO_CLOSE)
-    End Sub
-
 #End Region
 
     Private Sub WPF_SETTING_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
