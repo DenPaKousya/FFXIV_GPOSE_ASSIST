@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GPOSE_ASSIST"
         mc:Ignorable="d"
-        Title="Setting" Height="350" Width="500" ResizeMode="NoResize">
+        Title="Setting" Height="400" Width="550" ResizeMode="NoResize">
     <Grid>
         <TabControl Margin="10,10,10,50">
             <TabItem Header="General">
@@ -44,7 +44,7 @@
                                 <TextBox x:Name="TXT_SAVE_FILE_NAME" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="75,3,0,0" Width="100" Height="20"/>
                             </Grid>
                             <Grid VerticalAlignment="Top" Margin="5,55,5,5">
-                                <Label x:Name="LBL_SAVE_FILE_TYPE_GUIDE" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="File Type"/>
+                                <Label x:Name="LBL_SAVE_FILE_TYPE_GUIDE" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="Type"/>
                                 <ComboBox x:Name="CMB_SAVE_FILE_TYPE" HorizontalAlignment="Left" Margin="75,0,0,0" Width="100">
                                     <ComboBoxItem Content="PNG"/>
                                     <ComboBoxItem Content="JPEG"/>
@@ -54,8 +54,8 @@
                                 </ComboBox>
                             </Grid>
                             <Grid VerticalAlignment="Top" Margin="5,80,5,5">
-                                <Label x:Name="LBL_SAVE_FILE_QUALITY_GUIDE" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="File Quality"/>
-                                <ComboBox x:Name="CMB_SAVE_FILE_QUALITY" HorizontalAlignment="Left" Margin="75,0,0,0" Width="100">
+                                <Label x:Name="LBL_SAVE_FILE_QUALITY_GUIDE" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="Quality"/>
+                                <ComboBox x:Name="CMB_SAVE_FILE_QUALITY" HorizontalAlignment="Left" Margin="75,0,0,0" Width="100" IsEditable="True">
                                     <ComboBoxItem Content="100"/>
                                     <ComboBoxItem Content="90"/>
                                     <ComboBoxItem Content="80"/>
@@ -70,7 +70,7 @@
                                 <Label x:Name="LBL_SAVE_FILE_QUALITY_DESCRIPTION" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="175,0,0,0" Content="Enabled JPEG Only"/>
                             </Grid>
                             <Grid VerticalAlignment="Top" Margin="5,105,5,5">
-                                <Label x:Name="LBL_SAVE_FILE_INDEX_GUIDE" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="File Index"/>
+                                <Label x:Name="LBL_SAVE_FILE_INDEX_GUIDE" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="Index"/>
                                 <TextBox x:Name="TXT_SAVE_FILE_INDEX" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="75,3,0,0" Width="100" Height="20" TextAlignment="Right"/>
                             </Grid>
                             <Grid VerticalAlignment="Top" Margin="5,130,5,5">

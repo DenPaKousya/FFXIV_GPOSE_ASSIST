@@ -6,6 +6,8 @@ Public Class WPF_SETTING
     Private Enum ENM_WINDOW_EXEC
         DO_OK = 0
         DO_CLOSE
+        DO_VIEW_DIALOG_SD
+
     End Enum
 #End Region
 
@@ -28,6 +30,8 @@ Public Class WPF_SETTING
                 Call SUB_OK()
             Case ENM_WINDOW_EXEC.DO_CLOSE
                 Call SUB_CLOSE()
+            Case ENM_WINDOW_EXEC.DO_VIEW_DIALOG_SD
+                Call SUB_VIEW_DIALOG_SD()
         End Select
 
         Call Me.DoEvents()
@@ -63,6 +67,25 @@ Public Class WPF_SETTING
         Call Me.Close()
     End Sub
 
+    Private Sub SUB_VIEW_DIALOG_SD()
+        Dim FBD_FLODER As FolderBrowserDialog
+        FBD_FLODER = New FolderBrowserDialog
+        With FBD_FLODER
+            .Description = "Select Save Folder"
+            .SelectedPath = TXT_SAVE_DIRECTORY.Text
+        End With
+
+        Dim DLR_RETURN As DialogResult
+        DLR_RETURN = FBD_FLODER.ShowDialog()
+
+        If Not (DLR_RETURN = Forms.DialogResult.OK) Then
+            Exit Sub
+        End If
+
+        With FBD_FLODER
+            TXT_SAVE_DIRECTORY.Text = .SelectedPath
+        End With
+    End Sub
 #End Region
 
 #Region "初期化・終了処理"
@@ -86,6 +109,7 @@ Public Class WPF_SETTING
             TXT_SAVE_FILE_NAME.Text = .FILE.NAME
             CMB_SAVE_FILE_TYPE.Text = .FILE.TYPE
             CMB_SAVE_FILE_QUALITY.Text = .FILE.QUALITY
+            TXT_SAVE_FILE_INDEX.Text = .FILE.INDEX
             CHK_SAVE_FILE_COPYRIGHT.IsChecked = FUNC_CAST_INT_TO_BOOL(.FILE.COPYRIGHT)
         End With
         With SRT_SET.GUIDE
@@ -94,7 +118,7 @@ Public Class WPF_SETTING
         With SRT_SET.TRIM
             TXT_TRIM_LOACTION_LEFT.Text = .LOCATION.LEFT
             TXT_TRIM_LOACTION_TOP.Text = .LOCATION.TOP
-            CMB_NAME_PROCESS.SelectedIndex = .COMPOTION.TYPE
+            CMB_TRIM_COMPOTION_TYPE.SelectedIndex = .COMPOTION.TYPE
         End With
     End Sub
 
@@ -109,6 +133,16 @@ Public Class WPF_SETTING
             .FILE.NAME = TXT_SAVE_FILE_NAME.Text
             .FILE.TYPE = CMB_SAVE_FILE_TYPE.Text
             .FILE.QUALITY = FUNC_VALUE_CONVERT_NUMERIC_INT(CMB_SAVE_FILE_QUALITY.Text, 100)
+            If .FILE.QUALITY > 100 Then
+                .FILE.QUALITY = 100
+            End If
+            If .FILE.QUALITY <= 0 Then
+                .FILE.QUALITY = 10
+            End If
+            .FILE.INDEX = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_SAVE_FILE_INDEX.Text, 1)
+            If .FILE.INDEX <= 0 Then
+                .FILE.QUALITY = 1
+            End If
             .FILE.COPYRIGHT = FUNC_CAST_BOOL_TO_INT(CHK_SAVE_FILE_COPYRIGHT.IsChecked)
         End With
         With SRT_RET.GUIDE
@@ -117,7 +151,7 @@ Public Class WPF_SETTING
         With SRT_RET.TRIM
             .LOCATION.LEFT = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_TRIM_LOACTION_LEFT.Text, 0)
             .LOCATION.TOP = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_TRIM_LOACTION_TOP.Text, 0)
-            .COMPOTION.TYPE = CMB_NAME_PROCESS.SelectedIndex
+            .COMPOTION.TYPE = CMB_TRIM_COMPOTION_TYPE.SelectedIndex
             .SIZE.WIDTH = 0
             .SIZE.HEIGHT = 0
         End With
@@ -137,10 +171,24 @@ Public Class WPF_SETTING
     End Sub
 #End Region
 
+#Region "イベント-ボタンクリック"
+
+    Private Sub BTN_OK_Click(sender As Object, e As RoutedEventArgs) Handles BTN_OK.Click
+        Call SUB_EXEC_DO(ENM_WINDOW_EXEC.DO_OK)
+    End Sub
+
+    Private Sub BTN_CANCEL_Click(sender As Object, e As RoutedEventArgs) Handles BTN_CANCEL.Click
+        Call SUB_EXEC_DO(ENM_WINDOW_EXEC.DO_CLOSE)
+    End Sub
+
+    Private Sub BTN_SAVE_DIRECTORY_DIALOG_Click(sender As Object, e As RoutedEventArgs) Handles BTN_SAVE_DIRECTORY_DIALOG.Click
+        Call SUB_EXEC_DO(ENM_WINDOW_EXEC.DO_VIEW_DIALOG_SD)
+    End Sub
+#End Region
+
     Private Sub WPF_SETTING_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
         Call SUB_CTRL_VIEW_INIT()
         Call SUB_CTRL_VALUE_INIT()
     End Sub
-
 
 End Class
