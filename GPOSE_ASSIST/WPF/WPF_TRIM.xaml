@@ -71,7 +71,8 @@
 
         <Label x:Name="LBL_GUIDE" Content="" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="5,5,5,5" Height="100"  Width="100" FontFamily="Lucida Console" Foreground="White"/>
 
-        <CheckBox x:Name="CHK_OPACITY" HorizontalAlignment="Right" Height="20" Margin="5,5,5,5" VerticalAlignment="Top" FlowDirection="RightToLeft" Content="透過" Foreground="White"/>
+        <CheckBox x:Name="CHK_OPACITY" HorizontalAlignment="Right" Height="20" Margin="5,5,5,5" VerticalAlignment="Top" FlowDirection="RightToLeft" Content="Transparent" ToolTip="ガイドを透過します" Foreground="White"/>
+        <CheckBox x:Name="CHK_CONFIRM" HorizontalAlignment="Right" Height="20" Margin="5,25,5,25" VerticalAlignment="Top" FlowDirection="RightToLeft" Content="Confirm" ToolTip="保存確認画面を表示します" Foreground="White"/>
 
         <Button x:Name="PCB_BUTTON_SHUTTER" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="16" Height="16" Margin="0,0,5,21" ToolTip="撮影を行います" Background="#00000000" BorderBrush="#00000000">
             <Image Source="/RES/IMG/CAMERA_NORMAL.png" Margin="-2,-2,-2,-2"/>

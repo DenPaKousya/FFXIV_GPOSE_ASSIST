@@ -7,6 +7,7 @@ Public Class WPF_MAIN
         VIEW_TRIM = 0
         APPL_EXIT
         APPL_SETTING
+        APPL_OPEN_SAVE_FOLDER
     End Enum
 #End Region
 
@@ -32,6 +33,8 @@ Public Class WPF_MAIN
                 Call SUB_APPL_EXIT()
             Case ENM_WINDOW_EXEC.APPL_SETTING
                 Call SUB_APPL_SETTING()
+            Case ENM_WINDOW_EXEC.APPL_OPEN_SAVE_FOLDER
+                Call SUB_APPL_OPEN_SAVE_FOLDER()
         End Select
 
         Call Me.DoEvents()
@@ -56,12 +59,6 @@ Public Class WPF_MAIN
 #Region "主処理"
     Private Sub SUB_VIEW_TRIM()
 
-        Dim INT_LEFT_SET As Integer
-        Dim INT_TOP_SET As Integer
-
-        INT_LEFT_SET = SRT_APP_SETTINGS_VALUE.TRIM.LOCATION.LEFT
-        INT_TOP_SET = SRT_APP_SETTINGS_VALUE.TRIM.LOCATION.TOP
-
         If WPF_SHOW_WINDOW Is Nothing Then
             WPF_SHOW_WINDOW = New WPF_TRIM
             Call WPF_SHOW_WINDOW.SUB_SET_LOCATION_CONTROL(Me.Height)
@@ -81,10 +78,11 @@ Public Class WPF_MAIN
             WPF_SHOW_WINDOW.Visibility = Visibility.Hidden
             Call WPF_SHOW_WINDOW.Hide()
         Else
+            WPF_SHOW_WINDOW.SET_SIZE = True
             Call WPF_SHOW_WINDOW.Show()
+            WPF_SHOW_WINDOW.SET_SIZE = False
+            Call WPF_SHOW_WINDOW.SUB_SET_SIZE_AND_LOCATION_DEFAULT()
 
-            WPF_SHOW_WINDOW.Left = INT_LEFT_SET
-            WPF_SHOW_WINDOW.Top = INT_TOP_SET
             Dim BLN_LOCATION_DEFAULT As Boolean
             BLN_LOCATION_DEFAULT = (WPF_SHOW_WINDOW.Left = 0 And WPF_SHOW_WINDOW.Top = 0)
             If BLN_LOCATION_DEFAULT Then
@@ -95,6 +93,10 @@ Public Class WPF_MAIN
 
     Private Sub SUB_APPL_SETTING()
         Call FRM_APPL_MAIN.SUB_SETTING()
+    End Sub
+
+    Private Sub SUB_APPL_OPEN_SAVE_FOLDER()
+        Call FRM_APPL_MAIN.SUB_OPEN_SAVE_FOLDER()
     End Sub
 
     Private Sub SUB_APPL_EXIT()
@@ -129,10 +131,14 @@ Public Class WPF_MAIN
         Call SUB_EXEC_DO(ENM_WINDOW_EXEC.APPL_SETTING)
     End Sub
 
+
+    Private Sub MNI_OPEN_SAVE_FOLDER_Click(sender As Object, e As RoutedEventArgs) Handles MNI_OPEN_SAVE_FOLDER.Click
+        Call SUB_EXEC_DO(ENM_WINDOW_EXEC.APPL_OPEN_SAVE_FOLDER)
+    End Sub
+
     Private Sub MNI_EXIT_Click(sender As Object, e As RoutedEventArgs) Handles MNI_EXIT.Click
         Call SUB_EXEC_DO(ENM_WINDOW_EXEC.APPL_EXIT)
     End Sub
-
 #End Region
 
 End Class

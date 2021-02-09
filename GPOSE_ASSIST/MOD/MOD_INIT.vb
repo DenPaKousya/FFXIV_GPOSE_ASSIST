@@ -93,7 +93,13 @@
                 If Not STR_TEMP = "" Then
                     .TRIM.SIZE.HEIGHT = CInt(STR_TEMP)
                 End If
-                '<TRIM.SIZE
+                '>TRIM.SIZE
+                'TRIM.ASPECT_RATIO<
+                STR_TEMP = FUNC_GET_APP_SETTINGS(CST_APP_CONFIG_TRIM_ASPECT_RATIO_TYPE)
+                If Not STR_TEMP = "" Then
+                    .TRIM.ASPECT_RATIO.TYPE = CInt(STR_TEMP)
+                End If
+                '>TRIM.ASPECT_RATIO
                 'TRIM.COMPOTION<
                 STR_TEMP = FUNC_GET_APP_SETTINGS(CST_APP_CONFIG_TRIM_COMPOTION_TYPE)
                 If Not STR_TEMP = "" Then

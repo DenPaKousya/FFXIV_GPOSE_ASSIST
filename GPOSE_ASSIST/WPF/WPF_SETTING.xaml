@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GPOSE_ASSIST"
         mc:Ignorable="d"
-        Title="Setting" Height="400" Width="550" ResizeMode="NoResize">
+        Title="Setting" Height="430" Width="550" ResizeMode="NoResize">
     <Grid>
         <TabControl Margin="10,10,10,50">
             <TabItem Header="General">
@@ -111,7 +111,40 @@
                         </Grid>
                     </Grid>
                 </GroupBox>
-                <GroupBox Header="Compotion" VerticalAlignment="Top" Margin="5,95,5,5">
+                <GroupBox Header="Size" VerticalAlignment="Top" Margin="5,90,5,5">
+                    <Grid>
+                        <Grid VerticalAlignment="Top" Margin="5,5,5,5">
+                            <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="Width"/>
+                            <TextBox x:Name="TXT_TRIM_SIZE_WIDTH" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="75,3,0,0" Width="100" Height="20"/>
+                        </Grid>
+                        <Grid VerticalAlignment="Top" Margin="5,30,5,5">
+                            <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="Height"/>
+                            <TextBox x:Name="TXT_TRIM_SIZE_HEIGHT" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="75,3,0,0" Width="100" Height="20"/>
+                        </Grid>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Header="Aspect ratio" VerticalAlignment="Top" Margin="5,175,5,5">
+                    <Grid VerticalAlignment="Top" Margin="5,5,5,5">
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="Type"/>
+                        <ComboBox x:Name="CMB_TRIM_ASPECT_RATIO_TYPE" HorizontalAlignment="Left" Margin="75,0,0,0" Width="100">
+                            <ComboBoxItem Content="Free"/>
+                            <ComboBoxItem Content="1:1"/>
+                            <ComboBoxItem Content="2:3"/>
+                            <ComboBoxItem Content="3:2"/>
+                            <ComboBoxItem Content="3:4"/>
+                            <ComboBoxItem Content="4:3"/>
+                            <ComboBoxItem Content="5:7"/>
+                            <ComboBoxItem Content="7:5"/>
+                            <ComboBoxItem Content="5:8"/>
+                            <ComboBoxItem Content="8:5"/>
+                            <ComboBoxItem Content="5:12"/>
+                            <ComboBoxItem Content="12:5"/>
+                            <ComboBoxItem Content="9:16"/>
+                            <ComboBoxItem Content="16:9"/>
+                        </ComboBox>
+                    </Grid>
+                </GroupBox>  
+                <GroupBox Header="Compotion" VerticalAlignment="Top" Margin="5,235,5,5">
                     <Grid>
                         <Grid VerticalAlignment="Top" Margin="5,5,5,5">
                             <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="Type"/>

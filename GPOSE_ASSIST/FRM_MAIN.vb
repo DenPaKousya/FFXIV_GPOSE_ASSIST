@@ -63,6 +63,21 @@ Public Class FRM_MAIN
         Call WPF_SHOW.ShowDialog()
     End Sub
 
+    Public Sub SUB_OPEN_SAVE_FOLDER()
+        Dim STR_DIR As String
+        STR_DIR = SRT_APP_SETTINGS_VALUE.SAVE.DIRECTORY
+
+        If Not FUNC_DIR_CHECK(STR_DIR) Then
+            Exit Sub
+        End If
+
+        Try
+            Call System.Diagnostics.Process.Start("EXPLORER.EXE", STR_DIR)
+        Catch ex As Exception
+            Exit Sub
+        End Try
+    End Sub
+
     Public Sub SUB_EXIT()
         Call Me.Close()
     End Sub
@@ -75,7 +90,6 @@ Public Class FRM_MAIN
         End If
         BLN_DONE_SUB_CHECK_PROCESS = True
         Call Application.DoEvents()
-
 
         Call SUB_GET_PROCESS()
         Call SUB_REFRESH_PROCESS()
@@ -162,6 +176,10 @@ Public Class FRM_MAIN
 
     Private Sub TSM_SETTING_Click(sender As Object, e As EventArgs) Handles TSM_SETTING.Click
         Call SUB_SETTING()
+    End Sub
+
+    Private Sub TSM_OPEN_SAVE_FOLDER_Click(sender As Object, e As EventArgs) Handles TSM_OPEN_SAVE_FOLDER.Click
+        Call SUB_OPEN_SAVE_FOLDER()
     End Sub
 
     Private Sub TSM_EXIT_Click(sender As Object, e As EventArgs) Handles TSM_EXIT.Click
