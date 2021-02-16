@@ -7,12 +7,30 @@ Public Class WPF_SETTING
         DO_OK = 0
         DO_CLOSE
         DO_VIEW_DIALOG_SD
-
+        DO_INIT_TRIM
     End Enum
 #End Region
 
 #Region "画面用・変数"
     Private BLN_WINDOW_EXEC_DO As Boolean = False
+#End Region
+
+
+#Region "プロパティ用変数"
+    Private BLN_PROPERTY_CANCEL As Boolean = True
+#End Region
+
+#Region "プロパティ"
+
+    Public Property CANCEL As Boolean
+        Get
+            Return BLN_PROPERTY_CANCEL
+        End Get
+        Set(ByVal value As Boolean)
+            BLN_PROPERTY_CANCEL = value
+        End Set
+    End Property
+
 #End Region
 
 #Region "主処理呼出元"
@@ -32,6 +50,8 @@ Public Class WPF_SETTING
                 Call SUB_CLOSE()
             Case ENM_WINDOW_EXEC.DO_VIEW_DIALOG_SD
                 Call SUB_VIEW_DIALOG_SD()
+            Case ENM_WINDOW_EXEC.DO_INIT_TRIM
+                Call SUB_INIT_TRIM()
         End Select
 
         Call Me.DoEvents()
@@ -60,6 +80,7 @@ Public Class WPF_SETTING
 #Region "主処理"
     Private Sub SUB_OK()
         SRT_APP_SETTINGS_VALUE = FUNC_GET_SETTING_FROM_CONTROL()
+        Me.CANCEL = False
         Call SUB_CLOSE()
     End Sub
 
@@ -86,6 +107,18 @@ Public Class WPF_SETTING
             TXT_SAVE_DIRECTORY.Text = .SelectedPath
         End With
     End Sub
+
+    Private Sub SUB_INIT_TRIM()
+        TXT_TRIM_LOACTION_LEFT.Text = CStr(0)
+        TXT_TRIM_LOACTION_TOP.Text = CStr(0)
+
+        TXT_TRIM_SIZE_WIDTH.Text = CStr(600)
+        TXT_TRIM_SIZE_HEIGHT.Text = CStr(400)
+
+        CMB_TRIM_ASPECT_RATIO_TYPE.SelectedIndex = 3
+
+        CMB_TRIM_COMPOTION_TYPE.SelectedIndex = 2
+    End Sub
 #End Region
 
 #Region "初期化・終了処理"
@@ -94,6 +127,7 @@ Public Class WPF_SETTING
     End Sub
 
     Private Sub SUB_CTRL_VALUE_INIT()
+        Me.CANCEL = True
         Call SUB_SET_SETTING_TO_CONTROL(SRT_APP_SETTINGS_VALUE)
     End Sub
 #End Region
@@ -187,6 +221,10 @@ Public Class WPF_SETTING
 
     Private Sub BTN_SAVE_DIRECTORY_DIALOG_Click(sender As Object, e As RoutedEventArgs) Handles BTN_SAVE_DIRECTORY_DIALOG.Click
         Call SUB_EXEC_DO(ENM_WINDOW_EXEC.DO_VIEW_DIALOG_SD)
+    End Sub
+
+    Private Sub BTN_INIT_TRIM_Click(sender As Object, e As RoutedEventArgs) Handles BTN_INIT_TRIM.Click
+        Call SUB_EXEC_DO(ENM_WINDOW_EXEC.DO_INIT_TRIM)
     End Sub
 #End Region
 

@@ -928,11 +928,12 @@ Public Class WPF_TRIM
     End Function
 
     Public Sub SUB_SET_SIZE_AND_LOCATION_DEFAULT()
+        BLN_SET_SIZE = True
         Me.Left = SRT_APP_SETTINGS_VALUE.TRIM.LOCATION.LEFT
         Me.Top = SRT_APP_SETTINGS_VALUE.TRIM.LOCATION.TOP
-        BLN_SET_SIZE = True
         Me.Width = SRT_APP_SETTINGS_VALUE.TRIM.SIZE.WIDTH
         Me.Height = SRT_APP_SETTINGS_VALUE.TRIM.SIZE.HEIGHT
+        Call SUB_PUT_GUIDE()
         BLN_SET_SIZE = False
         Call SUB_CHANGE_RATE(SRT_APP_SETTINGS_VALUE.TRIM.ASPECT_RATIO.TYPE)
         Call SUB_CHANGE_DRAW_COMPOTION(SRT_APP_SETTINGS_VALUE.TRIM.COMPOTION.TYPE)
@@ -1176,6 +1177,9 @@ Public Class WPF_TRIM
     End Sub
 
     Private Sub WPF_TRIM_LocationChanged(sender As Object, e As EventArgs) Handles Me.LocationChanged
+        If BLN_SET_SIZE Then
+            Exit Sub
+        End If
         Call SUB_PUT_GUIDE()
 
         SRT_APP_SETTINGS_VALUE.TRIM.LOCATION.LEFT = Me.Left

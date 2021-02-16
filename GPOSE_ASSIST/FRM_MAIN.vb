@@ -61,6 +61,15 @@ Public Class FRM_MAIN
 
         WPF_SHOW = New WPF_SETTING
         Call WPF_SHOW.ShowDialog()
+
+        If Not WPF_SHOW.CANCEL Then
+            If Not WPF_WINDOW_MAIN Is Nothing Then
+                Call WPF_WINDOW_MAIN.SUB_WINDOW_REFRESH()
+            End If
+        End If
+
+        Call WPF_SHOW.Close()
+        WPF_SHOW = Nothing
     End Sub
 
     Public Sub SUB_OPEN_SAVE_FOLDER()

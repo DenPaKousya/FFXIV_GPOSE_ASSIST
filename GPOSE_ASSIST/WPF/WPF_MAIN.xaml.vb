@@ -105,6 +105,19 @@ Public Class WPF_MAIN
 
 #End Region
 
+#Region "外部呼出"
+    Public Sub SUB_WINDOW_REFRESH()
+
+        If Not WPF_SHOW_WINDOW Is Nothing Then
+            Call WPF_SHOW_WINDOW.Hide()
+            Call WPF_SHOW_WINDOW.Close()
+            WPF_SHOW_WINDOW = Nothing
+        End If
+
+
+    End Sub
+#End Region
+
 #Region "NEW"
     Public Sub New()
 
