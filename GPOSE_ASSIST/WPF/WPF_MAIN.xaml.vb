@@ -1,4 +1,5 @@
 ﻿Imports System.Windows
+Imports System.Windows.Interop
 
 Public Class WPF_MAIN
 
@@ -14,6 +15,33 @@ Public Class WPF_MAIN
 #Region "画面用・変数"
     Private WPF_SHOW_WINDOW As WPF_TRIM = Nothing
     Private BLN_WINDOW_EXEC_DO As Boolean = False
+#End Region
+
+#Region "初期化・終了処理"
+    Private Sub SUB_CTRL_NEW_INIT()
+    End Sub
+
+    Private Sub SUB_CTRL_VIEW_INIT()
+        Dim WIH_HELPER As System.Windows.Interop.WindowInteropHelper
+        WIH_HELPER = New System.Windows.Interop.WindowInteropHelper(Me)
+
+        Dim INT_KEY As Integer
+        INT_KEY = CInt(FUNC_GET_KEY_HOTKEY("G"))
+        Dim INT_MOD As Integer
+        INT_MOD = FUNC_GET_MOD_HOTKEY("Alt")
+        Dim INT_ID As Integer
+        INT_ID = 0
+        Dim LNG_PARAM As Long
+        LNG_PARAM = 0L
+        If Not FUNC_REGISTER_HOT_KEY(WIH_HELPER.Handle, INT_ID, LNG_PARAM, INT_MOD, INT_KEY) Then
+            Call Debug.WriteLine("しっぱい")
+        End If
+
+        Dim HSC_SOURCE As System.Windows.Interop.HwndSource
+        HSC_SOURCE = HwndSource.FromHwnd(WIH_HELPER.Handle)
+        Call HSC_SOURCE.AddHook(New HwndSourceHook(AddressOf WndProc))
+        'AddHandler ComponentDispatcher.ThreadPreprocessMessage, AddressOf ComponentDispatcher_ThreadPreprocessMessage
+    End Sub
 #End Region
 
 #Region "主処理呼出元"
@@ -127,8 +155,72 @@ Public Class WPF_MAIN
         ' InitializeComponent() 呼び出しの後で初期化を追加します。
 
         AddHandler Me.MouseLeftButtonDown, Sub(sender, e) Me.DragMove() 'ウィンドウをマウスのドラッグで移動できるようにする
+        Call SUB_CTRL_NEW_INIT()
+    End Sub
+#End Region
+
+#Region "イベント-ウィンドウメッセージ"
+    Private STE_WND_PROC As Stopwatch
+    Private Function WndProc(ByVal hwnd As IntPtr, ByVal msg As Integer, ByVal wParam As IntPtr, ByVal lParam As IntPtr, ByRef handled As Boolean) As IntPtr
+        Const CST_WM_HOTKEY As Integer = &H312
+
+        Dim BLN_EXIT As Boolean
+        Select Case msg
+            Case CST_WM_HOTKEY
+                BLN_EXIT = False
+            Case Else '対象のメッセージ種別以外は
+                BLN_EXIT = True 'EXIT
+        End Select
+
+        If BLN_EXIT Then
+            Return IntPtr.Zero
+        End If
+
+        Dim INT_ELAPSED As Integer
+        Const CST_WAIT_MSEC As Integer = 100 '連打を受取らない時間
+
+        If STE_WND_PROC Is Nothing Then '初期呼出時
+            STE_WND_PROC = New System.Diagnostics.Stopwatch
+            Call STE_WND_PROC.Start()
+            INT_ELAPSED = CST_WAIT_MSEC + 1
+        Else
+            Call STE_WND_PROC.Stop()
+            INT_ELAPSED = STE_WND_PROC.ElapsedMilliseconds
+        End If
+
+        Dim BLN_DO As Boolean
+        BLN_DO = (INT_ELAPSED > CST_WAIT_MSEC)
+
+        If BLN_DO Then
+            Call SUB_HOTKEY(lParam) '処理を行う
+            Call STE_WND_PROC.Restart() '0から始動
+        Else
+            Call STE_WND_PROC.Start() '処理時間を除いて再始動
+        End If
+
+        Return IntPtr.Zero
+    End Function
+
+    Private Sub SUB_HOTKEY(ByVal LNG_PARAM As Long)
+        Call SUB_EXEC_DO(ENM_WINDOW_EXEC.VIEW_TRIM)
     End Sub
 
+
+    'Private Sub ComponentDispatcher_ThreadPreprocessMessage(ByRef msg As MSG, ByRef handled As Boolean)
+    '    Const CST_WM_HOTKEY As Integer = &H312
+
+    '    Dim BLN_EXIT As Boolean
+    '    Select Case msg.message
+    '        Case CST_WM_HOTKEY
+    '            BLN_EXIT = False
+    '        Case Else '対象のメッセージ種別以外は
+    '            BLN_EXIT = True 'EXIT
+    '    End Select
+
+    '    If BLN_EXIT Then
+    '        Exit Sub
+    '    End If
+    'End Sub
 #End Region
 
 #Region "イベント-ボタンクリック"
@@ -152,6 +244,12 @@ Public Class WPF_MAIN
     Private Sub MNI_EXIT_Click(sender As Object, e As RoutedEventArgs) Handles MNI_EXIT.Click
         Call SUB_EXEC_DO(ENM_WINDOW_EXEC.APPL_EXIT)
     End Sub
+
+
 #End Region
+
+    Private Sub WPF_MAIN_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
+        Call SUB_CTRL_VIEW_INIT()
+    End Sub
 
 End Class

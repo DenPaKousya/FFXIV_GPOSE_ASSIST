@@ -181,6 +181,51 @@ Public Class FRM_MAIN
     End Sub
 #End Region
 
+#Region "イベント-ウィンドウメッセージ"
+    Private STE_WND_PROC As Stopwatch
+    Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
+        Const CST_WM_HOTKEY As Integer = &H312
+
+        Dim BLN_EXIT As Boolean
+        Select Case m.Msg
+            Case CST_WM_HOTKEY
+                BLN_EXIT = False
+            Case Else '対象のメッセージ種別以外は
+                BLN_EXIT = True 'EXIT
+        End Select
+
+        If BLN_EXIT Then
+            Call MyBase.WndProc(m) '上位へ
+            Exit Sub '何もしない
+        End If
+
+        Dim INT_ELAPSED As Integer
+        Const CST_WAIT_MSEC As Integer = 300 '連打を受取らない時間
+
+        If STE_WND_PROC Is Nothing Then '初期呼出時
+            STE_WND_PROC = New System.Diagnostics.Stopwatch
+            Call STE_WND_PROC.Start()
+            INT_ELAPSED = CST_WAIT_MSEC + 1
+        Else
+            Call STE_WND_PROC.Stop()
+            INT_ELAPSED = STE_WND_PROC.ElapsedMilliseconds
+        End If
+
+        Dim BLN_DO As Boolean
+        BLN_DO = (INT_ELAPSED > CST_WAIT_MSEC)
+
+        If BLN_DO Then
+            '処理を行う
+            Call STE_WND_PROC.Restart() '0から始動
+        Else
+            Call STE_WND_PROC.Start() '処理時間を除いて再始動
+        End If
+
+        Call MyBase.WndProc(m) '上位処理も行う
+    End Sub
+
+#End Region
+
 #Region "イベント-アイテムクリック"
 
     Private Sub TSM_SETTING_Click(sender As Object, e As EventArgs) Handles TSM_SETTING.Click
