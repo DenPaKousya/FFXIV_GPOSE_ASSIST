@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GPOSE_ASSIST"
         mc:Ignorable="d"
-        Title="Setting" Height="450" Width="550" ResizeMode="NoResize">
+        Title="Setting" Height="480" Width="550" ResizeMode="NoResize">
     <Grid>
         <TabControl Margin="10,10,10,50">
             <TabItem Header="General">
@@ -16,6 +16,7 @@
                             <ComboBoxItem Content="chrome"/>
                             <ComboBoxItem Content="notepad"/>
                             <ComboBoxItem Content="FlowScape"/>
+                            <ComboBoxItem Content="GenshinImpact"/>
                         </ComboBox>
                         <Label x:Name="LBL_NAME_APPLICATION" HorizontalAlignment="Left" Margin="130,5,5,5" Content="***"/>
                         <Label HorizontalAlignment="Left" Margin="230,5,5,5" Content="*Reboot this application after changing"/>
