@@ -9,8 +9,8 @@
     <UseWPF>true</UseWPF>
     <MyType>WindowsForms</MyType>
     <ApplicationIcon>RES\ICO\MAIN.ico</ApplicationIcon>
-    <AssemblyVersion>1.0.27.2</AssemblyVersion>
-    <FileVersion>1.0.27.2</FileVersion>
+    <AssemblyVersion>1.0.27.3</AssemblyVersion>
+    <FileVersion>1.0.27.3</FileVersion>
     <Version>1.0.27</Version>
     <Authors>DenPaKousya</Authors>
     <Description>Add trimming and guide grid to FFXIV group pose</Description>
@@ -55,6 +55,9 @@
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
+    <None Update="RES\IMG\COPYRIGHT\ReadMe.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="RES\IMG\SAMPLE.tif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -69,6 +72,7 @@
   <ItemGroup>
     <Folder Include="RES\ICO\" />
     <Folder Include="RES\AUDIO\" />
+    <Folder Include="RES\IMG\COPYRIGHT\" />
   </ItemGroup>
 
   <ItemGroup>
