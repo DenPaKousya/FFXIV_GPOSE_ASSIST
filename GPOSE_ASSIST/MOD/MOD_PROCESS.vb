@@ -20,7 +20,7 @@
 
         Select Case STR_PROCESS_NAME
             Case "ffxiv_dx11"
-                STR_RET = "FFXIV"
+                STR_RET = "FINAL FANTASY XIV"
             Case "chrome"
                 STR_RET = "Google Chrome"
             Case "notepad"
@@ -29,6 +29,8 @@
                 STR_RET = "FlowScape"
             Case "GenshinImpact"
                 STR_RET = "原神"
+            Case "pso2"
+                STR_RET = "Phantasy Star Online 2"
             Case Else
                 STR_RET = "Unknown"
         End Select
