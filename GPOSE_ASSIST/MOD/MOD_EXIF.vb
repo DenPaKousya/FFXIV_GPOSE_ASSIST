@@ -191,6 +191,8 @@
                 STR_RET = "Microsoft"
             Case "FlowScape"
                 STR_RET = "Pixel Forest Games"
+            Case "GenshinImpact"
+                STR_RET = "miHoYo"
             Case Else
                 STR_RET = "Unknown"
         End Select

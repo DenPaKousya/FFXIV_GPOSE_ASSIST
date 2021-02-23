@@ -15,7 +15,7 @@
         Public SAVE_NAME_FILE As String
         Public TYPE As ENM_IMAGE_TYPE
         Public QUALITY As Integer
-        Public ADD_CL As Boolean
+        Public ADD_CR As Boolean
         Public EXIF As SRT_EXIF_SET
 
         Public SAVE_NAME_FILE_REAL As String
@@ -125,7 +125,7 @@
             'エンコードココマデ
 
             'コピーライトココカラ
-            If .ADD_CL Then
+            If .ADD_CR Then
                 Call SUB_ADD_COPYRIGHT(BMP_SAVE)
             End If
             'コピーライトココマデ

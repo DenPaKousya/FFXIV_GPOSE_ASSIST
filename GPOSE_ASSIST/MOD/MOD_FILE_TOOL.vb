@@ -167,4 +167,116 @@
         Return STR_RET
     End Function
 
+
+    'EXE実行処理(呼出用)
+    Public Function FUNC_CALL_EXE_FILE_SHELL(
+    ByVal strEXE_PATH As String, ByVal strCOMMAND_LINE As String,
+    Optional ByVal blnCHECK_FILE As Boolean = True
+    ) As Boolean
+        Dim intACCESSID As Integer
+
+        STR_FILE_TOOL_LAST_ERR_STRING = ""
+
+        If blnCHECK_FILE Then
+            If Not FUNC_FILE_CHECK(strEXE_PATH) Then 'チェックを行う
+                STR_FILE_TOOL_LAST_ERR_STRING = strEXE_PATH & Environment.NewLine & "ファイルがありません"
+                Return False
+            End If
+        End If
+
+        intACCESSID = FUNC_EXE_FILE_SHELL(strEXE_PATH, strCOMMAND_LINE) '実呼出
+        If intACCESSID = -1 Then
+            Return False
+        End If
+
+        If intACCESSID > 0 Then
+            Call System.Windows.Forms.Application.DoEvents()
+
+            Call FUNC_APP_ACTIVE(intACCESSID) '画面をアクティブにする
+
+        End If
+
+        Return True
+    End Function
+
+    'EXE実行処理
+    Private Function FUNC_EXE_FILE_SHELL(
+    ByVal strEXE_PATH As String, ByVal strCOMMAND_LINE As String
+    ) As Integer
+        Dim strPATH As String
+        Dim intRET As Integer
+        Dim strEXE_PATH_ABB As String
+
+        Dim psiSET As System.Diagnostics.ProcessStartInfo
+        STR_FILE_TOOL_LAST_ERR_STRING = ""
+
+        psiSET = New System.Diagnostics.ProcessStartInfo
+
+        strEXE_PATH_ABB = FUNC_GET_ABB_PATH(strEXE_PATH)
+
+        With psiSET
+            .FileName = strEXE_PATH_ABB
+            .Arguments = strCOMMAND_LINE
+            .WorkingDirectory = FUNC_PATH_TO_DIR_PATH(strEXE_PATH_ABB)
+        End With
+
+        strPATH = strEXE_PATH & " " & strCOMMAND_LINE
+        Try
+            ' パラメータを指定して実行
+            'Process.Start(strEXE_PATH, strCOMMAND_LINE)
+            Process.Start(psiSET)
+        Catch ex As Exception
+            intRET = -1
+            STR_FILE_TOOL_LAST_ERR_STRING = ex.Message
+        End Try
+
+        Return intRET
+    End Function
+
+    '他のEXEの画面をアクティブにする(繰返あり)
+    Public Function FUNC_APP_ACTIVE(
+    ByVal intACCESS_ID As Integer,
+    Optional ByVal intNUMBER_OF_TIMES As Integer = 1
+    ) As Boolean
+        Dim blnRET As Boolean
+        Dim intLOOP_INDEX As Integer
+
+        blnRET = False
+        For intLOOP_INDEX = 1 To intNUMBER_OF_TIMES
+            If FUNC_APP_ACTIVE_MAIN(intACCESS_ID) Then
+                blnRET = True
+                Exit For
+            End If
+            Call System.Windows.Forms.Application.DoEvents()
+        Next
+
+        Return blnRET
+    End Function
+
+    '他のEXEの画面をアクティブにする
+    Private Function FUNC_APP_ACTIVE_MAIN(
+    ByVal intACCESS_ID As Integer
+    ) As Boolean
+        Try
+            Call Microsoft.VisualBasic.Interaction.AppActivate(intACCESS_ID)
+        Catch ex As Exception
+            Return False
+        End Try
+
+        Return True
+    End Function
+
+    'パスから絶対パスを取得する
+    Public Function FUNC_GET_ABB_PATH(ByVal strFILE_PATH As String) As String
+        Dim strRET As String
+
+        Try
+            strRET = System.IO.Path.GetFullPath(strFILE_PATH)
+        Catch ex As Exception
+            Return ""
+        End Try
+
+        Return strRET
+    End Function
+
 End Module

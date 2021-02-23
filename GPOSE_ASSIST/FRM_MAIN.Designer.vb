@@ -28,6 +28,8 @@ Partial Class FRM_MAIN
         Me.CMS_MENU = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.TSM_SETTING = New System.Windows.Forms.ToolStripMenuItem()
         Me.TSS_01 = New System.Windows.Forms.ToolStripSeparator()
+        Me.TSM_OPEN_SAVE_FOLDER = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TSS_02 = New System.Windows.Forms.ToolStripSeparator()
         Me.TSM_EXIT = New System.Windows.Forms.ToolStripMenuItem()
         Me.TIM_CHECK_PROCESS = New System.Windows.Forms.Timer(Me.components)
         Me.CMS_MENU.SuspendLayout()
@@ -41,25 +43,36 @@ Partial Class FRM_MAIN
         'CMS_MENU
         '
         Me.CMS_MENU.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
-        Me.CMS_MENU.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TSM_SETTING, Me.TSS_01, Me.TSM_EXIT})
+        Me.CMS_MENU.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TSM_SETTING, Me.TSS_01, Me.TSM_OPEN_SAVE_FOLDER, Me.TSS_02, Me.TSM_EXIT})
         Me.CMS_MENU.Name = "CMS_MENU"
-        Me.CMS_MENU.Size = New System.Drawing.Size(119, 54)
+        Me.CMS_MENU.Size = New System.Drawing.Size(175, 82)
         '
         'TSM_SETTING
         '
         Me.TSM_SETTING.Name = "TSM_SETTING"
-        Me.TSM_SETTING.Size = New System.Drawing.Size(118, 22)
+        Me.TSM_SETTING.Size = New System.Drawing.Size(174, 22)
         Me.TSM_SETTING.Text = "Setting"
         '
         'TSS_01
         '
         Me.TSS_01.Name = "TSS_01"
-        Me.TSS_01.Size = New System.Drawing.Size(115, 6)
+        Me.TSS_01.Size = New System.Drawing.Size(171, 6)
+        '
+        'TSM_OPEN_SAVE_FOLDER
+        '
+        Me.TSM_OPEN_SAVE_FOLDER.Name = "TSM_OPEN_SAVE_FOLDER"
+        Me.TSM_OPEN_SAVE_FOLDER.Size = New System.Drawing.Size(174, 22)
+        Me.TSM_OPEN_SAVE_FOLDER.Text = "Open save folder"
+        '
+        'TSS_02
+        '
+        Me.TSS_02.Name = "TSS_02"
+        Me.TSS_02.Size = New System.Drawing.Size(171, 6)
         '
         'TSM_EXIT
         '
         Me.TSM_EXIT.Name = "TSM_EXIT"
-        Me.TSM_EXIT.Size = New System.Drawing.Size(118, 22)
+        Me.TSM_EXIT.Size = New System.Drawing.Size(174, 22)
         Me.TSM_EXIT.Text = "Exit"
         '
         'TIM_CHECK_PROCESS
@@ -92,4 +105,6 @@ Partial Class FRM_MAIN
     Friend WithEvents TSM_EXIT As ToolStripMenuItem
     Friend WithEvents TIM_CHECK_PROCESS As Timer
     Friend WithEvents TSM_SETTING As ToolStripMenuItem
+    Friend WithEvents TSM_OPEN_SAVE_FOLDER As ToolStripMenuItem
+    Friend WithEvents TSS_02 As ToolStripSeparator
 End Class

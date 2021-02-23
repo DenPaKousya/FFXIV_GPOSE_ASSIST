@@ -61,6 +61,30 @@ Public Class FRM_MAIN
 
         WPF_SHOW = New WPF_SETTING
         Call WPF_SHOW.ShowDialog()
+
+        If Not WPF_SHOW.CANCEL Then
+            If Not WPF_WINDOW_MAIN Is Nothing Then
+                Call WPF_WINDOW_MAIN.SUB_WINDOW_REFRESH()
+            End If
+        End If
+
+        Call WPF_SHOW.Close()
+        WPF_SHOW = Nothing
+    End Sub
+
+    Public Sub SUB_OPEN_SAVE_FOLDER()
+        Dim STR_DIR As String
+        STR_DIR = SRT_APP_SETTINGS_VALUE.SAVE.DIRECTORY
+
+        If Not FUNC_DIR_CHECK(STR_DIR) Then
+            Exit Sub
+        End If
+
+        Try
+            Call System.Diagnostics.Process.Start("EXPLORER.EXE", STR_DIR)
+        Catch ex As Exception
+            Exit Sub
+        End Try
     End Sub
 
     Public Sub SUB_EXIT()
@@ -75,7 +99,6 @@ Public Class FRM_MAIN
         End If
         BLN_DONE_SUB_CHECK_PROCESS = True
         Call Application.DoEvents()
-
 
         Call SUB_GET_PROCESS()
         Call SUB_REFRESH_PROCESS()
@@ -158,10 +181,59 @@ Public Class FRM_MAIN
     End Sub
 #End Region
 
+#Region "イベント-ウィンドウメッセージ"
+    Private STE_WND_PROC As Stopwatch
+    Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
+        Const CST_WM_HOTKEY As Integer = &H312
+
+        Dim BLN_EXIT As Boolean
+        Select Case m.Msg
+            Case CST_WM_HOTKEY
+                BLN_EXIT = False
+            Case Else '対象のメッセージ種別以外は
+                BLN_EXIT = True 'EXIT
+        End Select
+
+        If BLN_EXIT Then
+            Call MyBase.WndProc(m) '上位へ
+            Exit Sub '何もしない
+        End If
+
+        Dim INT_ELAPSED As Integer
+        Const CST_WAIT_MSEC As Integer = 300 '連打を受取らない時間
+
+        If STE_WND_PROC Is Nothing Then '初期呼出時
+            STE_WND_PROC = New System.Diagnostics.Stopwatch
+            Call STE_WND_PROC.Start()
+            INT_ELAPSED = CST_WAIT_MSEC + 1
+        Else
+            Call STE_WND_PROC.Stop()
+            INT_ELAPSED = STE_WND_PROC.ElapsedMilliseconds
+        End If
+
+        Dim BLN_DO As Boolean
+        BLN_DO = (INT_ELAPSED > CST_WAIT_MSEC)
+
+        If BLN_DO Then
+            '処理を行う
+            Call STE_WND_PROC.Restart() '0から始動
+        Else
+            Call STE_WND_PROC.Start() '処理時間を除いて再始動
+        End If
+
+        Call MyBase.WndProc(m) '上位処理も行う
+    End Sub
+
+#End Region
+
 #Region "イベント-アイテムクリック"
 
     Private Sub TSM_SETTING_Click(sender As Object, e As EventArgs) Handles TSM_SETTING.Click
         Call SUB_SETTING()
+    End Sub
+
+    Private Sub TSM_OPEN_SAVE_FOLDER_Click(sender As Object, e As EventArgs) Handles TSM_OPEN_SAVE_FOLDER.Click
+        Call SUB_OPEN_SAVE_FOLDER()
     End Sub
 
     Private Sub TSM_EXIT_Click(sender As Object, e As EventArgs) Handles TSM_EXIT.Click

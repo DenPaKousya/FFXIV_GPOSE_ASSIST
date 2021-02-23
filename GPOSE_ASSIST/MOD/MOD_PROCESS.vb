@@ -27,6 +27,8 @@
                 STR_RET = "メモ帳"
             Case "FlowScape"
                 STR_RET = "FlowScape"
+            Case "GenshinImpact"
+                STR_RET = "原神"
             Case Else
                 STR_RET = "Unknown"
         End Select

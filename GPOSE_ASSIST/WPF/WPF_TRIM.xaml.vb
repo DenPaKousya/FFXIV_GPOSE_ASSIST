@@ -78,6 +78,15 @@ Public Class WPF_TRIM
             ENM_PROPERTY_COMPOSTION_TYPE = value
         End Set
     End Property
+
+    Public Property SET_SIZE As Boolean
+        Get
+            Return BLN_SET_SIZE
+        End Get
+        Set(ByVal value As Boolean)
+            BLN_SET_SIZE = value
+        End Set
+    End Property
 #End Region
 
 #Region "外部呼出"
@@ -89,6 +98,11 @@ Public Class WPF_TRIM
         TIK_CONTROL = CHK_OPACITY.Margin
         TIK_SET = New Thickness(TIK_CONTROL.Left, TIK_CONTROL.Top + INT_MOVE_POINT, TIK_CONTROL.Right, TIK_CONTROL.Bottom)
         CHK_OPACITY.Margin = TIK_SET
+
+        TIK_CONTROL = CHK_CONFIRM.Margin
+        TIK_SET = New Thickness(TIK_CONTROL.Left, TIK_CONTROL.Top + INT_MOVE_POINT, TIK_CONTROL.Right, TIK_CONTROL.Bottom)
+        CHK_CONFIRM.Margin = TIK_SET
+
     End Sub
 #End Region
 
@@ -151,6 +165,21 @@ Public Class WPF_TRIM
         Dim BMP_MAKE As System.Drawing.Bitmap
         BMP_MAKE = FUNC_MAKE_BITMAP_FROM_PRINT(BMP_PROCESS_CLIENT, SRT_TRIM, RotateFlipType.RotateNoneFlipNone)
 
+        Dim BLN_OK_CONFIRM As Boolean
+        Dim SRT_RET_CONFIRM As WPF_SAVE_CONFIRM.SRT_RETURN_SAVE_CONFIRM
+        If CHK_CONFIRM.IsChecked Then
+            SRT_RET_CONFIRM = FUNC_SHOW_CONFIRM(BMP_MAKE, FUNC_CAST_INT_TO_BOOL(SRT_APP_SETTINGS_VALUE.SAVE.FILE.COPYRIGHT))
+            If SRT_RET_CONFIRM.CANCEL Then
+                Exit Sub
+            End If
+            BLN_OK_CONFIRM = True
+            If Not SRT_RET_CONFIRM.ROTATE = RotateFlipType.RotateNoneFlipNone Then
+                Call BMP_MAKE.RotateFlip(SRT_RET_CONFIRM.ROTATE)
+            End If
+        Else
+            BLN_OK_CONFIRM = False
+        End If
+
         Call SUB_FIXED_PHRASE_INIT(Now, SRT_APP_SETTINGS_VALUE.SAVE.FILE.INDEX)
         Dim SRT_SAVE As SRT_SAVE_IMAGE_PARAM
         With SRT_SAVE
@@ -158,9 +187,13 @@ Public Class WPF_TRIM
             .SAVE_NAME_FILE = FUNC_GET_NAME_SAVE_FILE(SRT_APP_SETTINGS_VALUE.SAVE.FILE.NAME)
             .TYPE = FUNC_GET_TYPE_IMAGE01_FROM_STRING(SRT_APP_SETTINGS_VALUE.SAVE.FILE.TYPE)
             .QUALITY = SRT_APP_SETTINGS_VALUE.SAVE.FILE.QUALITY
-            .ADD_CL = FUNC_CAST_INT_TO_BOOL(SRT_APP_SETTINGS_VALUE.SAVE.FILE.COPYRIGHT)
+            .ADD_CR = FUNC_CAST_INT_TO_BOOL(SRT_APP_SETTINGS_VALUE.SAVE.FILE.COPYRIGHT)
             .EXIF = FUNC_GET_EXIF_DEFAULT(SRT_APP_SETTINGS_VALUE.PROCESS_NAME, Now)
             .SAVE_NAME_FILE_REAL = FUNC_GET_NAME_FILE_REAL(.SAVE_DIR, .SAVE_NAME_FILE)
+
+            If BLN_OK_CONFIRM Then
+                .ADD_CR = SRT_RET_CONFIRM.ADD_CR
+            End If
         End With
         If Not FUNC_SAVE_IMAGE(BMP_MAKE, SRT_SAVE) Then
             Exit Sub
@@ -172,7 +205,7 @@ Public Class WPF_TRIM
             .SAVE_NAME_FILE = SRT_SAVE.SAVE_NAME_FILE
             .TYPE = FUNC_GET_TYPE_IMAGE02_FROM_STRING(SRT_APP_SETTINGS_VALUE.SAVE.FILE.TYPE)
             .QUALITY = SRT_SAVE.QUALITY
-            .ADD_CL = True
+            .ADD_CR = True
             .EXIF = SRT_SAVE.EXIF
             .SAVE_NAME_FILE_REAL = SRT_SAVE.SAVE_NAME_FILE_REAL
         End With
@@ -198,6 +231,21 @@ Public Class WPF_TRIM
         Dim BMP_MAKE As System.Drawing.Bitmap
         BMP_MAKE = FUNC_MAKE_BITMAP_FROM_PRINT(BMP_PROCESS_CLIENT, SRT_TRIM, RotateFlipType.RotateNoneFlipNone)
 
+        Dim BLN_OK_CONFIRM As Boolean
+        Dim SRT_RET_CONFIRM As WPF_SAVE_CONFIRM.SRT_RETURN_SAVE_CONFIRM
+        If CHK_CONFIRM.IsChecked Then
+            SRT_RET_CONFIRM = FUNC_SHOW_CONFIRM(BMP_MAKE, True)
+            If SRT_RET_CONFIRM.CANCEL Then
+                Exit Sub
+            End If
+            BLN_OK_CONFIRM = True
+            If Not SRT_RET_CONFIRM.ROTATE = RotateFlipType.RotateNoneFlipNone Then
+                Call BMP_MAKE.RotateFlip(SRT_RET_CONFIRM.ROTATE)
+            End If
+        Else
+            BLN_OK_CONFIRM = False
+        End If
+
         Call SUB_FIXED_PHRASE_INIT(Now, SRT_APP_SETTINGS_VALUE.SAVE.FILE.INDEX)
         Dim SRT_SAVE As SRT_SAVE_IMAGE_PARAM
         With SRT_SAVE
@@ -205,7 +253,7 @@ Public Class WPF_TRIM
             .SAVE_NAME_FILE = FUNC_GET_NAME_SAVE_FILE(SRT_APP_SETTINGS_VALUE.SAVE.FILE.NAME)
             .TYPE = ENM_IMAGE_TYPE.JPEG
             .QUALITY = SRT_APP_SETTINGS_VALUE.SAVE.FILE.QUALITY
-            .ADD_CL = True
+            .ADD_CR = True
             .EXIF = FUNC_GET_EXIF_DEFAULT(SRT_APP_SETTINGS_VALUE.PROCESS_NAME, Now)
             .SAVE_NAME_FILE_REAL = FUNC_GET_NAME_FILE_REAL(.SAVE_DIR, .SAVE_NAME_FILE)
         End With
@@ -310,6 +358,14 @@ Public Class WPF_TRIM
         Dim intHEIGHT As Integer
         intWIDTH = CInt(PCB_COMPOSITION.Width)
         intHEIGHT = CInt(PCB_COMPOSITION.Height)
+
+        If intWIDTH <= 0 Then
+            Exit Sub
+        End If
+
+        If intHEIGHT <= 0 Then
+            Exit Sub
+        End If
 
         Dim bmpCANVAS As Bitmap
         bmpCANVAS = New Bitmap(intWIDTH, intHEIGHT)
@@ -527,6 +583,7 @@ Public Class WPF_TRIM
 
         Call SUB_SET_RATE(ENM_RATE)
         ENM_RATE_CURRENT = ENM_RATE
+        SRT_APP_SETTINGS_VALUE.TRIM.ASPECT_RATIO.TYPE = ENM_RATE_CURRENT
     End Sub
 
     Private BLN_SET_SIZE As Boolean = False
@@ -854,6 +911,33 @@ Public Class WPF_TRIM
 
         Me.Background = New System.Windows.Media.SolidColorBrush(COL_SET)
     End Sub
+
+    Private Function FUNC_SHOW_CONFIRM(ByRef BMP_VIEW As System.Drawing.Bitmap, ByVal BLN_CR_DEFAULT As Boolean) As WPF_SAVE_CONFIRM.SRT_RETURN_SAVE_CONFIRM
+        Dim WPF_SHOW As WPF_SAVE_CONFIRM
+        WPF_SHOW = New WPF_SAVE_CONFIRM
+
+        WPF_SHOW.VIEW_IMAGE = BMP_VIEW.Clone
+        WPF_SHOW.ADD_COPYRIGHT_DEFAULT = BLN_CR_DEFAULT
+        Call WPF_SHOW.ShowDialog()
+
+        Dim SRT_RET As WPF_SAVE_CONFIRM.SRT_RETURN_SAVE_CONFIRM
+        SRT_RET = WPF_SHOW.RETURN_CONFIRM
+        WPF_SHOW = Nothing
+
+        Return SRT_RET
+    End Function
+
+    Public Sub SUB_SET_SIZE_AND_LOCATION_DEFAULT()
+        BLN_SET_SIZE = True
+        Me.Left = SRT_APP_SETTINGS_VALUE.TRIM.LOCATION.LEFT
+        Me.Top = SRT_APP_SETTINGS_VALUE.TRIM.LOCATION.TOP
+        Me.Width = SRT_APP_SETTINGS_VALUE.TRIM.SIZE.WIDTH
+        Me.Height = SRT_APP_SETTINGS_VALUE.TRIM.SIZE.HEIGHT
+        Call SUB_PUT_GUIDE()
+        BLN_SET_SIZE = False
+        Call SUB_CHANGE_RATE(SRT_APP_SETTINGS_VALUE.TRIM.ASPECT_RATIO.TYPE)
+        Call SUB_CHANGE_DRAW_COMPOTION(SRT_APP_SETTINGS_VALUE.TRIM.COMPOTION.TYPE)
+    End Sub
 #End Region
 
 #Region "NEW"
@@ -1070,8 +1154,7 @@ Public Class WPF_TRIM
 #End Region
 
     Private Sub WPF_TRIM_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
-        Call SUB_CHANGE_RATE(ENM_WINDOW_RATE.RATE_3_2)
-        Call SUB_CHANGE_DRAW_COMPOTION(SRT_APP_SETTINGS_VALUE.TRIM.COMPOTION.TYPE)
+
     End Sub
 
     Private Sub WPF_TRIM_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
@@ -1094,6 +1177,9 @@ Public Class WPF_TRIM
     End Sub
 
     Private Sub WPF_TRIM_LocationChanged(sender As Object, e As EventArgs) Handles Me.LocationChanged
+        If BLN_SET_SIZE Then
+            Exit Sub
+        End If
         Call SUB_PUT_GUIDE()
 
         SRT_APP_SETTINGS_VALUE.TRIM.LOCATION.LEFT = Me.Left
