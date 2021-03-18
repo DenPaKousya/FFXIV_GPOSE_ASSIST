@@ -8,6 +8,7 @@ Public Class WPF_MAIN
         VIEW_TRIM = 0
         APPL_EXIT
         APPL_SETTING
+        APPL_ROTATE_WINDOW
         APPL_OPEN_SAVE_FOLDER
     End Enum
 #End Region
@@ -61,6 +62,8 @@ Public Class WPF_MAIN
                 Call SUB_APPL_EXIT()
             Case ENM_WINDOW_EXEC.APPL_SETTING
                 Call SUB_APPL_SETTING()
+            Case ENM_WINDOW_EXEC.APPL_ROTATE_WINDOW
+                Call SUB_APPL_ROTATE_WINDOW()
             Case ENM_WINDOW_EXEC.APPL_OPEN_SAVE_FOLDER
                 Call SUB_APPL_OPEN_SAVE_FOLDER()
         End Select
@@ -122,6 +125,11 @@ Public Class WPF_MAIN
     Private Sub SUB_APPL_SETTING()
         Call FRM_APPL_MAIN.SUB_SETTING()
     End Sub
+
+    Private Sub SUB_APPL_ROTATE_WINDOW()
+        Call FRM_APPL_MAIN.SUB_ROTATE()
+    End Sub
+
 
     Private Sub SUB_APPL_OPEN_SAVE_FOLDER()
         Call FRM_APPL_MAIN.SUB_OPEN_SAVE_FOLDER()
@@ -234,6 +242,10 @@ Public Class WPF_MAIN
 
     Private Sub MNI_SETTING_Click(sender As Object, e As RoutedEventArgs) Handles MNI_SETTING.Click
         Call SUB_EXEC_DO(ENM_WINDOW_EXEC.APPL_SETTING)
+    End Sub
+
+    Private Sub MNI_ROTATE_Click(sender As Object, e As RoutedEventArgs) Handles MNI_ROTATE.Click
+        Call SUB_EXEC_DO(ENM_WINDOW_EXEC.APPL_ROTATE_WINDOW)
     End Sub
 
 

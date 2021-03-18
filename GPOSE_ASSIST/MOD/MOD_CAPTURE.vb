@@ -38,7 +38,13 @@
         BMP_PROCESS_CLIENT = New System.Drawing.Bitmap(SRT_RECT_CLIENT_WH.width, SRT_RECT_CLIENT_WH.height, PFT_BITMAP)
         GRP_PROCESS_CLIENT = System.Drawing.Graphics.FromImage(BMP_PROCESS_CLIENT)
 
+        Dim STW_TIME As System.Diagnostics.Stopwatch
+        STW_TIME = New System.Diagnostics.Stopwatch
+        Call STW_TIME.Start()
         Call SUB_PRINT_WINDOW_TEST(GRP_PROCESS_CLIENT, PRC_APP_TARGET)
+        'Call SUB_BIT_BLT(GRP_PROCESS_CLIENT, PRC_APP_TARGET, BMP_PROCESS_CLIENT.Width, BMP_PROCESS_CLIENT.Height)
+        Call STW_TIME.Stop()
+        Debug.WriteLine("経過：" & STW_TIME.ElapsedMilliseconds & "ms")
     End Sub
 
     Public Function FUNC_MAKE_BITMAP_FROM_PRINT(ByRef BMP_PROCESS_CLIENT As System.Drawing.Bitmap, ByVal SRT_TRIM As RECT_WH, ByVal ENM_ROTATE_FLIP_TYPE As RotateFlipType) As System.Drawing.Bitmap

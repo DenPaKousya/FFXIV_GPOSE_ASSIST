@@ -72,6 +72,32 @@ Public Class FRM_MAIN
         WPF_SHOW = Nothing
     End Sub
 
+    Private WPF_SHOW_ROTATE As WPF_ROTATE
+    Public Sub SUB_ROTATE()
+
+        If WPF_SHOW_ROTATE Is Nothing Then
+            WPF_SHOW_ROTATE = New WPF_ROTATE
+        End If
+
+        Dim BLN_VISIBLE As Boolean
+        Select Case WPF_SHOW_ROTATE.Visibility
+            Case System.Windows.Visibility.Hidden, System.Windows.Visibility.Collapsed
+                BLN_VISIBLE = False
+            Case System.Windows.Visibility.Visible
+                BLN_VISIBLE = True
+            Case Else
+                BLN_VISIBLE = False
+        End Select
+
+        Call WPF_SHOW_ROTATE.SUB_IMAGE_RELOAD()
+        If BLN_VISIBLE Then
+            WPF_SHOW_ROTATE.Visibility = System.Windows.Visibility.Hidden
+            Call WPF_SHOW_ROTATE.Hide()
+        Else
+            Call WPF_SHOW_ROTATE.Show()
+        End If
+    End Sub
+
     Public Sub SUB_OPEN_SAVE_FOLDER()
         Dim STR_DIR As String
         STR_DIR = SRT_APP_SETTINGS_VALUE.SAVE.DIRECTORY
