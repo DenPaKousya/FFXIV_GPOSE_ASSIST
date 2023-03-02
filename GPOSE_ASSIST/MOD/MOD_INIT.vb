@@ -105,6 +105,21 @@
                 If Not STR_TEMP = "" Then
                     .TRIM.COMPOTION.TYPE = CInt(STR_TEMP)
                 End If
+
+                ReDim .TRIM.COMPOTION.USER(CST_APP_CONFIG_TRIM_COMPOTION_USER_ITEM_COUNT)
+                For i = 1 To (.TRIM.COMPOTION.USER.Length - 1) 'USER SET
+                    ReDim .TRIM.COMPOTION.USER(i).TYPE(4)
+                    STR_TEMP = FUNC_GET_APP_SETTINGS(CST_APP_CONFIG_TRIM_COMPOTION_USER & "." & CStr(i))
+                    If Not STR_TEMP = "" Then
+                        .TRIM.COMPOTION.USER(i).BASE = CStr(STR_TEMP)
+                    End If
+                    Dim STR_ITEM() As String
+                    STR_ITEM = .TRIM.COMPOTION.USER(i).BASE.Split(",")
+                    .TRIM.COMPOTION.USER(i).NAME = STR_ITEM(0)
+                    For j = 1 To (.TRIM.COMPOTION.USER(i).TYPE.Length - 1)
+                        .TRIM.COMPOTION.USER(i).TYPE(j) = CInt(STR_ITEM(j))
+                    Next
+                Next
                 '>TRIM.COMPOTION
                 '>TRIM
 

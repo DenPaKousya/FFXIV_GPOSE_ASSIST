@@ -42,10 +42,27 @@
                 </MenuItem>
                 <MenuItem Header="構図補助">
                     <MenuItem x:Name="MNI_COMP_NONE" Header="無し" IsCheckable="True" />
-                    <MenuItem x:Name="MNI_COMP_2DIV" Header="2分割" IsCheckable="True" />
-                    <MenuItem x:Name="MNI_COMP_3DIV" Header="3分割" IsCheckable="True" />
-                    <MenuItem x:Name="MNI_COMP_4DIV" Header="4分割" IsCheckable="True" />
-                    <MenuItem x:Name="MNI_COMP_3DIV_PHI" Header="3分割(φ)" IsCheckable="True" />
+                    <MenuItem Header="分割">
+                        <MenuItem x:Name="MNI_COMP_2DIV" Header="2分割" IsCheckable="True" />
+                        <MenuItem x:Name="MNI_COMP_3DIV" Header="3分割" IsCheckable="True" />
+                        <MenuItem x:Name="MNI_COMP_4DIV" Header="4分割" IsCheckable="True" />
+                        <MenuItem x:Name="MNI_COMP_3DIV_PHI" Header="3分割(φ)" IsCheckable="True" />
+                        <MenuItem x:Name="MNI_COMP_CROSS_DIV" Header="X分割" IsCheckable="True" />
+                        <MenuItem x:Name="MNI_COMP_DIAGONAL_DIV_LL" Header="対角-左下起点" IsCheckable="True" />
+                        <MenuItem x:Name="MNI_COMP_DIAGONAL_DIV_UL" Header="対角-左上起点" IsCheckable="True" />
+                    </MenuItem>
+                    <MenuItem Header="V字">
+                        <MenuItem x:Name="MNI_COMP_V_SHAPE_DOWN" Header="V字" IsCheckable="True" />
+                        <MenuItem x:Name="MNI_COMP_V_SHAPE_UP" Header="V字(逆)" IsCheckable="True" />
+                        <MenuItem x:Name="MNI_COMP_V_SHAPE_RIGHT" Header=">字" IsCheckable="True" />
+                        <MenuItem x:Name="MNI_COMP_V_SHAPE_LEFT" Header=">字(逆)" IsCheckable="True" />
+                    </MenuItem>
+                    <MenuItem Header="調和三角形">
+                        <MenuItem x:Name="MNI_COMP_HARMONIOUS_TRIANGLE_HLL" Header="調和三角形-横-左下起点" IsCheckable="True" />
+                        <MenuItem x:Name="MNI_COMP_HARMONIOUS_TRIANGLE_HUL" Header="調和三角形-横-左上起点" IsCheckable="True" />
+                        <MenuItem x:Name="MNI_COMP_HARMONIOUS_TRIANGLE_VLL" Header="調和三角形-縦-左下起点" IsCheckable="True" />
+                        <MenuItem x:Name="MNI_COMP_HARMONIOUS_TRIANGLE_VUL" Header="調和三角形-縦-左上起点" IsCheckable="True" />
+                    </MenuItem>
                     <MenuItem Header="黄金螺旋">
                         <MenuItem Header="横">
                             <MenuItem x:Name="MNI_COMP_GOLDEN_RECTANGLE_HLL" Header="黄金螺旋-横-左下起点" IsCheckable="True" />
@@ -60,7 +77,17 @@
                             <MenuItem x:Name="MNI_COMP_GOLDEN_RECTANGLE_VLR" Header="黄金螺旋-縦-右下起点" IsCheckable="True" />
                         </MenuItem>
                     </MenuItem>
-                    
+                    <MenuItem Header="ユーザー定義">
+                        <MenuItem x:Name="MNI_COMP_USER_01" Header="XXX1" IsCheckable="True" />
+                        <MenuItem x:Name="MNI_COMP_USER_02" Header="XXX2" IsCheckable="True" />
+                        <MenuItem x:Name="MNI_COMP_USER_03" Header="XXX3" IsCheckable="True" />
+                        <MenuItem x:Name="MNI_COMP_USER_04" Header="XXX4" IsCheckable="True" />
+                        <MenuItem x:Name="MNI_COMP_USER_05" Header="XXX5" IsCheckable="True" />
+                        <MenuItem x:Name="MNI_COMP_USER_06" Header="XXX6" IsCheckable="True" />
+                        <MenuItem x:Name="MNI_COMP_USER_07" Header="XXX7" IsCheckable="True" />
+                        <MenuItem x:Name="MNI_COMP_USER_08" Header="XXX8" IsCheckable="True" />
+                        <MenuItem x:Name="MNI_COMP_USER_09" Header="XXX9" IsCheckable="True" />
+                    </MenuItem>
                 </MenuItem>
                 <Separator />
                 <MenuItem x:Name="MNI_CLOSE" Header="閉じる" />

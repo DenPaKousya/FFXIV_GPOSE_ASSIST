@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GPOSE_ASSIST"
         mc:Ignorable="d"
-        Title="Setting" Height="480" Width="550" ResizeMode="NoResize">
+        Title="Setting" Height="505" Width="550" ResizeMode="NoResize">
     <Grid>
         <TabControl Margin="10,10,10,50">
             <TabItem Header="General">
@@ -111,7 +111,6 @@
                             <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="Top"/>
                             <TextBox x:Name="TXT_TRIM_LOACTION_TOP" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="75,3,0,0" Width="100" Height="20"/>
                         </Grid>
-                       
                     </Grid>
                 </GroupBox>
                     <GroupBox Header="Size" VerticalAlignment="Top" Margin="5,90,5,5" IsEnabled="False">
@@ -147,25 +146,18 @@
                         </ComboBox>
                     </Grid>
                 </GroupBox>  
-                <GroupBox Header="Compotion" VerticalAlignment="Top" Margin="5,235,5,5" IsEnabled="False">
+                <GroupBox Header="Compotion" VerticalAlignment="Top" Margin="5,235,5,5" IsEnabled="True">
                         <Grid>
-                            <Grid VerticalAlignment="Top" Margin="5,5,5,5">
+                            <Grid VerticalAlignment="Top" Margin="5,5,5,5" IsEnabled="False">
                                 <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="Type"/>
-                                <ComboBox x:Name="CMB_TRIM_COMPOTION_TYPE" HorizontalAlignment="Left" Margin="75,0,0,0" Width="100">
-                                    <ComboBoxItem Content="無し"/>
-                                    <ComboBoxItem Content="2分割"/>
-                                    <ComboBoxItem Content="3分割"/>
-                                    <ComboBoxItem Content="4分割"/>
-                                    <ComboBoxItem Content="3分割(φ)"/>
-                                    <ComboBoxItem Content="黄金螺旋-横-左下起点"/>
-                                    <ComboBoxItem Content="黄金螺旋-横-右上起点"/>
-                                    <ComboBoxItem Content="黄金螺旋-横-左上起点"/>
-                                    <ComboBoxItem Content="黄金螺旋-横-右下起点"/>
-                                    <ComboBoxItem Content="黄金螺旋-縦-左下起点"/>
-                                    <ComboBoxItem Content="黄金螺旋-縦-右上起点"/>
-                                    <ComboBoxItem Content="黄金螺旋-縦-左上起点"/>
-                                    <ComboBoxItem Content="黄金螺旋-縦-右下起点"/>
+                                <ComboBox x:Name="CMB_TRIM_COMPOTION_TYPE" HorizontalAlignment="Left" Margin="75,0,0,0" Width="100" Height="20">
                                 </ComboBox>
+                            </Grid>
+                            <Grid VerticalAlignment="Top" Margin="5,30,5,5" IsEnabled="True">
+                                <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="User Defined"/>
+                                <ComboBox x:Name="CMB_TRIM_COMPOTION_TYPE_USER" HorizontalAlignment="Left" Margin="75,0,0,0" Width="100" Height="20">
+                                </ComboBox>
+                                <Button x:Name="BTN_CUSTOM_TRIM_COMPOTION_TYPE_USER" HorizontalAlignment="Left" Margin="185,5,5,5" Height="20" Width="80" Content="Customize"/>
                             </Grid>
                         </Grid>
                     </GroupBox>

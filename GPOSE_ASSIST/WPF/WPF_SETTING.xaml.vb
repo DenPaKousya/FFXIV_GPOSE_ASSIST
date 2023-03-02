@@ -8,13 +8,13 @@ Public Class WPF_SETTING
         DO_CLOSE
         DO_VIEW_DIALOG_SD
         DO_INIT_TRIM
+        DO_VIEW_DIALOG_USER_COMP
     End Enum
 #End Region
 
 #Region "画面用・変数"
     Private BLN_WINDOW_EXEC_DO As Boolean = False
 #End Region
-
 
 #Region "プロパティ用変数"
     Private BLN_PROPERTY_CANCEL As Boolean = True
@@ -52,6 +52,8 @@ Public Class WPF_SETTING
                 Call SUB_VIEW_DIALOG_SD()
             Case ENM_WINDOW_EXEC.DO_INIT_TRIM
                 Call SUB_INIT_TRIM()
+            Case ENM_WINDOW_EXEC.DO_VIEW_DIALOG_USER_COMP
+                Call SUB_VIEW_DIALOG_USER_COMP()
         End Select
 
         Call Me.DoEvents()
@@ -119,17 +121,76 @@ Public Class WPF_SETTING
 
         CMB_TRIM_COMPOTION_TYPE.SelectedIndex = 2
     End Sub
+
+    Private Sub SUB_VIEW_DIALOG_USER_COMP()
+        Dim WPF_SHOW As WPF_USER_COMPOTION
+
+        WPF_SHOW = New WPF_USER_COMPOTION
+        Dim INT_INDEX As Integer
+        INT_INDEX = (CMB_TRIM_COMPOTION_TYPE_USER.SelectedIndex + 1)
+        WPF_SHOW.CUSTOMIZE = SRT_APP_SETTINGS_VALUE.TRIM.COMPOTION.USER(INT_INDEX)
+        Call WPF_SHOW.ShowDialog()
+
+        If Not WPF_SHOW.CANCEL Then
+            'If Not WPF_WINDOW_MAIN Is Nothing Then
+            '    Call WPF_WINDOW_MAIN.SUB_WINDOW_REFRESH()
+            'End If
+        End If
+
+        Call WPF_SHOW.Close()
+        WPF_SHOW = Nothing
+    End Sub
 #End Region
 
 #Region "初期化・終了処理"
     Private Sub SUB_CTRL_VIEW_INIT()
-
+        Call SUB_INIT_COMBO_BOX_ITEM_COMPOTION_TYPE(CMB_TRIM_COMPOTION_TYPE)
+        Call SUB_INIT_COMBO_BOX_ITEM_COMPOTION_TYPE_USER(CMB_TRIM_COMPOTION_TYPE_USER)
     End Sub
 
     Private Sub SUB_CTRL_VALUE_INIT()
         Me.CANCEL = True
         Call SUB_SET_SETTING_TO_CONTROL(SRT_APP_SETTINGS_VALUE)
+        Call SUB_SET_COMBO_KIND_CODE_FIRST(CMB_TRIM_COMPOTION_TYPE_USER)
     End Sub
+#End Region
+
+#Region "構図補助プルダウン初期化"
+    Private Sub SUB_INIT_COMBO_BOX_ITEM_COMPOTION_TYPE(ByRef CMB_MAIN As Controls.ComboBox)
+        With CMB_MAIN
+            Call .Items.Clear()
+
+            Call SUB_ADD_ITEMS_COMPOTION_TYPE_ONLY(.Items)
+
+            Dim STR_NAME() As String
+            STR_NAME = FUNC_GET_STR_ARRAY_FROM_COMPOTION_TYPE_USER(SRT_APP_SETTINGS_VALUE.TRIM.COMPOTION.USER)
+            Call SUB_ADD_ITEMS_COMPOTION_TYPE_USER(.Items, STR_NAME)
+
+        End With
+    End Sub
+
+    Private Sub SUB_INIT_COMBO_BOX_ITEM_COMPOTION_TYPE_USER(ByRef CMB_MAIN As Controls.ComboBox)
+        With CMB_MAIN
+            Call .Items.Clear()
+
+            Dim STR_NAME() As String
+            STR_NAME = FUNC_GET_STR_ARRAY_FROM_COMPOTION_TYPE_USER(SRT_APP_SETTINGS_VALUE.TRIM.COMPOTION.USER)
+            Call SUB_ADD_ITEMS_COMPOTION_TYPE_USER(.Items, STR_NAME)
+        End With
+    End Sub
+
+    Private Function FUNC_GET_STR_ARRAY_FROM_COMPOTION_TYPE_USER(ByRef SRT_CONF() As SRT_APP_SETTINGS_TRIM_COMPOTION_USER) As String()
+        Dim STR_RET() As String
+        ReDim STR_RET(0)
+
+        Dim INT_INDEX As Integer
+        INT_INDEX = (SRT_CONF.Length - 1)
+        For i = 1 To INT_INDEX
+            ReDim Preserve STR_RET(i)
+            STR_RET(i) = SRT_CONF(i).NAME
+        Next
+        Return STR_RET
+    End Function
 #End Region
 
 #Region "設定←→画面コントロール"
@@ -192,6 +253,16 @@ Public Class WPF_SETTING
             .SIZE.HEIGHT = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_TRIM_SIZE_HEIGHT.Text, 300)
             .ASPECT_RATIO.TYPE = CMB_TRIM_ASPECT_RATIO_TYPE.SelectedIndex
             .COMPOTION.TYPE = CMB_TRIM_COMPOTION_TYPE.SelectedIndex
+
+            ReDim .COMPOTION.USER(CST_APP_CONFIG_TRIM_COMPOTION_USER_ITEM_COUNT)
+            For i = 1 To (.COMPOTION.USER.Length - 1) 'USER SET
+                ReDim .COMPOTION.USER(i).TYPE(4)
+                .COMPOTION.USER(i).NAME = "あいうえお" & i
+                For j = 1 To (.COMPOTION.USER(i).TYPE.Length - 1)
+                    .COMPOTION.USER(i).TYPE(j) = j
+                Next
+                .COMPOTION.USER(i).BASE = .COMPOTION.USER(i).FUNC_GET_BASE
+            Next
         End With
 
         Return SRT_RET
@@ -225,6 +296,10 @@ Public Class WPF_SETTING
 
     Private Sub BTN_INIT_TRIM_Click(sender As Object, e As RoutedEventArgs) Handles BTN_INIT_TRIM.Click
         Call SUB_EXEC_DO(ENM_WINDOW_EXEC.DO_INIT_TRIM)
+    End Sub
+
+    Private Sub BTN_CUSTOM_TRIM_COMPOTION_TYPE_USER_Click(sender As Object, e As RoutedEventArgs) Handles BTN_CUSTOM_TRIM_COMPOTION_TYPE_USER.Click
+        Call SUB_EXEC_DO(ENM_WINDOW_EXEC.DO_VIEW_DIALOG_USER_COMP)
     End Sub
 #End Region
 

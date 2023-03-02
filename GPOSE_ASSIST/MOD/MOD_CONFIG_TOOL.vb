@@ -52,12 +52,29 @@
         Public WIDTH As Integer
         Public HEIGHT As Integer
     End Structure
+
     Public Structure SRT_APP_SETTINGS_TRIM_ASPECT_RATIO
         Public TYPE As Integer
     End Structure
 
     Public Structure SRT_APP_SETTINGS_TRIM_COMPOTION
         Public TYPE As Integer
+        Public USER() As SRT_APP_SETTINGS_TRIM_COMPOTION_USER
+    End Structure
+
+    Public Structure SRT_APP_SETTINGS_TRIM_COMPOTION_USER
+        Public BASE As String
+        Public NAME As String
+        Public TYPE() As Integer
+        Public Function FUNC_GET_BASE() As String
+            Dim STR_RET As String
+            STR_RET = ""
+            STR_RET &= Me.NAME
+            For i = 1 To (Me.TYPE.Length - 1)
+                STR_RET &= "," & CStr(Me.TYPE(i))
+            Next
+            Return STR_RET
+        End Function
     End Structure
 #End Region
 
