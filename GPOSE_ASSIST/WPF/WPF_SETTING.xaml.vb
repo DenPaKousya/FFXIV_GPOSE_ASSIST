@@ -14,6 +14,7 @@ Public Class WPF_SETTING
 
 #Region "画面用・変数"
     Private BLN_WINDOW_EXEC_DO As Boolean = False
+    Private SRT_USER_SET() As SRT_APP_SETTINGS_TRIM_COMPOTION_USER
 #End Region
 
 #Region "プロパティ用変数"
@@ -217,6 +218,13 @@ Public Class WPF_SETTING
             TXT_TRIM_SIZE_HEIGHT.Text = .SIZE.HEIGHT
             CMB_TRIM_ASPECT_RATIO_TYPE.SelectedIndex = .ASPECT_RATIO.TYPE
             CMB_TRIM_COMPOTION_TYPE.SelectedIndex = .COMPOTION.TYPE
+
+            Dim INT_INDEX As Integer
+            INT_INDEX = (SRT_SET.TRIM.COMPOTION.USER.Length - 1)
+            ReDim SRT_USER_SET(INT_INDEX)
+            For i = 1 To INT_INDEX
+                SRT_USER_SET(i) = SRT_SET.TRIM.COMPOTION.USER(i)
+            Next
         End With
     End Sub
 
@@ -254,14 +262,11 @@ Public Class WPF_SETTING
             .ASPECT_RATIO.TYPE = CMB_TRIM_ASPECT_RATIO_TYPE.SelectedIndex
             .COMPOTION.TYPE = CMB_TRIM_COMPOTION_TYPE.SelectedIndex
 
-            ReDim .COMPOTION.USER(CST_APP_CONFIG_TRIM_COMPOTION_USER_ITEM_COUNT)
-            For i = 1 To (.COMPOTION.USER.Length - 1) 'USER SET
-                ReDim .COMPOTION.USER(i).TYPE(4)
-                .COMPOTION.USER(i).NAME = "あいうえお" & i
-                For j = 1 To (.COMPOTION.USER(i).TYPE.Length - 1)
-                    .COMPOTION.USER(i).TYPE(j) = j
-                Next
-                .COMPOTION.USER(i).BASE = .COMPOTION.USER(i).FUNC_GET_BASE
+            Dim INT_INDEX As Integer
+            INT_INDEX = (SRT_USER_SET.Length - 1)
+            ReDim .COMPOTION.USER(INT_INDEX)
+            For i = 1 To INT_INDEX
+                .COMPOTION.USER(i) = SRT_USER_SET(i)
             Next
         End With
 

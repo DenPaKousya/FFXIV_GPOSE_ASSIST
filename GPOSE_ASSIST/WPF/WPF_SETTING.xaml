@@ -155,9 +155,9 @@
                             </Grid>
                             <Grid VerticalAlignment="Top" Margin="5,30,5,5" IsEnabled="True">
                                 <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="User Defined"/>
-                                <ComboBox x:Name="CMB_TRIM_COMPOTION_TYPE_USER" HorizontalAlignment="Left" Margin="75,0,0,0" Width="100" Height="20">
+                                <ComboBox x:Name="CMB_TRIM_COMPOTION_TYPE_USER" HorizontalAlignment="Left" Margin="75,0,0,0" Width="150" Height="20">
                                 </ComboBox>
-                                <Button x:Name="BTN_CUSTOM_TRIM_COMPOTION_TYPE_USER" HorizontalAlignment="Left" Margin="185,5,5,5" Height="20" Width="80" Content="Customize"/>
+                                <Button x:Name="BTN_CUSTOM_TRIM_COMPOTION_TYPE_USER" HorizontalAlignment="Left" Margin="235,5,5,5" Height="20" Width="80" Content="Customize"/>
                             </Grid>
                         </Grid>
                     </GroupBox>

@@ -63,6 +63,12 @@
                         <MenuItem x:Name="MNI_COMP_HARMONIOUS_TRIANGLE_VLL" Header="調和三角形-縦-左下起点" IsCheckable="True" />
                         <MenuItem x:Name="MNI_COMP_HARMONIOUS_TRIANGLE_VUL" Header="調和三角形-縦-左上起点" IsCheckable="True" />
                     </MenuItem>
+                    <MenuItem Header="黄金三角形">
+                        <MenuItem x:Name="MNI_COMP_GOLDEN_TRIANGLE_HLL" Header="黄金三角形-横-左下起点" IsCheckable="True" />
+                        <MenuItem x:Name="MNI_COMP_GOLDEN_TRIANGLE_HUL" Header="黄金三角形-横-左上起点" IsCheckable="True" />
+                        <MenuItem x:Name="MNI_COMP_GOLDEN_TRIANGLE_VLL" Header="黄金三角形-縦-左下起点" IsCheckable="True" />
+                        <MenuItem x:Name="MNI_COMP_GOLDEN_TRIANGLE_VUL" Header="黄金三角形-縦-左上起点" IsCheckable="True" />
+                    </MenuItem>
                     <MenuItem Header="黄金螺旋">
                         <MenuItem Header="横">
                             <MenuItem x:Name="MNI_COMP_GOLDEN_RECTANGLE_HLL" Header="黄金螺旋-横-左下起点" IsCheckable="True" />

@@ -14,33 +14,38 @@ Public Class WPF_TRIM
     Private Enum ENM_DIVISION_PATTERN
         NONE = 0
 
-        TWO_DIV
-        THREE_DIV
-        QUAD_DIV
-        THREE_DIV_PHI
-        CROSS_DIV
-        DIAGONAL_DIV_LL
-        DIAGONAL_DIV_UL
+        TWO_DIV '1
+        THREE_DIV '2
+        QUAD_DIV '3
+        THREE_DIV_PHI '4
+        CROSS_DIV '5
+        DIAGONAL_DIV_LL '6
+        DIAGONAL_DIV_UL '7
 
-        V_SHAPE_DOWN
-        V_SHAPE_UP
-        V_SHAPE_RIGHT
-        V_SHAPE_LEFT
+        V_SHAPE_DOWN '8
+        V_SHAPE_UP '9
+        V_SHAPE_RIGHT '10
+        V_SHAPE_LEFT '11
 
-        HARMONIOUS_TRIANGLE_HLL
-        HARMONIOUS_TRIANGLE_HUL
-        HARMONIOUS_TRIANGLE_VLL
-        HARMONIOUS_TRIANGLE_VUL
+        HARMONIOUS_TRIANGLE_HLL '12
+        HARMONIOUS_TRIANGLE_HUL '13
+        HARMONIOUS_TRIANGLE_VLL '14
+        HARMONIOUS_TRIANGLE_VUL '15
 
-        GOLDEN_RECTANGLE_HLL
-        GOLDEN_RECTANGLE_HUR
-        GOLDEN_RECTANGLE_HUL
-        GOLDEN_RECTANGLE_HLR
+        GOLDEN_TRIANGLE_HLL '16
+        GOLDEN_TRIANGLE_HUL '17
+        GOLDEN_TRIANGLE_VLL '18
+        GOLDEN_TRIANGLE_VUL '19
 
-        GOLDEN_RECTANGLE_VLL
-        GOLDEN_RECTANGLE_VUR
-        GOLDEN_RECTANGLE_VUL
-        GOLDEN_RECTANGLE_VLR
+        GOLDEN_RECTANGLE_HLL '20
+        GOLDEN_RECTANGLE_HUR '21
+        GOLDEN_RECTANGLE_HUL '22
+        GOLDEN_RECTANGLE_HLR '23
+
+        GOLDEN_RECTANGLE_VLL '24
+        GOLDEN_RECTANGLE_VUR '25
+        GOLDEN_RECTANGLE_VUL '26
+        GOLDEN_RECTANGLE_VLR '27
 
         USER_01
         USER_02
@@ -110,6 +115,37 @@ Public Class WPF_TRIM
             BLN_SET_SIZE = value
         End Set
     End Property
+#End Region
+
+#Region "初期化・終了処理"
+    Private Sub SUB_CTRL_VALUE_INIT()
+
+        Dim INT_INDEX As Integer
+        INT_INDEX = (SRT_APP_SETTINGS_VALUE.TRIM.COMPOTION.USER.Length - 1)
+        For i = 1 To INT_INDEX
+            Select Case i
+                Case 1
+                    MNI_COMP_USER_01.Header = SRT_APP_SETTINGS_VALUE.TRIM.COMPOTION.USER(i).NAME
+                Case 2
+                    MNI_COMP_USER_02.Header = SRT_APP_SETTINGS_VALUE.TRIM.COMPOTION.USER(i).NAME
+                Case 3
+                    MNI_COMP_USER_03.Header = SRT_APP_SETTINGS_VALUE.TRIM.COMPOTION.USER(i).NAME
+                Case 4
+                    MNI_COMP_USER_04.Header = SRT_APP_SETTINGS_VALUE.TRIM.COMPOTION.USER(i).NAME
+                Case 5
+                    MNI_COMP_USER_05.Header = SRT_APP_SETTINGS_VALUE.TRIM.COMPOTION.USER(i).NAME
+                Case 6
+                    MNI_COMP_USER_06.Header = SRT_APP_SETTINGS_VALUE.TRIM.COMPOTION.USER(i).NAME
+                Case 7
+                    MNI_COMP_USER_07.Header = SRT_APP_SETTINGS_VALUE.TRIM.COMPOTION.USER(i).NAME
+                Case 8
+                    MNI_COMP_USER_08.Header = SRT_APP_SETTINGS_VALUE.TRIM.COMPOTION.USER(i).NAME
+                Case 9
+                    MNI_COMP_USER_09.Header = SRT_APP_SETTINGS_VALUE.TRIM.COMPOTION.USER(i).NAME
+            End Select
+        Next
+
+    End Sub
 #End Region
 
 #Region "外部呼出"
@@ -368,10 +404,18 @@ Public Class WPF_TRIM
                 MNI_COMP_HARMONIOUS_TRIANGLE_HLL.IsChecked = True
             Case ENM_DIVISION_PATTERN.HARMONIOUS_TRIANGLE_HUL
                 MNI_COMP_HARMONIOUS_TRIANGLE_HUL.IsChecked = True
-            Case ENM_DIVISION_PATTERN.HARMONIOUS_TRIANGLE_HLL
-                MNI_COMP_HARMONIOUS_TRIANGLE_HLL.IsChecked = True
-            Case ENM_DIVISION_PATTERN.HARMONIOUS_TRIANGLE_HUL
-                MNI_COMP_HARMONIOUS_TRIANGLE_HUL.IsChecked = True
+            Case ENM_DIVISION_PATTERN.HARMONIOUS_TRIANGLE_VLL
+                MNI_COMP_HARMONIOUS_TRIANGLE_VLL.IsChecked = True
+            Case ENM_DIVISION_PATTERN.HARMONIOUS_TRIANGLE_VUL
+                MNI_COMP_HARMONIOUS_TRIANGLE_VUL.IsChecked = True
+            Case ENM_DIVISION_PATTERN.GOLDEN_TRIANGLE_HLL
+                MNI_COMP_GOLDEN_TRIANGLE_HLL.IsChecked = True
+            Case ENM_DIVISION_PATTERN.GOLDEN_TRIANGLE_HUL
+                MNI_COMP_GOLDEN_TRIANGLE_HUL.IsChecked = True
+            Case ENM_DIVISION_PATTERN.GOLDEN_TRIANGLE_VLL
+                MNI_COMP_GOLDEN_TRIANGLE_VLL.IsChecked = True
+            Case ENM_DIVISION_PATTERN.GOLDEN_TRIANGLE_VUL
+                MNI_COMP_GOLDEN_TRIANGLE_VUL.IsChecked = True
             Case ENM_DIVISION_PATTERN.GOLDEN_RECTANGLE_HLL
                 MNI_COMP_GOLDEN_RECTANGLE_HLL.IsChecked = True
             Case ENM_DIVISION_PATTERN.GOLDEN_RECTANGLE_HUR
@@ -391,21 +435,21 @@ Public Class WPF_TRIM
             Case ENM_DIVISION_PATTERN.USER_01
                 MNI_COMP_USER_01.IsChecked = True
             Case ENM_DIVISION_PATTERN.USER_02
-                MNI_COMP_USER_01.IsChecked = True
+                MNI_COMP_USER_02.IsChecked = True
             Case ENM_DIVISION_PATTERN.USER_03
-                MNI_COMP_USER_01.IsChecked = True
+                MNI_COMP_USER_03.IsChecked = True
             Case ENM_DIVISION_PATTERN.USER_04
-                MNI_COMP_USER_01.IsChecked = True
+                MNI_COMP_USER_04.IsChecked = True
             Case ENM_DIVISION_PATTERN.USER_05
-                MNI_COMP_USER_01.IsChecked = True
+                MNI_COMP_USER_05.IsChecked = True
             Case ENM_DIVISION_PATTERN.USER_06
-                MNI_COMP_USER_01.IsChecked = True
+                MNI_COMP_USER_06.IsChecked = True
             Case ENM_DIVISION_PATTERN.USER_07
-                MNI_COMP_USER_01.IsChecked = True
+                MNI_COMP_USER_07.IsChecked = True
             Case ENM_DIVISION_PATTERN.USER_08
-                MNI_COMP_USER_01.IsChecked = True
+                MNI_COMP_USER_08.IsChecked = True
             Case ENM_DIVISION_PATTERN.USER_09
-                MNI_COMP_USER_01.IsChecked = True
+                MNI_COMP_USER_09.IsChecked = True
             Case Else
                 MNI_COMP_NONE.IsChecked = True
         End Select
@@ -416,25 +460,26 @@ Public Class WPF_TRIM
         SRT_APP_SETTINGS_VALUE.TRIM.COMPOTION.TYPE = Me.DRAWED_COMPOSTION_TYPE
     End Sub
 
-    Private Sub SUB_DRAW_COMPOSTION(ByVal enmPAT As ENM_DIVISION_PATTERN)
-        Dim intWIDTH As Integer
-        Dim intHEIGHT As Integer
-        intWIDTH = CInt(PCB_COMPOSITION.Width)
-        intHEIGHT = CInt(PCB_COMPOSITION.Height)
+    Private Sub SUB_DRAW_COMPOSTION(ByVal ENM_PAT As ENM_DIVISION_PATTERN)
+        Dim INT_WIDTH As Integer
+        INT_WIDTH = CInt(PCB_COMPOSITION.Width)
 
-        If intWIDTH <= 0 Then
+        Dim INT_HEIGHT As Integer
+        INT_HEIGHT = CInt(PCB_COMPOSITION.Height)
+
+        If INT_WIDTH <= 0 Then
             Exit Sub
         End If
 
-        If intHEIGHT <= 0 Then
+        If INT_HEIGHT <= 0 Then
             Exit Sub
         End If
 
-        Dim bmpCANVAS As Bitmap
-        bmpCANVAS = New Bitmap(intWIDTH, intHEIGHT)
+        Dim BMP_CANVAS As Bitmap
+        BMP_CANVAS = New Bitmap(INT_WIDTH, INT_HEIGHT)
 
-        Dim grpDRAW As Graphics
-        grpDRAW = Graphics.FromImage(bmpCANVAS)
+        Dim GRP_DRAW As Graphics
+        GRP_DRAW = Graphics.FromImage(BMP_CANVAS)
 
         Const cstPEN_SIZE As Single = 3.0
         Dim penDRAW As System.Drawing.Pen
@@ -444,18 +489,43 @@ Public Class WPF_TRIM
         Dim penFORE As System.Drawing.Pen
         penFORE = New System.Drawing.Pen(System.Drawing.Color.White, 1.0)
 
-        grpDRAW.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
+        GRP_DRAW.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
 
-        Call SUB_DRAW_OUTLINE(grpDRAW, penDRAW)
-        Call SUB_DRAW_OUTLINE(grpDRAW, penFORE)
+        Call SUB_DRAW_OUTLINE(GRP_DRAW, penDRAW)
+        Call SUB_DRAW_OUTLINE(GRP_DRAW, penFORE)
 
-        Call SUB_DRAW_COMPOSTION_ONE(enmPAT, grpDRAW, penDRAW, PCB_COMPOSITION)
-        Call SUB_DRAW_COMPOSTION_ONE(enmPAT, grpDRAW, penFORE, PCB_COMPOSITION)
+        If ENM_PAT >= ENM_DIVISION_PATTERN.USER_01 Then 'ユーザー定義の場合は
+            Dim INT_INDEX As Integer
+            INT_INDEX = FUNC_GET_NUMBER_USER(ENM_PAT)
+            If INT_INDEX > 0 Then
+                Dim INT_COUNT As Integer
+                INT_COUNT = (SRT_APP_SETTINGS_VALUE.TRIM.COMPOTION.USER(INT_INDEX).TYPE.Length - 1)
+                For i = 1 To INT_COUNT
+                    Dim INT_TYPE As Integer
+                    INT_TYPE = SRT_APP_SETTINGS_VALUE.TRIM.COMPOTION.USER(INT_INDEX).TYPE(i)
+                    If INT_TYPE > 0 Then
+                        Call SUB_DRAW_COMPOSTION_ONE(INT_TYPE, GRP_DRAW, penDRAW, PCB_COMPOSITION)
+                        Call SUB_DRAW_COMPOSTION_ONE(INT_TYPE, GRP_DRAW, penFORE, PCB_COMPOSITION)
+                    End If
+                Next
+            End If
+        Else
+            Call SUB_DRAW_COMPOSTION_ONE(ENM_PAT, GRP_DRAW, penDRAW, PCB_COMPOSITION)
+            Call SUB_DRAW_COMPOSTION_ONE(ENM_PAT, GRP_DRAW, penFORE, PCB_COMPOSITION)
+        End If
 
-        PCB_COMPOSITION.Source = FUNC_GET_IMAGESOURCE(bmpCANVAS)
-        Call grpDRAW.Dispose()
+        PCB_COMPOSITION.Source = FUNC_GET_IMAGESOURCE(BMP_CANVAS)
+        Call GRP_DRAW.Dispose()
 
     End Sub
+
+    Private Function FUNC_GET_NUMBER_USER(ByVal ENM_PAT As ENM_DIVISION_PATTERN) As Integer
+        Dim INT_RET As Integer
+
+        INT_RET = (CInt(ENM_PAT) - CInt(ENM_DIVISION_PATTERN.USER_01))
+        INT_RET += 1
+        Return INT_RET
+    End Function
 
     Private Sub SUB_DRAW_OUTLINE(ByRef GRP_DRAW As Graphics, ByRef PEN_DRAW As System.Drawing.Pen)
         Dim rct As System.Drawing.Rectangle
@@ -497,6 +567,14 @@ Public Class WPF_TRIM
                 Call SUB_DRAW_HARMONIOUS_TRIANGLE_VLL(GRP_DRAW, PEN_DRAW, IMG_CANVAS)
             Case ENM_DIVISION_PATTERN.HARMONIOUS_TRIANGLE_VUL
                 Call SUB_DRAW_HARMONIOUS_TRIANGLE_VUL(GRP_DRAW, PEN_DRAW, IMG_CANVAS)
+            Case ENM_DIVISION_PATTERN.GOLDEN_TRIANGLE_HLL
+                Call SUB_DRAW_GOLDEN_TRIANGLE_HLL(GRP_DRAW, PEN_DRAW, IMG_CANVAS)
+            Case ENM_DIVISION_PATTERN.GOLDEN_TRIANGLE_HUL
+                Call SUB_DRAW_GOLDEN_TRIANGLE_HUL(GRP_DRAW, PEN_DRAW, IMG_CANVAS)
+            Case ENM_DIVISION_PATTERN.GOLDEN_TRIANGLE_VLL
+                Call SUB_DRAW_GOLDEN_TRIANGLE_VLL(GRP_DRAW, PEN_DRAW, IMG_CANVAS)
+            Case ENM_DIVISION_PATTERN.GOLDEN_TRIANGLE_VUL
+                Call SUB_DRAW_GOLDEN_TRIANGLE_VUL(GRP_DRAW, PEN_DRAW, IMG_CANVAS)
             Case ENM_DIVISION_PATTERN.GOLDEN_RECTANGLE_HLL
                 Call SUB_DRAW_GOLDEN_RECTANGLE(ENM_GOLDEN_RATE_TYPE.HORIZONTAL_START_LOWER_LEFT, GRP_DRAW, PEN_DRAW, IMG_CANVAS)
             Case ENM_DIVISION_PATTERN.GOLDEN_RECTANGLE_HUR
@@ -953,6 +1031,10 @@ Public Class WPF_TRIM
         MNI_COMP_HARMONIOUS_TRIANGLE_HUL.IsChecked = False
         MNI_COMP_HARMONIOUS_TRIANGLE_VLL.IsChecked = False
         MNI_COMP_HARMONIOUS_TRIANGLE_VUL.IsChecked = False
+        MNI_COMP_GOLDEN_TRIANGLE_HLL.IsChecked = False
+        MNI_COMP_GOLDEN_TRIANGLE_HUL.IsChecked = False
+        MNI_COMP_GOLDEN_TRIANGLE_VLL.IsChecked = False
+        MNI_COMP_GOLDEN_TRIANGLE_VUL.IsChecked = False
         MNI_COMP_GOLDEN_RECTANGLE_HLL.IsChecked = False
         MNI_COMP_GOLDEN_RECTANGLE_HUR.IsChecked = False
         MNI_COMP_GOLDEN_RECTANGLE_HUL.IsChecked = False
@@ -961,6 +1043,15 @@ Public Class WPF_TRIM
         MNI_COMP_GOLDEN_RECTANGLE_VUR.IsChecked = False
         MNI_COMP_GOLDEN_RECTANGLE_VUL.IsChecked = False
         MNI_COMP_GOLDEN_RECTANGLE_VLR.IsChecked = False
+        MNI_COMP_USER_01.IsChecked = False
+        MNI_COMP_USER_02.IsChecked = False
+        MNI_COMP_USER_03.IsChecked = False
+        MNI_COMP_USER_04.IsChecked = False
+        MNI_COMP_USER_05.IsChecked = False
+        MNI_COMP_USER_06.IsChecked = False
+        MNI_COMP_USER_07.IsChecked = False
+        MNI_COMP_USER_08.IsChecked = False
+        MNI_COMP_USER_09.IsChecked = False
     End Sub
 
     Private Sub SUB_RATE_ALL_UNCHECKED()
@@ -1198,6 +1289,22 @@ Public Class WPF_TRIM
         Call SUB_CHANGE_DRAW_COMPOTION(ENM_DIVISION_PATTERN.HARMONIOUS_TRIANGLE_VUL)
     End Sub
 
+    Private Sub MNI_COMP_GOLDEN_TRIANGLE_HLL_Click(sender As Object, e As RoutedEventArgs) Handles MNI_COMP_GOLDEN_TRIANGLE_HLL.Click
+        Call SUB_CHANGE_DRAW_COMPOTION(ENM_DIVISION_PATTERN.GOLDEN_TRIANGLE_HLL)
+    End Sub
+
+    Private Sub MNI_COMP_GOLDEN_TRIANGLE_HUL_Click(sender As Object, e As RoutedEventArgs) Handles MNI_COMP_GOLDEN_TRIANGLE_HUL.Click
+        Call SUB_CHANGE_DRAW_COMPOTION(ENM_DIVISION_PATTERN.GOLDEN_TRIANGLE_HUL)
+    End Sub
+
+    Private Sub MNI_COMP_GOLDEN_TRIANGLE_VLL_Click(sender As Object, e As RoutedEventArgs) Handles MNI_COMP_GOLDEN_TRIANGLE_VLL.Click
+        Call SUB_CHANGE_DRAW_COMPOTION(ENM_DIVISION_PATTERN.GOLDEN_TRIANGLE_VLL)
+    End Sub
+
+    Private Sub MNI_COMP_GOLDEN_TRIANGLE_VUL_Click(sender As Object, e As RoutedEventArgs) Handles MNI_COMP_GOLDEN_TRIANGLE_VUL.Click
+        Call SUB_CHANGE_DRAW_COMPOTION(ENM_DIVISION_PATTERN.GOLDEN_TRIANGLE_VUL)
+    End Sub
+
     Private Sub MNI_COMP_GOLDEN_RECTANGLE_HLL_Click(sender As Object, e As RoutedEventArgs) Handles MNI_COMP_GOLDEN_RECTANGLE_HLL.Click
         Call SUB_CHANGE_DRAW_COMPOTION(ENM_DIVISION_PATTERN.GOLDEN_RECTANGLE_HLL)
     End Sub
@@ -1230,6 +1337,41 @@ Public Class WPF_TRIM
         Call SUB_CHANGE_DRAW_COMPOTION(ENM_DIVISION_PATTERN.GOLDEN_RECTANGLE_VLR)
     End Sub
 
+    Private Sub MNI_COMP_USER_01_Click(sender As Object, e As RoutedEventArgs) Handles MNI_COMP_USER_01.Click
+        Call SUB_CHANGE_DRAW_COMPOTION(ENM_DIVISION_PATTERN.USER_01)
+    End Sub
+
+    Private Sub MNI_COMP_USER_02_Click(sender As Object, e As RoutedEventArgs) Handles MNI_COMP_USER_02.Click
+        Call SUB_CHANGE_DRAW_COMPOTION(ENM_DIVISION_PATTERN.USER_02)
+    End Sub
+
+    Private Sub MNI_COMP_USER_03_Click(sender As Object, e As RoutedEventArgs) Handles MNI_COMP_USER_03.Click
+        Call SUB_CHANGE_DRAW_COMPOTION(ENM_DIVISION_PATTERN.USER_03)
+    End Sub
+
+    Private Sub MNI_COMP_USER_04_Click(sender As Object, e As RoutedEventArgs) Handles MNI_COMP_USER_04.Click
+        Call SUB_CHANGE_DRAW_COMPOTION(ENM_DIVISION_PATTERN.USER_04)
+    End Sub
+
+    Private Sub MNI_COMP_USER_05_Click(sender As Object, e As RoutedEventArgs) Handles MNI_COMP_USER_05.Click
+        Call SUB_CHANGE_DRAW_COMPOTION(ENM_DIVISION_PATTERN.USER_05)
+    End Sub
+
+    Private Sub MNI_COMP_USER_06_Click(sender As Object, e As RoutedEventArgs) Handles MNI_COMP_USER_06.Click
+        Call SUB_CHANGE_DRAW_COMPOTION(ENM_DIVISION_PATTERN.USER_06)
+    End Sub
+
+    Private Sub MNI_COMP_USER_07_Click(sender As Object, e As RoutedEventArgs) Handles MNI_COMP_USER_07.Click
+        Call SUB_CHANGE_DRAW_COMPOTION(ENM_DIVISION_PATTERN.USER_07)
+    End Sub
+
+    Private Sub MNI_COMP_USER_08_Click(sender As Object, e As RoutedEventArgs) Handles MNI_COMP_USER_08.Click
+        Call SUB_CHANGE_DRAW_COMPOTION(ENM_DIVISION_PATTERN.USER_08)
+    End Sub
+
+    Private Sub MNI_COMP_USER_09_Click(sender As Object, e As RoutedEventArgs) Handles MNI_COMP_USER_09.Click
+        Call SUB_CHANGE_DRAW_COMPOTION(ENM_DIVISION_PATTERN.USER_09)
+    End Sub
 #End Region
 
 #End Region
@@ -1290,7 +1432,7 @@ Public Class WPF_TRIM
 #End Region
 
     Private Sub WPF_TRIM_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
-
+        Call SUB_CTRL_VALUE_INIT()
     End Sub
 
     Private Sub WPF_TRIM_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
