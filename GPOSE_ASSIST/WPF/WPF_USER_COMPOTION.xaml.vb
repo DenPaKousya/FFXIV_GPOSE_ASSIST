@@ -41,20 +41,17 @@ Public Class WPF_USER_COMPOTION
 
 #Region "初期化・終了処理"
     Private Sub SUB_CTRL_VIEW_INIT()
-        Call SUB_INIT_COMBO_BOX_ITEM_COMPOTION_TYPE_ONLY(CMB_TRIM_COMPOTION_TYPE_01)
-        Call SUB_INIT_COMBO_BOX_ITEM_COMPOTION_TYPE_ONLY(CMB_TRIM_COMPOTION_TYPE_02)
-        Call SUB_INIT_COMBO_BOX_ITEM_COMPOTION_TYPE_ONLY(CMB_TRIM_COMPOTION_TYPE_03)
-        Call SUB_INIT_COMBO_BOX_ITEM_COMPOTION_TYPE_ONLY(CMB_TRIM_COMPOTION_TYPE_04)
+        Call SUB_INIT_COMBO_BOX_ITEM_COMPOTION_TYPE_ONLY(CMB_TRIM_COMPOTION_TYPE_01, True)
+        Call SUB_INIT_COMBO_BOX_ITEM_COMPOTION_TYPE_ONLY(CMB_TRIM_COMPOTION_TYPE_02, True)
+        Call SUB_INIT_COMBO_BOX_ITEM_COMPOTION_TYPE_ONLY(CMB_TRIM_COMPOTION_TYPE_03, True)
+        Call SUB_INIT_COMBO_BOX_ITEM_COMPOTION_TYPE_ONLY(CMB_TRIM_COMPOTION_TYPE_04, True)
     End Sub
 
     Private Sub SUB_CTRL_VALUE_INIT()
         Me.CANCEL = True
 
-        TXT_NAME.Text = Me.CUSTOMIZE.NAME
-        CMB_TRIM_COMPOTION_TYPE_01.SelectedIndex = (Me.CUSTOMIZE.TYPE(1) - 1)
-        CMB_TRIM_COMPOTION_TYPE_02.SelectedIndex = (Me.CUSTOMIZE.TYPE(2) - 1)
-        CMB_TRIM_COMPOTION_TYPE_03.SelectedIndex = (Me.CUSTOMIZE.TYPE(3) - 1)
-        CMB_TRIM_COMPOTION_TYPE_04.SelectedIndex = (Me.CUSTOMIZE.TYPE(4) - 1)
+        Call SUB_SET_VALUE_TO_CONTROL(Me.CUSTOMIZE)
+
 
     End Sub
 
@@ -62,10 +59,13 @@ Public Class WPF_USER_COMPOTION
 
 #Region "プルダウン関連"
 
-    Private Sub SUB_INIT_COMBO_BOX_ITEM_COMPOTION_TYPE_ONLY(ByRef CMB_MAIN As Controls.ComboBox)
+    Private Sub SUB_INIT_COMBO_BOX_ITEM_COMPOTION_TYPE_ONLY(ByRef CMB_MAIN As Controls.ComboBox, Optional ByVal BLN_NONE As Boolean = False)
         With CMB_MAIN
             Call .Items.Clear()
 
+            If BLN_NONE Then
+                Call .Items.Add("無し")
+            End If
             Call SUB_ADD_ITEMS_COMPOTION_TYPE_ONLY(.Items)
         End With
     End Sub
@@ -113,8 +113,8 @@ Public Class WPF_USER_COMPOTION
 
 #Region "主処理"
     Private Sub SUB_OK()
-        'SRT_APP_SETTINGS_VALUE = FUNC_GET_SETTING_FROM_CONTROL()
         Me.CANCEL = False
+        Me.CUSTOMIZE = FUNC_GET_VALUE_FROM_CONTROL()
         Call SUB_CLOSE()
     End Sub
 
@@ -122,6 +122,34 @@ Public Class WPF_USER_COMPOTION
         Call Me.Close()
     End Sub
 
+#End Region
+
+#Region "構造体←→画面コントロール"
+    Private Sub SUB_SET_VALUE_TO_CONTROL(ByRef SRT_VALUE As SRT_APP_SETTINGS_TRIM_COMPOTION_USER)
+
+        TXT_NAME.Text = SRT_VALUE.NAME
+        CMB_TRIM_COMPOTION_TYPE_01.SelectedIndex = (SRT_VALUE.TYPE(1))
+        CMB_TRIM_COMPOTION_TYPE_02.SelectedIndex = (SRT_VALUE.TYPE(2))
+        CMB_TRIM_COMPOTION_TYPE_03.SelectedIndex = (SRT_VALUE.TYPE(3))
+        CMB_TRIM_COMPOTION_TYPE_04.SelectedIndex = (SRT_VALUE.TYPE(4))
+    End Sub
+
+    Private Function FUNC_GET_VALUE_FROM_CONTROL() As SRT_APP_SETTINGS_TRIM_COMPOTION_USER
+        Dim SRT_RET As SRT_APP_SETTINGS_TRIM_COMPOTION_USER
+
+        SRT_RET = Nothing
+        With SRT_RET
+            .NAME = TXT_NAME.Text
+            ReDim .TYPE(4)
+            .TYPE(1) = (CMB_TRIM_COMPOTION_TYPE_01.SelectedIndex)
+            .TYPE(2) = (CMB_TRIM_COMPOTION_TYPE_02.SelectedIndex)
+            .TYPE(3) = (CMB_TRIM_COMPOTION_TYPE_03.SelectedIndex)
+            .TYPE(4) = (CMB_TRIM_COMPOTION_TYPE_04.SelectedIndex)
+            .BASE = .FUNC_GET_BASE
+        End With
+
+        Return SRT_RET
+    End Function
 #End Region
 
 #Region "イベント-ボタンクリック"

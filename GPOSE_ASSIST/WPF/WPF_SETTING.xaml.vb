@@ -129,13 +129,11 @@ Public Class WPF_SETTING
         WPF_SHOW = New WPF_USER_COMPOTION
         Dim INT_INDEX As Integer
         INT_INDEX = (CMB_TRIM_COMPOTION_TYPE_USER.SelectedIndex + 1)
-        WPF_SHOW.CUSTOMIZE = SRT_APP_SETTINGS_VALUE.TRIM.COMPOTION.USER(INT_INDEX)
+        WPF_SHOW.CUSTOMIZE = SRT_USER_SET(INT_INDEX)
         Call WPF_SHOW.ShowDialog()
 
         If Not WPF_SHOW.CANCEL Then
-            'If Not WPF_WINDOW_MAIN Is Nothing Then
-            '    Call WPF_WINDOW_MAIN.SUB_WINDOW_REFRESH()
-            'End If
+            SRT_USER_SET(INT_INDEX) = WPF_SHOW.CUSTOMIZE
         End If
 
         Call WPF_SHOW.Close()
@@ -217,7 +215,7 @@ Public Class WPF_SETTING
             TXT_TRIM_SIZE_WIDTH.Text = .SIZE.WIDTH
             TXT_TRIM_SIZE_HEIGHT.Text = .SIZE.HEIGHT
             CMB_TRIM_ASPECT_RATIO_TYPE.SelectedIndex = .ASPECT_RATIO.TYPE
-            CMB_TRIM_COMPOTION_TYPE.SelectedIndex = .COMPOTION.TYPE
+            CMB_TRIM_COMPOTION_TYPE.SelectedIndex = (.COMPOTION.TYPE - 1)
 
             Dim INT_INDEX As Integer
             INT_INDEX = (SRT_SET.TRIM.COMPOTION.USER.Length - 1)
