@@ -134,6 +134,7 @@ Public Class WPF_SETTING
 
         If Not WPF_SHOW.CANCEL Then
             SRT_USER_SET(INT_INDEX) = WPF_SHOW.CUSTOMIZE
+            CMB_TRIM_COMPOTION_TYPE_USER.Items(CMB_TRIM_COMPOTION_TYPE_USER.SelectedIndex) = SRT_USER_SET(INT_INDEX).NAME
         End If
 
         Call WPF_SHOW.Close()

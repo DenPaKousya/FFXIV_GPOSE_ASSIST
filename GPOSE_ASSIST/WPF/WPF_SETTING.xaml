@@ -105,11 +105,11 @@
                     <Grid>
                         <Grid VerticalAlignment="Top" Margin="5,5,5,5">
                             <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="Left"/>
-                            <TextBox x:Name="TXT_TRIM_LOACTION_LEFT" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="75,3,0,0" Width="100" Height="20"/>
+                            <TextBox x:Name="TXT_TRIM_LOACTION_LEFT" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="80,3,0,0" Width="100" Height="20"/>
                         </Grid>
                         <Grid VerticalAlignment="Top" Margin="5,30,5,5">
                             <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="Top"/>
-                            <TextBox x:Name="TXT_TRIM_LOACTION_TOP" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="75,3,0,0" Width="100" Height="20"/>
+                            <TextBox x:Name="TXT_TRIM_LOACTION_TOP" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="80,3,0,0" Width="100" Height="20"/>
                         </Grid>
                     </Grid>
                 </GroupBox>
@@ -117,18 +117,18 @@
                     <Grid>
                         <Grid VerticalAlignment="Top" Margin="5,5,5,5">
                             <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="Width"/>
-                            <TextBox x:Name="TXT_TRIM_SIZE_WIDTH" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="75,3,0,0" Width="100" Height="20"/>
+                            <TextBox x:Name="TXT_TRIM_SIZE_WIDTH" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="80,3,0,0" Width="100" Height="20"/>
                         </Grid>
                         <Grid VerticalAlignment="Top" Margin="5,30,5,5">
                             <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="Height"/>
-                            <TextBox x:Name="TXT_TRIM_SIZE_HEIGHT" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="75,3,0,0" Width="100" Height="20"/>
+                            <TextBox x:Name="TXT_TRIM_SIZE_HEIGHT" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="80,3,0,0" Width="100" Height="20"/>
                         </Grid>
                     </Grid>
                 </GroupBox>
                     <GroupBox Header="Aspect ratio" VerticalAlignment="Top" Margin="5,175,5,5" IsEnabled="False">
                     <Grid VerticalAlignment="Top" Margin="5,5,5,5">
                         <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="Type"/>
-                        <ComboBox x:Name="CMB_TRIM_ASPECT_RATIO_TYPE" HorizontalAlignment="Left" Margin="75,0,0,0" Width="100">
+                        <ComboBox x:Name="CMB_TRIM_ASPECT_RATIO_TYPE" HorizontalAlignment="Left" Margin="80,0,0,0" Width="100">
                             <ComboBoxItem Content="Free"/>
                             <ComboBoxItem Content="1:1"/>
                             <ComboBoxItem Content="2:3"/>
@@ -150,16 +150,14 @@
                         <Grid>
                             <Grid VerticalAlignment="Top" Margin="5,5,5,5" IsEnabled="False">
                                 <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="Type"/>
-                                <ComboBox x:Name="CMB_TRIM_COMPOTION_TYPE" HorizontalAlignment="Left" Margin="75,0,0,0" Width="100">
+                                <ComboBox x:Name="CMB_TRIM_COMPOTION_TYPE" HorizontalAlignment="Left" Margin="80,0,0,0" Width="100">
                                 </ComboBox>
                             </Grid>
                             <Grid VerticalAlignment="Top" Margin="5,35,5,5" IsEnabled="True">
                                 <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="User Defined"/>
-                                <ComboBox x:Name="CMB_TRIM_COMPOTION_TYPE_USER" HorizontalAlignment="Left" Margin="75,0,0,0" Width="150">
+                                <ComboBox x:Name="CMB_TRIM_COMPOTION_TYPE_USER" HorizontalAlignment="Left" Margin="80,0,0,0" Width="150">
                                 </ComboBox>
-                                <Grid>
-                                <Button x:Name="BTN_CUSTOM_TRIM_COMPOTION_TYPE_USER" HorizontalAlignment="Left" Margin="235,5,5,5" Height="20" Width="80" Content="Customize"/>
-                                </Grid>
+                                <Button x:Name="BTN_CUSTOM_TRIM_COMPOTION_TYPE_USER" HorizontalAlignment="Left" Margin="235,0,0,0" Width="80" Content="Customize"/>
                             </Grid>
                         </Grid>
                     </GroupBox>
