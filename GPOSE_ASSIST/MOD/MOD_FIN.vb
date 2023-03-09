@@ -58,6 +58,12 @@
                 'TRIM.COMPOTION<
                 STR_TEMP = CStr(.TRIM.COMPOTION.TYPE)
                 Call FUNC_WRITE_APP_SETTINGS(CST_APP_CONFIG_TRIM_COMPOTION_TYPE, STR_TEMP)
+                For i = 1 To (.TRIM.COMPOTION.USER.Length - 1)
+                    STR_TEMP = CStr(.TRIM.COMPOTION.USER(i).BASE)
+                    Dim STR_KEY As String
+                    STR_KEY = CST_APP_CONFIG_TRIM_COMPOTION_USER & "." & CStr(i)
+                    Call FUNC_WRITE_APP_SETTINGS(STR_KEY, STR_TEMP)
+                Next
                 '>TRIM.COMPOTION
                 '>TRIM
             Catch ex As Exception

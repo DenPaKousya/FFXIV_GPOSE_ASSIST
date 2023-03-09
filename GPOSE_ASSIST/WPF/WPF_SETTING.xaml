@@ -150,7 +150,7 @@
                         <Grid>
                             <Grid VerticalAlignment="Top" Margin="5,5,5,5" IsEnabled="False">
                                 <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="Type"/>
-                                <ComboBox x:Name="CMB_TRIM_COMPOTION_TYPE" HorizontalAlignment="Left" Margin="80,0,0,0" Width="100">
+                                <ComboBox x:Name="CMB_TRIM_COMPOTION_TYPE" HorizontalAlignment="Left" Margin="80,0,0,0" Width="150">
                                 </ComboBox>
                             </Grid>
                             <Grid VerticalAlignment="Top" Margin="5,35,5,5" IsEnabled="True">
