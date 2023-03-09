@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GPOSE_ASSIST"
         mc:Ignorable="d"
-        Title="Customize" Height="250" Width="320" ResizeMode="NoResize" ShowInTaskbar="False" WindowStartupLocation="CenterOwner">
+        Title="Customize" Height="270" Width="320" ResizeMode="NoResize" ShowInTaskbar="False" WindowStartupLocation="CenterOwner">
     <Grid>
         <GroupBox Header="Compotion Definition" VerticalAlignment="Top" Margin="5,5,5,0" Grid.ColumnSpan="2">
             <Grid>
@@ -13,24 +13,24 @@
                     <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="Name"/>
                     <TextBox x:Name="TXT_NAME" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="110,3,0,0" Width="150" Height="20"/>
                 </Grid>
-                <Grid VerticalAlignment="Top" Margin="5,30,5,5">
+                <Grid VerticalAlignment="Top" Margin="5,35,5,5">
                     <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="Compotion Type 1"/>
-                    <ComboBox x:Name="CMB_TRIM_COMPOTION_TYPE_01" HorizontalAlignment="Left" Margin="110,0,0,0" Width="150" Height="20">
+                    <ComboBox x:Name="CMB_TRIM_COMPOTION_TYPE_01" HorizontalAlignment="Left" Margin="110,0,0,0" Width="150">
                     </ComboBox>
                 </Grid>
-                <Grid VerticalAlignment="Top" Margin="5,55,5,5">
+                <Grid VerticalAlignment="Top" Margin="5,65,5,5">
                     <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="Compotion Type 2"/>
-                    <ComboBox x:Name="CMB_TRIM_COMPOTION_TYPE_02" HorizontalAlignment="Left" Margin="110,0,0,0" Width="150" Height="20">
+                    <ComboBox x:Name="CMB_TRIM_COMPOTION_TYPE_02" HorizontalAlignment="Left" Margin="110,0,0,0" Width="150">
                     </ComboBox>
                 </Grid>
-                <Grid VerticalAlignment="Top" Margin="5,80,5,5">
+                <Grid VerticalAlignment="Top" Margin="5,95,5,5">
                     <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="Compotion Type 3"/>
-                    <ComboBox x:Name="CMB_TRIM_COMPOTION_TYPE_03" HorizontalAlignment="Left" Margin="110,0,0,0" Width="150" Height="20">
+                    <ComboBox x:Name="CMB_TRIM_COMPOTION_TYPE_03" HorizontalAlignment="Left" Margin="110,0,0,0" Width="150">
                     </ComboBox>
                 </Grid>
-                <Grid VerticalAlignment="Top" Margin="5,105,5,5">
+                <Grid VerticalAlignment="Top" Margin="5,125,5,5">
                     <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="Compotion Type 4"/>
-                    <ComboBox x:Name="CMB_TRIM_COMPOTION_TYPE_04" HorizontalAlignment="Left" Margin="110,0,0,0" Width="150" Height="20">
+                    <ComboBox x:Name="CMB_TRIM_COMPOTION_TYPE_04" HorizontalAlignment="Left" Margin="110,0,0,0" Width="150">
                     </ComboBox>
                 </Grid>
             </Grid>
