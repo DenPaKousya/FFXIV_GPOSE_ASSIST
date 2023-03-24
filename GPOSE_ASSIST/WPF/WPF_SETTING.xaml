@@ -18,6 +18,7 @@
                             <ComboBoxItem Content="FlowScape"/>
                             <ComboBoxItem Content="GenshinImpact"/>
                             <ComboBoxItem Content="pso2"/>
+                            <ComboBoxItem Content="BP_Benchmark-Win64-Shipping"/>
                         </ComboBox>
                         <Label x:Name="LBL_NAME_APPLICATION" HorizontalAlignment="Left" Margin="130,5,5,5" Content="***"/>
                         <Label HorizontalAlignment="Left" Margin="260,5,5,5" Content="*Reboot this application after changing"/>
@@ -113,7 +114,7 @@
                         </Grid>
                     </Grid>
                 </GroupBox>
-                    <GroupBox Header="Size" VerticalAlignment="Top" Margin="5,90,5,5" IsEnabled="False">
+                <GroupBox Header="Size" VerticalAlignment="Top" Margin="5,90,5,5" IsEnabled="False">
                     <Grid>
                         <Grid VerticalAlignment="Top" Margin="5,5,5,5">
                             <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="Width"/>
@@ -125,7 +126,7 @@
                         </Grid>
                     </Grid>
                 </GroupBox>
-                    <GroupBox Header="Aspect ratio" VerticalAlignment="Top" Margin="5,175,5,5" IsEnabled="False">
+                <GroupBox Header="Aspect ratio" VerticalAlignment="Top" Margin="5,175,5,5" IsEnabled="False">
                     <Grid VerticalAlignment="Top" Margin="5,5,5,5">
                         <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="Type"/>
                         <ComboBox x:Name="CMB_TRIM_ASPECT_RATIO_TYPE" HorizontalAlignment="Left" Margin="80,0,0,0" Width="100">
@@ -161,10 +162,39 @@
                             </Grid>
                         </Grid>
                     </GroupBox>
+                    
                     <Grid VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="5,5,5,5">
                         <Button x:Name="BTN_INIT_TRIM" HorizontalAlignment="Right" Margin="5,5,5,5" Height="30" Width="80" Content="Initialize"/>
                     </Grid>
                 </Grid>
+            </TabItem>
+            <TabItem Header="Camera">
+            <Grid>
+                <GroupBox Header="Control" VerticalAlignment="Top" Margin="5,5,5,5">
+                        <Grid>
+                            <Grid VerticalAlignment="Top" Margin="5,5,5,5">
+                                <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="Wait For GAME Response"/>
+                                <CheckBox x:Name="CHK_CAMERA_CONTROL_WAIT_RESPONSE" Content="Stable but small values invalid" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="155,7,0,0"/>
+                                <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="170,0,0,0" Content=""/>
+                            </Grid>
+                            <Grid VerticalAlignment="Top" Margin="5,35,5,5">
+                                <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="WASD Push Weight"/>
+                                <TextBox x:Name="TXT_CAMERA_CONTROL_WASD_PUSH_WAIT" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,3,0,0" Width="50" Height="20"/>
+                                <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="170,0,0,0" Content="ms"/>
+                            </Grid>
+                            <Grid VerticalAlignment="Top" Margin="5,65,5,5">
+                                <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="Arrow Push Weight"/>
+                                <TextBox x:Name="TXT_CAMERA_CONTROL_ARROW_PUSH_WAIT" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,3,0,0" Width="50" Height="20"/>
+                                <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="170,0,0,0" Content="ms"/>
+                            </Grid>
+                            <Grid VerticalAlignment="Top" Margin="5,95,5,5">
+                                <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Content="PageUD Push Weight"/>
+                                <TextBox x:Name="TXT_CAMERA_CONTROL_PAGE_UD_PUSH_WAIT" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,3,0,0" Width="50" Height="20"/>
+                                <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="170,0,0,0" Content="ms"/>
+                            </Grid>
+                        </Grid>
+                    </GroupBox>
+            </Grid>
             </TabItem>
         </TabControl>
         <Grid VerticalAlignment="Bottom" Margin="5,5,5,5">

@@ -25,6 +25,11 @@
     End Function
 
     Public Function FUNC_CHECK_FOREGROUND_APPL(ByRef PRC_CHECK As Process) As Boolean
+
+        If PRC_CHECK Is Nothing Then
+            Return False
+        End If
+
         Dim INT_FORE As IntPtr
         INT_FORE = FUNC_GET_FOREGROUND_WINDOW()
 

@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel
+Imports System.Printing
 Imports System.Windows
 Imports System.Windows.Input
 
@@ -8,6 +9,16 @@ Public Class WPF_TRIM
     Private Enum ENM_WINDOW_EXEC
         DO_CAPTURE = 0
         DO_CAPTURE_JPEG
+        DO_KEY_W
+        DO_KEY_A
+        DO_KEY_S
+        DO_KEY_D
+        DO_KEY_ALLOW_UP
+        DO_KEY_ALLOW_LEFT
+        DO_KEY_ALLOW_DOWN
+        DO_KEY_ALLOW_RIGHT
+        DO_KEY_PAGE_UP
+        DO_KEY_PAGE_DOWN
         DO_FIT_WINDOW
     End Enum
 
@@ -86,9 +97,17 @@ Public Class WPF_TRIM
     End Enum
 #End Region
 
+#Region "画面用・構造体"
+    Private Structure SRT_KEY_MASK
+        Public SHIFT As Boolean
+        Public CTRL As Boolean
+        Public ALT As Boolean
+    End Structure
+#End Region
+
 #Region "画面用・変数"
     Private BLN_WINDOW_EXEC_DO As Boolean = False
-
+    Private SRT_MASK As SRT_KEY_MASK
     Private TIM_TOPMOST As System.Windows.Threading.DispatcherTimer
 #End Region
 
@@ -180,6 +199,26 @@ Public Class WPF_TRIM
                 Call SUB_CAPTURE()
             Case ENM_WINDOW_EXEC.DO_CAPTURE_JPEG
                 Call SUB_CAPTURE_JPEG()
+            Case ENM_WINDOW_EXEC.DO_KEY_W
+                Call SUB_KEY_W()
+            Case ENM_WINDOW_EXEC.DO_KEY_A
+                Call SUB_KEY_A()
+            Case ENM_WINDOW_EXEC.DO_KEY_S
+                Call SUB_KEY_S()
+            Case ENM_WINDOW_EXEC.DO_KEY_D
+                Call SUB_KEY_D()
+            Case ENM_WINDOW_EXEC.DO_KEY_ALLOW_UP
+                Call SUB_KEY_ALLOW_UP()
+            Case ENM_WINDOW_EXEC.DO_KEY_ALLOW_LEFT
+                Call SUB_KEY_ALLOW_LEFT()
+            Case ENM_WINDOW_EXEC.DO_KEY_ALLOW_DOWN
+                Call SUB_KEY_ALLOW_DOWN()
+            Case ENM_WINDOW_EXEC.DO_KEY_ALLOW_RIGHT
+                Call SUB_KEY_ALLOW_RIGHT()
+            Case ENM_WINDOW_EXEC.DO_KEY_PAGE_UP
+                Call SUB_KEY_PAGE_UP()
+            Case ENM_WINDOW_EXEC.DO_KEY_PAGE_DOWN
+                Call SUB_KEY_PAGE_DOWN()
             Case ENM_WINDOW_EXEC.DO_FIT_WINDOW
                 Call SUB_FIT_WINDOW()
         End Select
@@ -323,6 +362,48 @@ Public Class WPF_TRIM
         SRT_APP_SETTINGS_VALUE.SAVE.FILE.INDEX += 1
         Call My.Computer.Audio.Play(My.Resources.SHUTTER_SHORT, Microsoft.VisualBasic.AudioPlayMode.Background)
     End Sub
+
+
+    Private Sub SUB_KEY_W()
+        Call SUB_SEND_KEYS_W(PRC_APP_TARGET, SRT_APP_SETTINGS_VALUE.CAMERA.CONTROL.WASD_PUSH_WEIGHT, FUNC_CAST_INT_TO_BOOL(SRT_APP_SETTINGS_VALUE.CAMERA.CONTROL.WAIT_FOR_GAME_RESPONSE))
+    End Sub
+
+    Private Sub SUB_KEY_A()
+        Call SUB_SEND_KEYS_A(PRC_APP_TARGET, SRT_APP_SETTINGS_VALUE.CAMERA.CONTROL.WASD_PUSH_WEIGHT, FUNC_CAST_INT_TO_BOOL(SRT_APP_SETTINGS_VALUE.CAMERA.CONTROL.WAIT_FOR_GAME_RESPONSE))
+    End Sub
+
+    Private Sub SUB_KEY_S()
+        Call SUB_SEND_KEYS_S(PRC_APP_TARGET, SRT_APP_SETTINGS_VALUE.CAMERA.CONTROL.WASD_PUSH_WEIGHT, FUNC_CAST_INT_TO_BOOL(SRT_APP_SETTINGS_VALUE.CAMERA.CONTROL.WAIT_FOR_GAME_RESPONSE))
+    End Sub
+
+    Private Sub SUB_KEY_D()
+        Call SUB_SEND_KEYS_D(PRC_APP_TARGET, SRT_APP_SETTINGS_VALUE.CAMERA.CONTROL.WASD_PUSH_WEIGHT, FUNC_CAST_INT_TO_BOOL(SRT_APP_SETTINGS_VALUE.CAMERA.CONTROL.WAIT_FOR_GAME_RESPONSE))
+    End Sub
+
+    Private Sub SUB_KEY_ALLOW_UP()
+        Call SUB_SEND_KEYS_UP(PRC_APP_TARGET, SRT_APP_SETTINGS_VALUE.CAMERA.CONTROL.ARROW_PUSH_WEIGHT, FUNC_CAST_INT_TO_BOOL(SRT_APP_SETTINGS_VALUE.CAMERA.CONTROL.WAIT_FOR_GAME_RESPONSE))
+    End Sub
+
+    Private Sub SUB_KEY_ALLOW_RIGHT()
+        Call SUB_SEND_KEYS_RIGHT(PRC_APP_TARGET, SRT_APP_SETTINGS_VALUE.CAMERA.CONTROL.ARROW_PUSH_WEIGHT, FUNC_CAST_INT_TO_BOOL(SRT_APP_SETTINGS_VALUE.CAMERA.CONTROL.WAIT_FOR_GAME_RESPONSE))
+    End Sub
+
+    Private Sub SUB_KEY_ALLOW_DOWN()
+        Call SUB_SEND_KEYS_DOWN(PRC_APP_TARGET, SRT_APP_SETTINGS_VALUE.CAMERA.CONTROL.ARROW_PUSH_WEIGHT, FUNC_CAST_INT_TO_BOOL(SRT_APP_SETTINGS_VALUE.CAMERA.CONTROL.WAIT_FOR_GAME_RESPONSE))
+    End Sub
+
+    Private Sub SUB_KEY_ALLOW_LEFT()
+        Call SUB_SEND_KEYS_LEFT(PRC_APP_TARGET, SRT_APP_SETTINGS_VALUE.CAMERA.CONTROL.ARROW_PUSH_WEIGHT, FUNC_CAST_INT_TO_BOOL(SRT_APP_SETTINGS_VALUE.CAMERA.CONTROL.WAIT_FOR_GAME_RESPONSE))
+    End Sub
+
+    Private Sub SUB_KEY_PAGE_UP()
+        Call SUB_SEND_KEYS_PGUP(PRC_APP_TARGET, SRT_APP_SETTINGS_VALUE.CAMERA.CONTROL.PAGEUD_PUSH_WEIGHT, FUNC_CAST_INT_TO_BOOL(SRT_APP_SETTINGS_VALUE.CAMERA.CONTROL.WAIT_FOR_GAME_RESPONSE))
+    End Sub
+
+    Private Sub SUB_KEY_PAGE_DOWN()
+        Call SUB_SEND_KEYS_PGDN(PRC_APP_TARGET, SRT_APP_SETTINGS_VALUE.CAMERA.CONTROL.PAGEUD_PUSH_WEIGHT, FUNC_CAST_INT_TO_BOOL(SRT_APP_SETTINGS_VALUE.CAMERA.CONTROL.WAIT_FOR_GAME_RESPONSE))
+    End Sub
+
 
     Private Sub SUB_FIT_WINDOW()
 
@@ -912,23 +993,139 @@ Public Class WPF_TRIM
 
         Dim INT_X_CUR As Integer
         Dim INT_Y_CUR As Integer
-        Dim INT_BUTTON_NUM As Integer
 
+        'カメラ
+        Dim BTN_SET As System.Windows.Controls.Button
+        BTN_SET = PCB_BUTTON_SHUTTER_JPEG
+        Dim INT_BUTTON_NUM As Integer
         INT_BUTTON_NUM = 0
         INT_X_CUR = INT_MARGIN_ONE
         INT_Y_CUR = (INT_MARGIN_ONE * (INT_BUTTON_NUM + 1)) + (INT_SIZE * INT_BUTTON_NUM)
-        PCB_BUTTON_SHUTTER_JPEG.Width = INT_SIZE
-        PCB_BUTTON_SHUTTER_JPEG.Height = INT_SIZE
+        BTN_SET.Width = INT_SIZE
+        BTN_SET.Height = INT_SIZE
         THK_CURRENT = New Thickness(0, 0, INT_X_CUR, INT_Y_CUR)
-        PCB_BUTTON_SHUTTER_JPEG.Margin = THK_CURRENT
+        BTN_SET.Margin = THK_CURRENT
 
-        INT_BUTTON_NUM += 1
-        INT_X_CUR = INT_MARGIN_ONE
+        BTN_SET = PCB_BUTTON_SHUTTER
+        INT_BUTTON_NUM = 1
+        INT_X_CUR = INT_X_CUR
         INT_Y_CUR = (INT_MARGIN_ONE * (INT_BUTTON_NUM + 1)) + (INT_SIZE * INT_BUTTON_NUM)
-        PCB_BUTTON_SHUTTER.Width = INT_SIZE
-        PCB_BUTTON_SHUTTER.Height = INT_SIZE
+        BTN_SET.Width = INT_SIZE
+        BTN_SET.Height = INT_SIZE
         THK_CURRENT = New Thickness(0, 0, INT_X_CUR, INT_Y_CUR)
-        PCB_BUTTON_SHUTTER.Margin = THK_CURRENT
+        BTN_SET.Margin = THK_CURRENT
+
+        INT_X_CUR += INT_SIZE
+
+        'PU,PD
+        BTN_SET = PCB_BUTTON_KEY_PAGE_DOWN
+        INT_BUTTON_NUM = 0
+        INT_X_CUR = INT_X_CUR + INT_MARGIN_ONE
+        INT_Y_CUR = (INT_MARGIN_ONE * (INT_BUTTON_NUM + 1)) + (INT_SIZE * INT_BUTTON_NUM)
+        BTN_SET.Width = INT_SIZE
+        BTN_SET.Height = INT_SIZE
+        THK_CURRENT = New Thickness(0, 0, INT_X_CUR, INT_Y_CUR)
+        BTN_SET.Margin = THK_CURRENT
+
+        BTN_SET = PCB_BUTTON_KEY_PAGE_UP
+        INT_BUTTON_NUM = 1
+        INT_X_CUR = INT_X_CUR
+        INT_Y_CUR = (INT_MARGIN_ONE * (INT_BUTTON_NUM + 1)) + (INT_SIZE * INT_BUTTON_NUM)
+        BTN_SET.Width = INT_SIZE
+        BTN_SET.Height = INT_SIZE
+        THK_CURRENT = New Thickness(0, 0, INT_X_CUR, INT_Y_CUR)
+        BTN_SET.Margin = THK_CURRENT
+
+        INT_X_CUR += INT_SIZE
+
+        '↑→↓←
+        BTN_SET = PCB_BUTTON_KEY_ALLOW_RIGHT
+        INT_BUTTON_NUM = 1
+        INT_X_CUR = INT_X_CUR + INT_MARGIN_ONE
+        INT_Y_CUR = (INT_MARGIN_ONE * (INT_BUTTON_NUM + 1)) + (INT_SIZE * INT_BUTTON_NUM)
+        INT_Y_CUR = CInt(INT_Y_CUR / 2)
+        BTN_SET.Width = INT_SIZE
+        BTN_SET.Height = INT_SIZE
+        THK_CURRENT = New Thickness(0, 0, INT_X_CUR, INT_Y_CUR)
+        BTN_SET.Margin = THK_CURRENT
+
+        INT_X_CUR += INT_SIZE
+
+        BTN_SET = PCB_BUTTON_KEY_ALLOW_DOWN
+        INT_BUTTON_NUM = 0
+        INT_X_CUR = INT_X_CUR + INT_MARGIN_ONE
+        INT_Y_CUR = (INT_MARGIN_ONE * (INT_BUTTON_NUM + 1)) + (INT_SIZE * INT_BUTTON_NUM)
+        BTN_SET.Width = INT_SIZE
+        BTN_SET.Height = INT_SIZE
+        THK_CURRENT = New Thickness(0, 0, INT_X_CUR, INT_Y_CUR)
+        BTN_SET.Margin = THK_CURRENT
+
+        BTN_SET = PCB_BUTTON_KEY_ALLOW_UP
+        INT_BUTTON_NUM = 1
+        INT_X_CUR = INT_X_CUR
+        INT_Y_CUR = (INT_MARGIN_ONE * (INT_BUTTON_NUM + 1)) + (INT_SIZE * INT_BUTTON_NUM)
+        BTN_SET.Width = INT_SIZE
+        BTN_SET.Height = INT_SIZE
+        THK_CURRENT = New Thickness(0, 0, INT_X_CUR, INT_Y_CUR)
+        BTN_SET.Margin = THK_CURRENT
+
+        INT_X_CUR += INT_SIZE
+
+        BTN_SET = PCB_BUTTON_KEY_ALLOW_LEFT
+        INT_BUTTON_NUM = 1
+        INT_X_CUR = INT_X_CUR + INT_MARGIN_ONE
+        INT_Y_CUR = (INT_MARGIN_ONE * (INT_BUTTON_NUM + 1)) + (INT_SIZE * INT_BUTTON_NUM)
+        INT_Y_CUR = CInt(INT_Y_CUR / 2)
+        BTN_SET.Width = INT_SIZE
+        BTN_SET.Height = INT_SIZE
+        THK_CURRENT = New Thickness(0, 0, INT_X_CUR, INT_Y_CUR)
+        BTN_SET.Margin = THK_CURRENT
+
+        INT_X_CUR += INT_SIZE
+
+        'WASD
+        BTN_SET = PCB_BUTTON_KEY_D
+        INT_BUTTON_NUM = 1
+        INT_X_CUR = INT_X_CUR + INT_MARGIN_ONE
+        INT_Y_CUR = (INT_MARGIN_ONE * (INT_BUTTON_NUM + 1)) + (INT_SIZE * INT_BUTTON_NUM)
+        INT_Y_CUR = CInt(INT_Y_CUR / 2)
+        BTN_SET.Width = INT_SIZE
+        BTN_SET.Height = INT_SIZE
+        THK_CURRENT = New Thickness(0, 0, INT_X_CUR, INT_Y_CUR)
+        BTN_SET.Margin = THK_CURRENT
+
+        INT_X_CUR += INT_SIZE
+
+        BTN_SET = PCB_BUTTON_KEY_S
+        INT_BUTTON_NUM = 0
+        INT_X_CUR = INT_X_CUR + INT_MARGIN_ONE
+        INT_Y_CUR = (INT_MARGIN_ONE * (INT_BUTTON_NUM + 1)) + (INT_SIZE * INT_BUTTON_NUM)
+        BTN_SET.Width = INT_SIZE
+        BTN_SET.Height = INT_SIZE
+        THK_CURRENT = New Thickness(0, 0, INT_X_CUR, INT_Y_CUR)
+        BTN_SET.Margin = THK_CURRENT
+
+        BTN_SET = PCB_BUTTON_KEY_W
+        INT_BUTTON_NUM = 1
+        INT_X_CUR = INT_X_CUR
+        INT_Y_CUR = (INT_MARGIN_ONE * (INT_BUTTON_NUM + 1)) + (INT_SIZE * INT_BUTTON_NUM)
+        BTN_SET.Width = INT_SIZE
+        BTN_SET.Height = INT_SIZE
+        THK_CURRENT = New Thickness(0, 0, INT_X_CUR, INT_Y_CUR)
+        BTN_SET.Margin = THK_CURRENT
+
+        INT_X_CUR += INT_SIZE
+
+        BTN_SET = PCB_BUTTON_KEY_A
+        INT_BUTTON_NUM = 1
+        INT_X_CUR = INT_X_CUR + INT_MARGIN_ONE
+        INT_Y_CUR = (INT_MARGIN_ONE * (INT_BUTTON_NUM + 1)) + (INT_SIZE * INT_BUTTON_NUM)
+        INT_Y_CUR = CInt(INT_Y_CUR / 2)
+        BTN_SET.Width = INT_SIZE
+        BTN_SET.Height = INT_SIZE
+        THK_CURRENT = New Thickness(0, 0, INT_X_CUR, INT_Y_CUR)
+        BTN_SET.Margin = THK_CURRENT
+
     End Sub
 
 
@@ -1145,6 +1342,46 @@ Public Class WPF_TRIM
 
     Private Sub PCB_BUTTON_SHUTTER_JPEG_Click(sender As Object, e As RoutedEventArgs) Handles PCB_BUTTON_SHUTTER_JPEG.Click
         Call SUB_EXEC_DO(ENM_WINDOW_EXEC.DO_CAPTURE_JPEG)
+    End Sub
+
+    Private Sub PCB_BUTTON_KEY_W_Click(sender As Object, e As RoutedEventArgs) Handles PCB_BUTTON_KEY_W.Click
+        Call SUB_EXEC_DO(ENM_WINDOW_EXEC.DO_KEY_W)
+    End Sub
+
+    Private Sub PCB_BUTTON_KEY_A_Click(sender As Object, e As RoutedEventArgs) Handles PCB_BUTTON_KEY_A.Click
+        Call SUB_EXEC_DO(ENM_WINDOW_EXEC.DO_KEY_A)
+    End Sub
+
+    Private Sub PCB_BUTTON_KEY_S_Click(sender As Object, e As RoutedEventArgs) Handles PCB_BUTTON_KEY_S.Click
+        Call SUB_EXEC_DO(ENM_WINDOW_EXEC.DO_KEY_S)
+    End Sub
+
+    Private Sub PCB_BUTTON_KEY_D_Click(sender As Object, e As RoutedEventArgs) Handles PCB_BUTTON_KEY_D.Click
+        Call SUB_EXEC_DO(ENM_WINDOW_EXEC.DO_KEY_D)
+    End Sub
+
+    Private Sub PCB_BUTTON_KEY_ALLOW_UP_Click(sender As Object, e As RoutedEventArgs) Handles PCB_BUTTON_KEY_ALLOW_UP.Click
+        Call SUB_EXEC_DO(ENM_WINDOW_EXEC.DO_KEY_ALLOW_UP)
+    End Sub
+
+    Private Sub PCB_BUTTON_KEY_ALLOW_LEFT_Click(sender As Object, e As RoutedEventArgs) Handles PCB_BUTTON_KEY_ALLOW_LEFT.Click
+        Call SUB_EXEC_DO(ENM_WINDOW_EXEC.DO_KEY_ALLOW_LEFT)
+    End Sub
+
+    Private Sub PCB_BUTTON_KEY_ALLOW_DOWN_Click(sender As Object, e As RoutedEventArgs) Handles PCB_BUTTON_KEY_ALLOW_DOWN.Click
+        Call SUB_EXEC_DO(ENM_WINDOW_EXEC.DO_KEY_ALLOW_DOWN)
+    End Sub
+
+    Private Sub PCB_BUTTON_KEY_ALLOW_RIGHT_Click(sender As Object, e As RoutedEventArgs) Handles PCB_BUTTON_KEY_ALLOW_RIGHT.Click
+        Call SUB_EXEC_DO(ENM_WINDOW_EXEC.DO_KEY_ALLOW_RIGHT)
+    End Sub
+
+    Private Sub PCB_BUTTON_KEY_PAGE_UP_Click(sender As Object, e As RoutedEventArgs) Handles PCB_BUTTON_KEY_PAGE_UP.Click
+        Call SUB_EXEC_DO(ENM_WINDOW_EXEC.DO_KEY_PAGE_UP)
+    End Sub
+
+    Private Sub PCB_BUTTON_KEY_PAGE_DOWN_Click(sender As Object, e As RoutedEventArgs) Handles PCB_BUTTON_KEY_PAGE_DOWN.Click
+        Call SUB_EXEC_DO(ENM_WINDOW_EXEC.DO_KEY_PAGE_DOWN)
     End Sub
 #End Region
 
@@ -1428,6 +1665,96 @@ Public Class WPF_TRIM
                 Me.Topmost = False
             End If
         End If
+
+    End Sub
+#End Region
+
+#Region "イベント-キーアップ"
+    Private Sub SUB_KEY_UP(ByVal ENM_KEY As System.Windows.Input.Key)
+
+        Dim INT_LEFT As Integer
+        Dim INT_TOP As Integer
+
+        Select Case ENM_KEY
+            Case Key.Up
+                INT_LEFT = Me.Left
+                INT_TOP = Me.Top - 1
+            Case Key.Right
+                INT_LEFT = Me.Left + 1
+                INT_TOP = Me.Top
+            Case Key.Down
+                INT_LEFT = Me.Left
+                INT_TOP = Me.Top + 1
+            Case Key.Left
+                INT_LEFT = Me.Left - 1
+                INT_TOP = Me.Top
+            Case Else
+                INT_LEFT = Me.Left
+                INT_TOP = Me.Top
+        End Select
+
+        Me.Left = INT_LEFT
+        Me.Top = INT_TOP
+    End Sub
+
+    Private Sub SUB_KEY_UP_CTRL(ByVal ENM_KEY As System.Windows.Input.Key)
+        Dim INT_W As Integer
+        Dim INT_H As Integer
+
+        Select Case ENM_KEY
+            Case Key.Up
+                INT_W = Me.Width
+                INT_H = Me.Height - 1
+            Case Key.Right
+                INT_W = Me.Width + 1
+                INT_H = Me.Height
+            Case Key.Down
+                INT_W = Me.Width
+                INT_H = Me.Height + 1
+            Case Key.Left
+                INT_W = Me.Width - 1
+                INT_H = Me.Height
+            Case Else
+                INT_W = Me.Width
+                INT_H = Me.Height
+        End Select
+
+        Me.Width = INT_W
+        Me.Height = INT_H
+    End Sub
+
+    Private Sub SUB_GET_KEY_MASK()
+        Dim ENM_STATES As KeyStates
+
+        SRT_MASK.SHIFT = False
+        ENM_STATES = Keyboard.GetKeyStates(Key.LeftShift)
+        If (ENM_STATES And KeyStates.Down) = KeyStates.Down Then
+            SRT_MASK.SHIFT = True
+        End If
+        ENM_STATES = Keyboard.GetKeyStates(Key.RightShift)
+        If (ENM_STATES And KeyStates.Down) = KeyStates.Down Then
+            SRT_MASK.SHIFT = True
+        End If
+
+        SRT_MASK.CTRL = False
+        ENM_STATES = Keyboard.GetKeyStates(Key.LeftCtrl)
+        If (ENM_STATES And KeyStates.Down) = KeyStates.Down Then
+            SRT_MASK.CTRL = True
+        End If
+        ENM_STATES = Keyboard.GetKeyStates(Key.RightCtrl)
+        If (ENM_STATES And KeyStates.Down) = KeyStates.Down Then
+            SRT_MASK.CTRL = True
+        End If
+
+        SRT_MASK.ALT = False
+        ENM_STATES = Keyboard.GetKeyStates(Key.LeftAlt)
+        If (ENM_STATES And KeyStates.Down) = KeyStates.Down Then
+            SRT_MASK.ALT = True
+        End If
+        ENM_STATES = Keyboard.GetKeyStates(Key.RightAlt)
+        If (ENM_STATES And KeyStates.Down) = KeyStates.Down Then
+            SRT_MASK.ALT = True
+        End If
     End Sub
 #End Region
 
@@ -1452,6 +1779,7 @@ Public Class WPF_TRIM
 
         SRT_APP_SETTINGS_VALUE.TRIM.SIZE.WIDTH = Me.Width
         SRT_APP_SETTINGS_VALUE.TRIM.SIZE.HEIGHT = Me.Height
+
     End Sub
 
     Private Sub WPF_TRIM_LocationChanged(sender As Object, e As EventArgs) Handles Me.LocationChanged
@@ -1462,31 +1790,24 @@ Public Class WPF_TRIM
 
         SRT_APP_SETTINGS_VALUE.TRIM.LOCATION.LEFT = Me.Left
         SRT_APP_SETTINGS_VALUE.TRIM.LOCATION.TOP = Me.Top
+
     End Sub
 
     Private Sub WPF_TRIM_KeyUp(sender As Object, e As KeyEventArgs) Handles Me.KeyUp
-        Dim INT_LEFT As Integer
-        Dim INT_TOP As Integer
-        Select Case e.Key
-            Case Key.Up
-                INT_LEFT = Me.Left
-                INT_TOP = Me.Top - 1
-            Case Key.Right
-                INT_LEFT = Me.Left + 1
-                INT_TOP = Me.Top
-            Case Key.Down
-                INT_LEFT = Me.Left
-                INT_TOP = Me.Top + 1
-            Case Key.Left
-                INT_LEFT = Me.Left - 1
-                INT_TOP = Me.Top
-            Case Else
-                INT_LEFT = Me.Left
-                INT_TOP = Me.Top
-        End Select
 
-        Me.Left = INT_LEFT
-        Me.Top = INT_TOP
+        Call SUB_GET_KEY_MASK()
+
+        Select Case True
+            Case SRT_MASK.SHIFT
+            Case SRT_MASK.CTRL
+                Call SUB_KEY_UP_CTRL(e.Key)
+            Case SRT_MASK.ALT
+            Case Else
+                Call SUB_KEY_UP(e.Key)
+        End Select
     End Sub
 
+    Private Sub WPF_TRIM_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
+
+    End Sub
 End Class

@@ -66,6 +66,17 @@
                 Next
                 '>TRIM.COMPOTION
                 '>TRIM
+
+                'CAMERA<
+                'CAMERA.CONTROL<
+                STR_TEMP = CStr(.CAMERA.CONTROL.WASD_PUSH_WEIGHT)
+                Call FUNC_WRITE_APP_SETTINGS(CST_APP_CONFIG_CAMERA_CONTROL_WASD_PUSH_WEIGHT, STR_TEMP)
+                STR_TEMP = CStr(.CAMERA.CONTROL.ARROW_PUSH_WEIGHT)
+                Call FUNC_WRITE_APP_SETTINGS(CST_APP_CONFIG_CAMERA_CONTROL_ARROW_PUSH_WEIGHT, STR_TEMP)
+                STR_TEMP = CStr(.CAMERA.CONTROL.PAGEUD_PUSH_WEIGHT)
+                Call FUNC_WRITE_APP_SETTINGS(CST_APP_CONFIG_CAMERA_CONTROL_PAGEUD_PUSH_WEIGHT, STR_TEMP)
+                '>CAMERA.CONTROL
+                '>CAMERA
             Catch ex As Exception
                 Return False
             End Try

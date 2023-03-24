@@ -6,6 +6,7 @@
         Public SAVE As SRT_APP_SETTINGS_SAVE
         Public GUIDE As SRT_APP_SETTINGS_GUIDE
         Public TRIM As SRT_APP_SETTINGS_TRIM
+        Public CAMERA As SRT_APP_SETTINGS_CAMERA
     End Structure
 
 #Region "SAVE"
@@ -75,6 +76,20 @@
             Next
             Return STR_RET
         End Function
+    End Structure
+#End Region
+
+#Region "CAMERA"
+    Public Structure SRT_APP_SETTINGS_CAMERA
+        Public CONTROL As SRT_APP_SETTINGS_CAMERA_CONTROL
+
+    End Structure
+
+    Public Structure SRT_APP_SETTINGS_CAMERA_CONTROL
+        Public WAIT_FOR_GAME_RESPONSE As Integer
+        Public WASD_PUSH_WEIGHT As Integer
+        Public ARROW_PUSH_WEIGHT As Integer
+        Public PAGEUD_PUSH_WEIGHT As Integer
     End Structure
 #End Region
 

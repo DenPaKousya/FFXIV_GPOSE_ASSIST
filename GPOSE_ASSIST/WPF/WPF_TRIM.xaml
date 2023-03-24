@@ -107,11 +107,41 @@
         <CheckBox x:Name="CHK_OPACITY" HorizontalAlignment="Right" Height="20" Margin="5,5,5,5" VerticalAlignment="Top" FlowDirection="RightToLeft" Content="Transparent" ToolTip="ガイドを透過します" Foreground="White"/>
         <CheckBox x:Name="CHK_CONFIRM" HorizontalAlignment="Right" Height="20" Margin="5,25,5,25" VerticalAlignment="Top" FlowDirection="RightToLeft" Content="Confirm" ToolTip="保存確認画面を表示します" Foreground="White"/>
 
-        <Button x:Name="PCB_BUTTON_SHUTTER" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="16" Height="16" Margin="0,0,5,21" ToolTip="撮影を行います" Background="#00000000" BorderBrush="#00000000">
+        <Button x:Name="PCB_BUTTON_SHUTTER" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="16" Height="16" Margin="0,0,5,30" ToolTip="撮影を行います" Background="#00000000" BorderBrush="#00000000">
             <Image Source="/RES/IMG/CAMERA_NORMAL.png" Margin="-2,-2,-2,-2"/>
         </Button>
-        <Button x:Name="PCB_BUTTON_SHUTTER_JPEG" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="16" Height="16" Margin="0,0,5,5" ToolTip="撮影を行います（SNS向け）" Background="#00000000" BorderBrush="#00000000">
+        <Button x:Name="PCB_BUTTON_SHUTTER_JPEG" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="16" Height="16" Margin="0,0,5,10" ToolTip="撮影を行います（SNS向け）" Background="#00000000" BorderBrush="#00000000">
             <Image Source="/RES/IMG/CAMERA_JPEG.png" Margin="-2,-2,-2,-2"/>
+        </Button>
+        <Button x:Name="PCB_BUTTON_KEY_PAGE_UP" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="16" Height="16" Margin="0,0,25,30" ToolTip="PageUpキーを転送します。" Background="#00000000" BorderBrush="#00000000">
+            <Image Source="/RES/IMG/KEY_PAGE_UP.png" Margin="-2,-2,-2,-2" OpacityMask="#E0000000"/>
+        </Button>
+        <Button x:Name="PCB_BUTTON_KEY_PAGE_DOWN" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="16" Height="16" Margin="0,0,25,10" ToolTip="PageDownキーを転送します。" Background="#00000000" BorderBrush="#00000000">
+            <Image Source="/RES/IMG/KEY_PAGE_DOWN.png" Margin="-2,-2,-2,-2" OpacityMask="#E0000000"/>
+        </Button>
+        <Button x:Name="PCB_BUTTON_KEY_ALLOW_UP" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="16" Height="16" Margin="0,0,55,35" ToolTip="↑キーを転送します。" Background="#00000000" BorderBrush="#00000000">
+            <Image Source="/RES/IMG/KEY_ALLOW_UP.png" Margin="-2,-2,-2,-2" OpacityMask="#E0000000"/>
+        </Button>
+        <Button x:Name="PCB_BUTTON_KEY_ALLOW_LEFT" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="16" Height="16" Margin="0,0,65,20" ToolTip="←キーを転送します。" Background="#00000000" BorderBrush="#00000000">
+            <Image Source="/RES/IMG/KEY_ALLOW_LEFT.png" Margin="-2,-2,-2,-2" OpacityMask="#E0000000"/>
+        </Button>
+        <Button x:Name="PCB_BUTTON_KEY_ALLOW_DOWN" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="16" Height="16" Margin="0,0,55,5" ToolTip="↓キーを転送します。" Background="#00000000" BorderBrush="#00000000">
+            <Image Source="/RES/IMG/KEY_ALLOW_DOWN.png" Margin="-2,-2,-2,-2" OpacityMask="#E0000000"/>
+        </Button>
+        <Button x:Name="PCB_BUTTON_KEY_ALLOW_RIGHT" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="16" Height="16" Margin="0,0,45,20" ToolTip="→キーを転送します。" Background="#00000000" BorderBrush="#00000000">
+            <Image Source="/RES/IMG/KEY_ALLOW_RIGHT.png" Margin="-2,-2,-2,-2" OpacityMask="#E0000000"/>
+        </Button>
+        <Button x:Name="PCB_BUTTON_KEY_W" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="16" Height="16" Margin="0,0,95,35" ToolTip="Wキーを転送します。" Background="#00000000" BorderBrush="#00000000">
+            <Image Source="/RES/IMG/KEY_W.png" Margin="-2,-2,-2,-2" OpacityMask="#E0000000"/>
+        </Button>
+        <Button x:Name="PCB_BUTTON_KEY_A" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="16" Height="16" Margin="0,0,105,20" ToolTip="Aキーを転送します。" Background="#00000000" BorderBrush="#00000000">
+            <Image Source="/RES/IMG/KEY_A.png" Margin="-2,-2,-2,-2" OpacityMask="#E0000000"/>
+        </Button>
+        <Button x:Name="PCB_BUTTON_KEY_S" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="16" Height="16" Margin="0,0,95,5" ToolTip="Sキーを転送します。" Background="#00000000" BorderBrush="#00000000">
+            <Image Source="/RES/IMG/KEY_S.png" Margin="-2,-2,-2,-2" OpacityMask="#E0000000"/>
+        </Button>
+        <Button x:Name="PCB_BUTTON_KEY_D" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="16" Height="16" Margin="0,0,85,20" ToolTip="Dキーを転送します。" Background="#00000000" BorderBrush="#00000000">
+            <Image Source="/RES/IMG/KEY_D.png" Margin="-2,-2,-2,-2" OpacityMask="#E0000000"/>
         </Button>
     </Grid>
 </Window>
