@@ -21,41 +21,43 @@
     End Sub
 
     Public Function FUNC_GET_FIXED_PHRASE(ByVal strBASE As String) As String
-        Dim strTEMP As String
-        Dim strRET As String
-
         Dim strYEAR As String
-        Dim strMONTH As String
-        Dim strDAY As String
-        Dim strHOUR As String
-        Dim strMINUTE As String
-        Dim strSECOND As String
-        Dim strINDEX As String
-
-        strRET = ""
-
         strYEAR = String.Format("{0:" & "0000" & "}", datPARM_DATE_BASE.Year)
+
+        Dim strMONTH As String
         strMONTH = String.Format("{0:" & "00" & "}", datPARM_DATE_BASE.Month)
+
+        Dim strDAY As String
         strDAY = String.Format("{0:" & "00" & "}", datPARM_DATE_BASE.Day)
+
+        Dim strHOUR As String
         strHOUR = String.Format("{0:" & "00" & "}", datPARM_DATE_BASE.Hour)
+
+        Dim strMINUTE As String
         strMINUTE = String.Format("{0:" & "00" & "}", datPARM_DATE_BASE.Minute)
+
+        Dim strSECOND As String
         strSECOND = String.Format("{0:" & "00" & "}", datPARM_DATE_BASE.Second)
+
+        Dim strINDEX As String
         strINDEX = String.Format("{0:" & "00000" & "}", intPARM_INDEX)
 
-        strTEMP = strBASE
-        strTEMP = strTEMP.Replace(CST_YEAR, strYEAR)
-        strTEMP = strTEMP.Replace(CST_MONTH, strMONTH)
-        strTEMP = strTEMP.Replace(CST_DAY, strDAY)
-        strTEMP = strTEMP.Replace(CST_HOUR, strHOUR)
-        strTEMP = strTEMP.Replace(CST_MINUTE, strMINUTE)
-        strTEMP = strTEMP.Replace(CST_SECOND, strSECOND)
-        strTEMP = strTEMP.Replace(CST_INDEX, strINDEX)
+        Dim STR_TEMP As String
+        STR_TEMP = strBASE
+        STR_TEMP = STR_TEMP.Replace(CST_YEAR, strYEAR)
+        STR_TEMP = STR_TEMP.Replace(CST_MONTH, strMONTH)
+        STR_TEMP = STR_TEMP.Replace(CST_DAY, strDAY)
+        STR_TEMP = STR_TEMP.Replace(CST_HOUR, strHOUR)
+        STR_TEMP = STR_TEMP.Replace(CST_MINUTE, strMINUTE)
+        STR_TEMP = STR_TEMP.Replace(CST_SECOND, strSECOND)
+        STR_TEMP = STR_TEMP.Replace(CST_INDEX, strINDEX)
+        STR_TEMP = STR_TEMP.Replace("\", "")
 
-        strTEMP = strTEMP.Replace("\", "")
+        Dim STR_RET As String
+        STR_RET = ""
+        STR_RET = STR_TEMP
 
-        strRET = strTEMP
-
-        Return strRET
+        Return STR_RET
     End Function
 
 End Module
