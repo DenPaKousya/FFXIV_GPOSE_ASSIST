@@ -20,37 +20,37 @@
         intPARM_INDEX = INT_INDEX
     End Sub
 
-    Public Function FUNC_GET_FIXED_PHRASE(ByVal strBASE As String) As String
-        Dim strYEAR As String
-        strYEAR = String.Format("{0:" & "0000" & "}", datPARM_DATE_BASE.Year)
+    Public Function FUNC_GET_FIXED_PHRASE(ByVal STR_BASE As String) As String
+        Dim STR_YEAR As String
+        STR_YEAR = String.Format("{0:" & "0000" & "}", datPARM_DATE_BASE.Year)
 
-        Dim strMONTH As String
-        strMONTH = String.Format("{0:" & "00" & "}", datPARM_DATE_BASE.Month)
+        Dim STR_MONTH As String
+        STR_MONTH = String.Format("{0:" & "00" & "}", datPARM_DATE_BASE.Month)
 
-        Dim strDAY As String
-        strDAY = String.Format("{0:" & "00" & "}", datPARM_DATE_BASE.Day)
+        Dim STR_DAY As String
+        STR_DAY = String.Format("{0:" & "00" & "}", datPARM_DATE_BASE.Day)
 
-        Dim strHOUR As String
-        strHOUR = String.Format("{0:" & "00" & "}", datPARM_DATE_BASE.Hour)
+        Dim STR_HOUR As String
+        STR_HOUR = String.Format("{0:" & "00" & "}", datPARM_DATE_BASE.Hour)
 
-        Dim strMINUTE As String
-        strMINUTE = String.Format("{0:" & "00" & "}", datPARM_DATE_BASE.Minute)
+        Dim STR_MINUTE As String
+        STR_MINUTE = String.Format("{0:" & "00" & "}", datPARM_DATE_BASE.Minute)
 
-        Dim strSECOND As String
-        strSECOND = String.Format("{0:" & "00" & "}", datPARM_DATE_BASE.Second)
+        Dim STR_SECOND As String
+        STR_SECOND = String.Format("{0:" & "00" & "}", datPARM_DATE_BASE.Second)
 
-        Dim strINDEX As String
-        strINDEX = String.Format("{0:" & "00000" & "}", intPARM_INDEX)
+        Dim STR_INDEX As String
+        STR_INDEX = String.Format("{0:" & "00000" & "}", intPARM_INDEX)
 
         Dim STR_TEMP As String
-        STR_TEMP = strBASE
-        STR_TEMP = STR_TEMP.Replace(CST_YEAR, strYEAR)
-        STR_TEMP = STR_TEMP.Replace(CST_MONTH, strMONTH)
-        STR_TEMP = STR_TEMP.Replace(CST_DAY, strDAY)
-        STR_TEMP = STR_TEMP.Replace(CST_HOUR, strHOUR)
-        STR_TEMP = STR_TEMP.Replace(CST_MINUTE, strMINUTE)
-        STR_TEMP = STR_TEMP.Replace(CST_SECOND, strSECOND)
-        STR_TEMP = STR_TEMP.Replace(CST_INDEX, strINDEX)
+        STR_TEMP = STR_BASE
+        STR_TEMP = STR_TEMP.Replace(CST_YEAR, STR_YEAR)
+        STR_TEMP = STR_TEMP.Replace(CST_MONTH, STR_MONTH)
+        STR_TEMP = STR_TEMP.Replace(CST_DAY, STR_DAY)
+        STR_TEMP = STR_TEMP.Replace(CST_HOUR, STR_HOUR)
+        STR_TEMP = STR_TEMP.Replace(CST_MINUTE, STR_MINUTE)
+        STR_TEMP = STR_TEMP.Replace(CST_SECOND, STR_SECOND)
+        STR_TEMP = STR_TEMP.Replace(CST_INDEX, STR_INDEX)
         STR_TEMP = STR_TEMP.Replace("\", "")
 
         Dim STR_RET As String
