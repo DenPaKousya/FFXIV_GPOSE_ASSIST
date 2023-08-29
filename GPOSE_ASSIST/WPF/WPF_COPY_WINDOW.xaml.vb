@@ -53,6 +53,7 @@ Public Class WPF_COPY_WINDOW
     Private STR_PATH_IMAGE_FILE As String
 
     Private WPF_IMAGE_SUB_WINDOW As WPF_IMAGE
+    Private BLN_SHOW_IMAGE_SUB_WINDOW As Boolean = False
 #End Region
 
 #Region "初期化・終了処理"
@@ -94,6 +95,7 @@ Public Class WPF_COPY_WINDOW
         If WPF_IMAGE_SUB_WINDOW Is Nothing Then
             WPF_IMAGE_SUB_WINDOW = New WPF_IMAGE
         End If
+
         WPF_IMAGE_SUB_WINDOW.PATH_IMAGE = STR_PATH_IMAGE_FILE
         Call WPF_IMAGE_SUB_WINDOW.SUB_INIT_IMAGE()
 
@@ -103,6 +105,7 @@ Public Class WPF_COPY_WINDOW
 
         WPF_IMAGE_SUB_WINDOW.PATH_IMAGE = STR_PATH_IMAGE_FILE
         Call WPF_IMAGE_SUB_WINDOW.Show()
+        BLN_SHOW_IMAGE_SUB_WINDOW = True
 
         'If BLN_CHECK_FILE Then
         '    URI_IMAGE = New Uri(STR_PATH_IMAGE_FILE, UriKind.Relative)
@@ -365,6 +368,10 @@ Public Class WPF_COPY_WINDOW
 #End Region
 
     Private Sub WPF_COPY_WINDOW_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        If BLN_SHOW_IMAGE_SUB_WINDOW Then
+            Call WPF_IMAGE_SUB_WINDOW.Close()
+            WPF_IMAGE_SUB_WINDOW = Nothing
+        End If
         Me.CHECK_CLOSED = True
     End Sub
 
