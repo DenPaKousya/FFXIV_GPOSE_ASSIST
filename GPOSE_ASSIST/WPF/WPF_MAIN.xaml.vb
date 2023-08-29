@@ -6,6 +6,7 @@ Public Class WPF_MAIN
 #Region "画面用・列挙定数"
     Private Enum ENM_WINDOW_EXEC
         VIEW_TRIM = 0
+        VIEW_COPY
         APPL_EXIT
         APPL_SETTING
         APPL_ROTATE_WINDOW
@@ -58,6 +59,8 @@ Public Class WPF_MAIN
         Select Case ENM_WINDOW_EXEC
             Case ENM_WINDOW_EXEC.VIEW_TRIM
                 Call SUB_VIEW_TRIM()
+            Case ENM_WINDOW_EXEC.VIEW_COPY
+                Call SUB_APPL_VIEW_COPY_WINDOW()
             Case ENM_WINDOW_EXEC.APPL_EXIT
                 Call SUB_APPL_EXIT()
             Case ENM_WINDOW_EXEC.APPL_SETTING
@@ -130,9 +133,12 @@ Public Class WPF_MAIN
         Call FRM_APPL_MAIN.SUB_ROTATE()
     End Sub
 
-
     Private Sub SUB_APPL_OPEN_SAVE_FOLDER()
         Call FRM_APPL_MAIN.SUB_OPEN_SAVE_FOLDER()
+    End Sub
+
+    Private Sub SUB_APPL_VIEW_COPY_WINDOW()
+        Call FRM_APPL_MAIN.SUB_VIEW_COPY_WINDOW()
     End Sub
 
     Private Sub SUB_APPL_EXIT()
@@ -257,7 +263,9 @@ Public Class WPF_MAIN
         Call SUB_EXEC_DO(ENM_WINDOW_EXEC.APPL_EXIT)
     End Sub
 
-
+    Private Sub MNI_COPY_Click(sender As Object, e As RoutedEventArgs) Handles MNI_COPY.Click
+        Call SUB_EXEC_DO(ENM_WINDOW_EXEC.VIEW_COPY)
+    End Sub
 #End Region
 
     Private Sub WPF_MAIN_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded

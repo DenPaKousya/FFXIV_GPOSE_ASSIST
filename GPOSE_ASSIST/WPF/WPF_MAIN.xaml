@@ -15,6 +15,7 @@
             <ContextMenu x:Name="MENU_WINDOW">
                 <MenuItem x:Name="MNI_SETTING" Header="Setting" />
                 <MenuItem x:Name="MNI_ROTATE" Header="Rotate window" />
+                <MenuItem x:Name="MNI_COPY" Header="Copy window" />
                 <Separator />
                 <MenuItem x:Name="MNI_OPEN_SAVE_FOLDER" Header="Open save folder" />
                 <Separator />

@@ -30,6 +30,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="RES\IMG\BLANK_10P_16_9.png" />
+    <None Remove="RES\IMG\BLANK_16_9.png" />
+    <None Remove="RES\IMG\BLANK_20P_16_9.png" />
     <None Remove="RES\IMG\BTN_MAIN.png" />
     <None Remove="RES\IMG\CAMERA_JPEG.png" />
     <None Remove="RES\IMG\CAMERA_NORMAL.png" />
@@ -78,6 +81,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="RES\IMG\BLANK_10P_16_9.png" />
+    <Resource Include="RES\IMG\BLANK_16_9.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="RES\IMG\BLANK_20P_16_9.png" />
     <Resource Include="RES\IMG\BTN_MAIN.png" />
     <Resource Include="RES\IMG\CAMERA_JPEG.png" />
     <Resource Include="RES\IMG\CAMERA_NORMAL.png" />

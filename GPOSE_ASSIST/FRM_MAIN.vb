@@ -113,6 +113,10 @@ Public Class FRM_MAIN
         End Try
     End Sub
 
+    Public Sub SUB_VIEW_COPY_WINDOW()
+        Call SUB_CALL_THUBNAIL(Me)
+    End Sub
+
     Public Sub SUB_EXIT()
         Call Me.Close()
     End Sub

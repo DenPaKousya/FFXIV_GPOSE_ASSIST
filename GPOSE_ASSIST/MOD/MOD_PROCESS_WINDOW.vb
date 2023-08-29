@@ -38,6 +38,24 @@ Public Module MOD_PROCESS_WINDOW
         Return SRT_RET
     End Function
 
+    Public Function FUNC_CHECK_WINDOW_BORDERLESS(ByRef PRC_TARGET As Process) As Boolean
+        Dim RCT_CLIENT As RECT_WH
+        RCT_CLIENT = FUNC_GET_CRIENT_RECT_WH(PRC_TARGET)
+
+        Dim RCT_WIONDOW As RECT_WH
+        RCT_WIONDOW = FUNC_GET_WINDOW_RECT_WH(PRC_TARGET)
+
+        If Not (RCT_CLIENT.height = RCT_WIONDOW.height) Then
+            Return False
+        End If
+
+        If Not (RCT_CLIENT.width = RCT_WIONDOW.width) Then
+            Return False
+        End If
+
+        Return True
+    End Function
+
     Public Function FUNC_GET_CRIENT_RECT(ByRef PRC_CRIENT As Process) As RECT
         Dim SRT_RET As RECT
         SRT_RET = FUNC_GET_INIT_RECT()
