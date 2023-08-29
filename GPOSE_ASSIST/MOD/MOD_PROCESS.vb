@@ -31,6 +31,8 @@
                 STR_RET = "原神"
             Case "pso2"
                 STR_RET = "Phantasy Star Online 2"
+            Case "RemotePlay"
+                STR_RET = "PS Remote Play"
             Case Else
                 STR_RET = "Unknown"
         End Select

@@ -19,7 +19,8 @@
                             <ComboBoxItem Content="GenshinImpact"/>
                             <ComboBoxItem Content="pso2"/>
                             <ComboBoxItem Content="BP_Benchmark-Win64-Shipping"/>
-                        </ComboBox>
+                            <ComboBoxItem Content="RemotePlay"/>
+                         </ComboBox>
                         <Label x:Name="LBL_NAME_APPLICATION" HorizontalAlignment="Left" Margin="130,5,5,5" Content="***"/>
                         <Label HorizontalAlignment="Left" Margin="260,5,5,5" Content="*Reboot this application after changing"/>
                     </Grid>

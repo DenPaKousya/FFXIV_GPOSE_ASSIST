@@ -195,6 +195,8 @@
                 STR_RET = "miHoYo"
             Case "pso2"
                 STR_RET = "SEGA"
+            Case "RemotePlay"
+                STR_RET = "SONY"
             Case Else
                 STR_RET = "Unknown"
         End Select
