@@ -174,11 +174,10 @@ Public Class FRM_MAIN
                 WPF_WINDOW_MAIN = New WPF_MAIN
             End If
             Select Case WPF_WINDOW_MAIN.Visibility
-                Case Windows.Visibility.Collapsed, Windows.Visibility.Hidden
+                Case System.Windows.Visibility.Collapsed, System.Windows.Visibility.Hidden
                     Call WPF_WINDOW_MAIN.Show()
                 Case Else
             End Select
-
             Dim ENM_ALIGNMENT As ENM_POSITION_WPF_LOCATION
             ENM_ALIGNMENT = FUNC_GET_LOCATION_ALIGNMENT_FROM_STRING(SRT_APP_SETTINGS_VALUE.GUIDE.LOCATION.ALIGNMENT)
             Call SUB_SET_LOCATION_OVERLAY_WPF(WPF_WINDOW_MAIN, ENM_ALIGNMENT)

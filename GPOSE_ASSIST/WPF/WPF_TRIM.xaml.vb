@@ -1281,11 +1281,11 @@ Public Class WPF_TRIM
     End Sub
 
     Private Sub SUB_CHK_OPACITY_CHECK_CHANGE()
-        Dim COL_SET As Windows.Media.Color
+        Dim COL_SET As System.Windows.Media.Color
         If CHK_OPACITY.IsChecked Then
-            COL_SET = Windows.Media.Color.FromArgb(0, 0, 0, 255)
+            COL_SET = System.Windows.Media.Color.FromArgb(0, 0, 0, 255)
         Else
-            COL_SET = Windows.Media.Color.FromArgb(16, 0, 0, 255)
+            COL_SET = System.Windows.Media.Color.FromArgb(16, 0, 0, 255)
         End If
 
         Me.Background = New System.Windows.Media.SolidColorBrush(COL_SET)
