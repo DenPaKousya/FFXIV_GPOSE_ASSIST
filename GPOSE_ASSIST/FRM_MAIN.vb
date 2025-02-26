@@ -15,7 +15,7 @@ Public Class FRM_MAIN
 
         Dim STR_ERROR As String
         STR_ERROR = ""
-        If Not FUNC_APPL_INIT(STR_ERROR) Then
+        If Not FUNC_APPL_INIT(STR_ERROR, Me) Then
             Call MessageBox.Show(Me, STR_ERROR, "", MessageBoxDefaultButton.Button1, MessageBoxIcon.Error)
             Call Application.Exit()
         End If

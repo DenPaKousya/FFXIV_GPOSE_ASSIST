@@ -9,7 +9,7 @@
     <UseWPF>true</UseWPF>
     <MyType>WindowsForms</MyType>
     <ApplicationIcon>RES\ICO\MAIN.ico</ApplicationIcon>
-    <Version>1.5.9</Version>
+    <Version>1.6.1</Version>
     <Authors>DenPaKousya</Authors>
     <Description>Add trimming and guide grid to FFXIV group pose</Description>
     <Product>FFXIV_GPOSE_ASSIST</Product>
@@ -65,12 +65,22 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="My Project\Settings.Designer.vb">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
     <None Update="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Update="My Project\Settings.settings">
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Update="RES\IMG\COPYRIGHT\ReadMe.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -105,6 +115,12 @@
     <Folder Include="RES\ICO\" />
     <Folder Include="RES\AUDIO\" />
     <Folder Include="RES\IMG\COPYRIGHT\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GPOSE_ASSIST_LIB\GPOSE_ASSIST_LIB.vbproj">
+      <Private>True</Private>
+    </ProjectReference>
   </ItemGroup>
 
   <ItemGroup>

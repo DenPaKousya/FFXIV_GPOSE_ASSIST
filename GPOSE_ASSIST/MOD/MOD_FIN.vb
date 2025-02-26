@@ -4,6 +4,9 @@
         Call SUB_END_GAPHICS()
 
         Call FUNC_SET_APP_SETTING()
+
+        Call GPOSE_ASSIST_LIB.MOD_NETWORK_TCP.FUNC_SERVER_FIN()
+        Call GPOSE_ASSIST_LIB.MOD_NETWORK_TCP.FUNC_SERVER_STOP()
     End Sub
 
     Private Function FUNC_SET_APP_SETTING() As Boolean

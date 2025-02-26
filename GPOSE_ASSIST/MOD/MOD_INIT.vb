@@ -1,6 +1,6 @@
 ﻿Module MOD_INIT
 
-    Friend Function FUNC_APPL_INIT(ByRef STR_ERROR_DETAIL As String) As Boolean
+    Friend Function FUNC_APPL_INIT(ByRef STR_ERROR_DETAIL As String, ByRef FRM_MAIN As System.Windows.Forms.Form) As Boolean
 
         STR_ERROR_DETAIL = ""
 
@@ -15,6 +15,17 @@
             STR_ERROR_DETAIL = "EXIFの初期化に失敗しました。"
             Return False
         End If
+
+        If Not GPOSE_ASSIST_LIB.MOD_NETWORK_TCP.FUNC_SERVER_START(1234, FRM_MAIN) Then
+            STR_ERROR_DETAIL = "aaa。"
+            Return False
+        End If
+
+        If Not GPOSE_ASSIST_LIB.MOD_NETWORK_TCP.FUNC_SERVER_INIT() Then
+            STR_ERROR_DETAIL = "aaa。"
+            Return False
+        End If
+
         Return True
     End Function
 
