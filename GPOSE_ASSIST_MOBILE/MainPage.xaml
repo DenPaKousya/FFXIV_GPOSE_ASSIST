@@ -10,12 +10,7 @@
             Spacing="25"
 			Loaded="Layout_Loaded"
 			Unloaded="Layout_Unloaded">
-            <Image
-                Source="dotnet_bot.png"
-                HeightRequest="185"
-                Aspect="AspectFit"
-                SemanticProperties.Description="dot net bot in a hovercraft number nine" 
-				/>
+           
 
             <Label
                 Text="Hello, World!"
@@ -34,7 +29,24 @@
                 SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="OnCounterClicked"
                 HorizontalOptions="Fill" />
-        </VerticalStackLayout>
+			<VerticalStackLayout>
+				<HorizontalStackLayout Margin="1" HorizontalOptions="Center">
+					<Button x:Name="BTN_KEY_W" Text="" HorizontalOptions="Center" SemanticProperties.Hint="Send Key W" ImageSource="key_w.png" BackgroundColor="#00000000" BorderColor="#00000000" SemanticProperties.Description="EVENT SEND_KEY_W" Clicked="BTN_Clicked">
+					</Button>
+				</HorizontalStackLayout>
+				<HorizontalStackLayout Margin="1" HorizontalOptions="Center">
+					<Button x:Name="BTN_KEY_A" Text="" HorizontalOptions="Center" SemanticProperties.Hint="Send Key A" ImageSource="key_a.png" SemanticProperties.Description="EVENT SEND_KEY_A" Clicked="BTN_Clicked">
+					</Button>
+					<Button x:Name="BTN_KEY_D" Text="" HorizontalOptions="Center" SemanticProperties.Hint="Send Key D" ImageSource="key_d.png" SemanticProperties.Description="EVENT SEND_KEY_D" Clicked="BTN_Clicked" >
+					</Button>
+				</HorizontalStackLayout>
+				<HorizontalStackLayout Margin="1" HorizontalOptions="Center">
+					<Button x:Name="BTN_KEY_S" Text="" HorizontalOptions="Center" SemanticProperties.Hint="Send Key S" ImageSource="key_s.png" SemanticProperties.Description="EVENT SEND_KEY_S" Clicked="BTN_Clicked">
+					</Button>
+				</HorizontalStackLayout>
+			</VerticalStackLayout>
+			
+		</VerticalStackLayout>
     </ScrollView>
 
 </ContentPage>

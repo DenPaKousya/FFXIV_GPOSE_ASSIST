@@ -199,6 +199,56 @@ Public Class FRM_MAIN
     End Sub
 #End Region
 
+#Region "通信用"
+    Public Sub SUB_RECEIVE_MESSAGE(ByVal STR_MESSAGE As String)
+        Call SUB_PROCESS_MESSAGE(STR_MESSAGE)
+    End Sub
+
+    Private Sub SUB_PROCESS_MESSAGE(ByVal STR_MESSAGE As String)
+        Dim STR_SEP As String
+        STR_SEP = " "
+
+        Dim STR_MESSAGE_ROW() As String
+        STR_MESSAGE_ROW = STR_MESSAGE.Split(STR_SEP)
+
+        Dim STR_CONTENT As String
+        Dim STR_DETAIL As String
+
+        Try
+            STR_CONTENT = STR_MESSAGE_ROW(0)
+            STR_DETAIL = STR_MESSAGE_ROW(1)
+        Catch ex As Exception
+            Exit Sub
+        End Try
+
+        Select Case STR_CONTENT
+            Case "EVENT"
+                Call SUB_PROCESS_MESSAGE_EVENT(STR_DETAIL)
+            Case Else
+
+        End Select
+
+    End Sub
+
+    Private Sub SUB_PROCESS_MESSAGE_EVENT(ByVal STR_EVENT_DETAIL As String)
+        Call Debug.WriteLine(STR_EVENT_DETAIL)
+
+        Select Case STR_EVENT_DETAIL
+            Case "SEND_KEY_W"
+                Call SUB_SEND_KEYS_W(PRC_APP_TARGET, SRT_APP_SETTINGS_VALUE.CAMERA.CONTROL.WASD_PUSH_WEIGHT, FUNC_CAST_INT_TO_BOOL(SRT_APP_SETTINGS_VALUE.CAMERA.CONTROL.WAIT_FOR_GAME_RESPONSE))
+            Case "SEND_KEY_A"
+                Call SUB_SEND_KEYS_A(PRC_APP_TARGET, SRT_APP_SETTINGS_VALUE.CAMERA.CONTROL.WASD_PUSH_WEIGHT, FUNC_CAST_INT_TO_BOOL(SRT_APP_SETTINGS_VALUE.CAMERA.CONTROL.WAIT_FOR_GAME_RESPONSE))
+            Case "SEND_KEY_S"
+                Call SUB_SEND_KEYS_S(PRC_APP_TARGET, SRT_APP_SETTINGS_VALUE.CAMERA.CONTROL.WASD_PUSH_WEIGHT, FUNC_CAST_INT_TO_BOOL(SRT_APP_SETTINGS_VALUE.CAMERA.CONTROL.WAIT_FOR_GAME_RESPONSE))
+            Case "SEND_KEY_D"
+                Call SUB_SEND_KEYS_D(PRC_APP_TARGET, SRT_APP_SETTINGS_VALUE.CAMERA.CONTROL.WASD_PUSH_WEIGHT, FUNC_CAST_INT_TO_BOOL(SRT_APP_SETTINGS_VALUE.CAMERA.CONTROL.WAIT_FOR_GAME_RESPONSE))
+            Case Else
+
+        End Select
+
+    End Sub
+#End Region
+
 #Region "NEW"
     Public Sub New()
 

@@ -8,7 +8,7 @@
         {
             InitializeComponent();
 
-           
+
 
         }
 
@@ -51,6 +51,16 @@
             GPOSE_ASSIST_LIB.MOD_NETWORK_TCP.FUNC_CLIENT_SEND(count.ToString());
             SemanticScreenReader.Announce(CounterBtn.Text);
         }
-    }
 
+        private void BTN_Clicked(object sender, EventArgs e)
+        {
+            Button BTN_SENDER;
+            BTN_SENDER = (Button)sender;
+
+            String STR_DES;
+            STR_DES = SemanticProperties.GetDescription(BTN_SENDER);
+
+            GPOSE_ASSIST_LIB.MOD_NETWORK_TCP.FUNC_CLIENT_SEND(STR_DES);
+        }
+    }
 }

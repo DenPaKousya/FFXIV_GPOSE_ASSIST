@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "GPOSE_ASSIST": {
+      "commandName": "Project",
+      "hotReloadEnabled": false,
+      "nativeDebugging": true
+    }
+  }
+}

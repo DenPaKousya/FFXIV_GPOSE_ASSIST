@@ -1,8 +1,14 @@
-﻿Module MOD_SEND_KEYS
+﻿Imports System.Runtime.InteropServices
+
+Module MOD_SEND_KEYS
 
 #Region "WINAPI"
     Declare Function SendMessage Lib "user32.dll" Alias "SendMessageA" (ByVal hWnd As System.IntPtr, ByVal MSG As Integer, ByVal wParam As System.IntPtr, ByVal lParam As System.IntPtr) As System.IntPtr
-    Declare Function PostMessage Lib "user32.dll" Alias "PostMessageA" (ByVal hWnd As System.IntPtr, ByVal MSG As Integer, ByVal wParam As System.IntPtr, ByVal lParam As System.IntPtr) As System.IntPtr
+    'Declare Function PostMessage Lib "user32.dll" Alias "PostMessageA" (ByVal hWnd As System.IntPtr, ByVal MSG As Integer, ByVal wParam As System.IntPtr, ByVal lParam As System.IntPtr) As System.IntPtr
+
+    <DllImport("user32.dll")> Private Function PostMessage(ByVal hWnd As System.IntPtr, ByVal MSG As Integer, ByVal wParam As Integer, ByVal lParam As Integer) As Integer
+    End Function
+
 #End Region
 
 #Region "定数"
@@ -384,17 +390,26 @@
             ptrHANDLE = prcTARGET.MainWindowHandle
         End If
 
+        Dim LPARAM_DOWN As Integer
+        'LPARAM_DOWN = &H1E0001
+        LPARAM_DOWN = &H0
+
+        Dim LPARAM_UP As Integer
+        LPARAM_UP = &HC0000001
+
         If blnIME Then
             Call SendMessage(ptrHANDLE, ENM_SEND_MSG.WM_IME_CHAR, enmVK, 0)
         Else
-            Call SendMessage(ptrHANDLE, ENM_SEND_MSG.WM_KEYDOWN, enmVK, 0)
+            Call SendMessage(ptrHANDLE, ENM_SEND_MSG.WM_KEYDOWN, enmVK, LPARAM_DOWN)
         End If
 
         Call System.Threading.Thread.Sleep(intWAIT_MSEC)
 
         If Not blnIME Then
-            Call SendMessage(ptrHANDLE, ENM_SEND_MSG.WM_KEYUP, enmVK, 0)
+            Call SendMessage(ptrHANDLE, ENM_SEND_MSG.WM_KEYUP, enmVK, LPARAM_UP)
         End If
+
+        Call Debug.WriteLine("FUNC_SEND_KEYS" & enmVK.ToString)
 
         Return True
     End Function
@@ -416,18 +431,28 @@
             ptrHANDLE = prcTARGET.MainWindowHandle
         End If
 
+        Dim LPARAM_DOWN As Integer
+        'LPARAM_DOWN = &H1E0001
+        LPARAM_DOWN = &H0
+
+        Dim LPARAM_UP As Integer
+        LPARAM_UP = &HC0000001
+
         If blnIME Then
             Call PostMessage(ptrHANDLE, ENM_SEND_MSG.WM_IME_CHAR, enmVK, 0)
         Else
-            Call PostMessage(ptrHANDLE, ENM_SEND_MSG.WM_KEYDOWN, enmVK, 0)
+            'Call PostMessage(ptrHANDLE, ENM_SEND_MSG.WM_KEYDOWN, enmVK, 0)
+            Call PostMessage(ptrHANDLE, ENM_SEND_MSG.WM_KEYDOWN, enmVK, LPARAM_DOWN)
         End If
 
         Call System.Threading.Thread.Sleep(intWAIT_MSEC)
 
         If Not blnIME Then
-            Call PostMessage(ptrHANDLE, ENM_SEND_MSG.WM_KEYUP, enmVK, 0)
+            'Call PostMessage(ptrHANDLE, ENM_SEND_MSG.WM_KEYUP, enmVK, 1)
+            Call PostMessage(ptrHANDLE, ENM_SEND_MSG.WM_KEYUP, enmVK, LPARAM_UP)
         End If
 
+        Call Debug.WriteLine("FUNC_POST_KEYS" & enmVK.ToString)
         Return True
     End Function
 

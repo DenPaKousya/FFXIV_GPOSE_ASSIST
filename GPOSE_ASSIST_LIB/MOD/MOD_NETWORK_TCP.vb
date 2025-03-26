@@ -8,10 +8,12 @@ Imports Microsoft.SqlServer
 Public Module MOD_NETWORK_TCP
 
 #Region "外部用・変数"
-    Private FRM_PARENT As Object
+    Public STR_SEVER_LAST_RECV As String
 #End Region
 
 #Region "モジュール用・変数"
+    Private FRM_SERVER As Object
+
     Private TCL_SERVER_LISTNER As System.Net.Sockets.TcpListener
 
     Private SMR_SERVER_READER As System.IO.StreamReader
@@ -26,6 +28,7 @@ Public Module MOD_NETWORK_TCP
 
     Public Function FUNC_SERVER_START(ByVal INT_NUMBER_PORT As Integer, ByRef OBJ_PARENT As Object) As Boolean
 
+        STR_SEVER_LAST_RECV = ""
         Try
             TCL_SERVER_LISTNER = New System.Net.Sockets.TcpListener(IPAddress.Any, INT_NUMBER_PORT)
             Call TCL_SERVER_LISTNER.Start()
@@ -33,11 +36,13 @@ Public Module MOD_NETWORK_TCP
             Return False
         End Try
 
-        FRM_PARENT = OBJ_PARENT
+        FRM_SERVER = OBJ_PARENT
         Return True
     End Function
 
     Public Function FUNC_SERVER_STOP() As Boolean
+
+        STR_SEVER_LAST_RECV = ""
 
         If TCL_SERVER_LISTNER Is Nothing Then
             Return True
@@ -124,7 +129,7 @@ Public Module MOD_NETWORK_TCP
                 Exit Sub
             End If
 
-            STR_MESSAGE &= "aaa"
+            Call FRM_SERVER.SUB_RECEIVE_MESSAGE(STR_MESSAGE)
         End SyncLock
 
     End Sub
