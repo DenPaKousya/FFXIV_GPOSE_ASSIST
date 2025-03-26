@@ -41,15 +41,15 @@
 
         private void OnCounterClicked(object sender, EventArgs e)
         {
-            count++;
-            DisplayAlert("Alert", "You have been alerted", "OK");
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
+            //count++;
+            //DisplayAlert("Alert", "You have been alerted", "OK");
+            //if (count == 1)
+            //    CounterBtn.Text = $"Clicked {count} time";
+            //else
+            //    CounterBtn.Text = $"Clicked {count} times";
 
-            GPOSE_ASSIST_LIB.MOD_NETWORK_TCP.FUNC_CLIENT_SEND(count.ToString());
-            SemanticScreenReader.Announce(CounterBtn.Text);
+            //GPOSE_ASSIST_LIB.MOD_NETWORK_TCP.FUNC_CLIENT_SEND(count.ToString());
+            //SemanticScreenReader.Announce(CounterBtn.Text);
         }
 
         private void BTN_Clicked(object sender, EventArgs e)
