@@ -11,7 +11,7 @@
         private void Layout_Loaded(object sender, EventArgs e)
         {
             bool BLN_RET;
-            BLN_RET = GPOSE_ASSIST_LIB.MOD_NETWORK_TCP.FUNC_CLIENT_INIT("192.168.1.82", 1234);
+            BLN_RET = GPOSE_ASSIST_LIB.MOD_NETWORK_TCP.FUNC_CLIENT_INIT("192.168.10.222", 1234);
             if (!BLN_RET)
             {
                 CloseApp();
