@@ -22,80 +22,93 @@ Partial Class FRM_MAIN
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
+        components = New ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FRM_MAIN))
-        Me.NTI_TASK = New System.Windows.Forms.NotifyIcon(Me.components)
-        Me.CMS_MENU = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.TSM_SETTING = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TSS_01 = New System.Windows.Forms.ToolStripSeparator()
-        Me.TSM_OPEN_SAVE_FOLDER = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TSS_02 = New System.Windows.Forms.ToolStripSeparator()
-        Me.TSM_EXIT = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TIM_CHECK_PROCESS = New System.Windows.Forms.Timer(Me.components)
-        Me.CMS_MENU.SuspendLayout()
-        Me.SuspendLayout()
-        '
-        'NTI_TASK
-        '
-        Me.NTI_TASK.ContextMenuStrip = Me.CMS_MENU
-        Me.NTI_TASK.Visible = True
-        '
-        'CMS_MENU
-        '
-        Me.CMS_MENU.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
-        Me.CMS_MENU.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TSM_SETTING, Me.TSS_01, Me.TSM_OPEN_SAVE_FOLDER, Me.TSS_02, Me.TSM_EXIT})
-        Me.CMS_MENU.Name = "CMS_MENU"
-        Me.CMS_MENU.Size = New System.Drawing.Size(175, 82)
-        '
-        'TSM_SETTING
-        '
-        Me.TSM_SETTING.Name = "TSM_SETTING"
-        Me.TSM_SETTING.Size = New System.Drawing.Size(174, 22)
-        Me.TSM_SETTING.Text = "Setting"
-        '
-        'TSS_01
-        '
-        Me.TSS_01.Name = "TSS_01"
-        Me.TSS_01.Size = New System.Drawing.Size(171, 6)
-        '
-        'TSM_OPEN_SAVE_FOLDER
-        '
-        Me.TSM_OPEN_SAVE_FOLDER.Name = "TSM_OPEN_SAVE_FOLDER"
-        Me.TSM_OPEN_SAVE_FOLDER.Size = New System.Drawing.Size(174, 22)
-        Me.TSM_OPEN_SAVE_FOLDER.Text = "Open save folder"
-        '
-        'TSS_02
-        '
-        Me.TSS_02.Name = "TSS_02"
-        Me.TSS_02.Size = New System.Drawing.Size(171, 6)
-        '
-        'TSM_EXIT
-        '
-        Me.TSM_EXIT.Name = "TSM_EXIT"
-        Me.TSM_EXIT.Size = New System.Drawing.Size(174, 22)
-        Me.TSM_EXIT.Text = "Exit"
-        '
-        'TIM_CHECK_PROCESS
-        '
-        Me.TIM_CHECK_PROCESS.Interval = 1000
-        '
-        'FRM_MAIN
-        '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 18.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(10, 10)
-        Me.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.MaximizeBox = False
-        Me.MinimizeBox = False
-        Me.Name = "FRM_MAIN"
-        Me.ShowIcon = False
-        Me.ShowInTaskbar = False
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
-        Me.WindowState = System.Windows.Forms.FormWindowState.Minimized
-        Me.CMS_MENU.ResumeLayout(False)
-        Me.ResumeLayout(False)
+        NTI_TASK = New NotifyIcon(components)
+        CMS_MENU = New ContextMenuStrip(components)
+        TSM_SETTING = New ToolStripMenuItem()
+        TSS_01 = New ToolStripSeparator()
+        TSM_OPEN_SAVE_FOLDER = New ToolStripMenuItem()
+        TSS_02 = New ToolStripSeparator()
+        TSM_MOBILE = New ToolStripMenuItem()
+        TSS_03 = New ToolStripSeparator()
+        TSM_EXIT = New ToolStripMenuItem()
+        TIM_CHECK_PROCESS = New Timer(components)
+        CMS_MENU.SuspendLayout()
+        SuspendLayout()
+        ' 
+        ' NTI_TASK
+        ' 
+        NTI_TASK.ContextMenuStrip = CMS_MENU
+        NTI_TASK.Visible = True
+        ' 
+        ' CMS_MENU
+        ' 
+        CMS_MENU.Font = New Font("メイリオ", 9.0F)
+        CMS_MENU.Items.AddRange(New ToolStripItem() {TSM_SETTING, TSS_01, TSM_OPEN_SAVE_FOLDER, TSS_02, TSM_MOBILE, TSS_03, TSM_EXIT})
+        CMS_MENU.Name = "CMS_MENU"
+        CMS_MENU.Size = New Size(175, 110)
+        ' 
+        ' TSM_SETTING
+        ' 
+        TSM_SETTING.Name = "TSM_SETTING"
+        TSM_SETTING.Size = New Size(174, 22)
+        TSM_SETTING.Text = "Setting"
+        ' 
+        ' TSS_01
+        ' 
+        TSS_01.Name = "TSS_01"
+        TSS_01.Size = New Size(171, 6)
+        ' 
+        ' TSM_OPEN_SAVE_FOLDER
+        ' 
+        TSM_OPEN_SAVE_FOLDER.Name = "TSM_OPEN_SAVE_FOLDER"
+        TSM_OPEN_SAVE_FOLDER.Size = New Size(174, 22)
+        TSM_OPEN_SAVE_FOLDER.Text = "Open save folder"
+        ' 
+        ' TSS_02
+        ' 
+        TSS_02.Name = "TSS_02"
+        TSS_02.Size = New Size(171, 6)
+        ' 
+        ' TSM_MOBILE
+        ' 
+        TSM_MOBILE.Name = "TSM_MOBILE"
+        TSM_MOBILE.Size = New Size(174, 22)
+        TSM_MOBILE.Text = "Mobile"
+        ' 
+        ' TSS_03
+        ' 
+        TSS_03.Name = "TSS_03"
+        TSS_03.Size = New Size(171, 6)
+        ' 
+        ' TSM_EXIT
+        ' 
+        TSM_EXIT.Name = "TSM_EXIT"
+        TSM_EXIT.Size = New Size(174, 22)
+        TSM_EXIT.Text = "Exit"
+        ' 
+        ' TIM_CHECK_PROCESS
+        ' 
+        TIM_CHECK_PROCESS.Interval = 1000
+        ' 
+        ' FRM_MAIN
+        ' 
+        AutoScaleDimensions = New SizeF(7F, 18F)
+        AutoScaleMode = AutoScaleMode.Font
+        ClientSize = New Size(120, 10)
+        Font = New Font("メイリオ", 9F)
+        FormBorderStyle = FormBorderStyle.None
+        Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        MaximizeBox = False
+        MinimizeBox = False
+        Name = "FRM_MAIN"
+        ShowIcon = False
+        ShowInTaskbar = False
+        StartPosition = FormStartPosition.Manual
+        WindowState = FormWindowState.Minimized
+        CMS_MENU.ResumeLayout(False)
+        ResumeLayout(False)
 
     End Sub
 
@@ -107,4 +120,6 @@ Partial Class FRM_MAIN
     Friend WithEvents TSM_SETTING As ToolStripMenuItem
     Friend WithEvents TSM_OPEN_SAVE_FOLDER As ToolStripMenuItem
     Friend WithEvents TSS_02 As ToolStripSeparator
+    Friend WithEvents TSM_MOBILE As ToolStripMenuItem
+    Friend WithEvents TSS_03 As ToolStripSeparator
 End Class

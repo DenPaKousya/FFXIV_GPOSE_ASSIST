@@ -55,6 +55,21 @@ Public Class FRM_MAIN
 #End Region
 
 #Region "処理実行"
+    Public Sub SUB_MOBILE()
+        Dim WPF_SHOW As WPF_MOBILE_SETTING
+
+        WPF_SHOW = New WPF_MOBILE_SETTING
+        Call WPF_SHOW.ShowDialog()
+
+        If Not WPF_SHOW.CANCEL Then
+            If Not WPF_WINDOW_MAIN Is Nothing Then
+                Call WPF_WINDOW_MAIN.SUB_WINDOW_REFRESH()
+            End If
+        End If
+
+        Call WPF_SHOW.Close()
+        WPF_SHOW = Nothing
+    End Sub
 
     Public Sub SUB_SETTING()
         Dim WPF_SHOW As WPF_SETTING
@@ -374,6 +389,10 @@ Public Class FRM_MAIN
 
     Private Sub TSM_OPEN_SAVE_FOLDER_Click(sender As Object, e As EventArgs) Handles TSM_OPEN_SAVE_FOLDER.Click
         Call SUB_OPEN_SAVE_FOLDER()
+    End Sub
+
+    Private Sub TSM_MOBILE_Click(sender As Object, e As EventArgs) Handles TSM_MOBILE.Click
+        Call SUB_MOBILE()
     End Sub
 
     Private Sub TSM_EXIT_Click(sender As Object, e As EventArgs) Handles TSM_EXIT.Click
