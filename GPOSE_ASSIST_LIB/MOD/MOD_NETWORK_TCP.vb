@@ -105,7 +105,7 @@ Public Module MOD_NETWORK_TCP
 
         While True
             Try
-                Call ProcessMessage(SMR_SERVER_READER)
+                Call ProcessMessage(SMR_SERVER_READER, SMR_SERVER_WRITER)
             Catch ex As ThreadInterruptedException
                 Exit Sub
             Catch ex As Exception
@@ -116,7 +116,7 @@ Public Module MOD_NETWORK_TCP
     End Sub
 
     Private OBJ_THREAD_LOCK As New Object
-    Private Sub ProcessMessage(ByRef SMR_MESSAGE As System.IO.StreamReader)
+    Private Sub ProcessMessage(ByRef SMR_MESSAGE As System.IO.StreamReader, ByRef SMR_W As System.IO.StreamWriter)
 
         SyncLock OBJ_THREAD_LOCK
             If SMR_MESSAGE Is Nothing Then
@@ -129,6 +129,8 @@ Public Module MOD_NETWORK_TCP
                 Exit Sub
             End If
 
+            Call SMR_W.WriteLine("aaa")
+            Call SMR_W.Flush()
             Call FRM_SERVER.SUB_RECEIVE_MESSAGE(STR_MESSAGE)
         End SyncLock
 
@@ -182,7 +184,12 @@ Public Module MOD_NETWORK_TCP
     Public Function FUNC_CLIENT_SEND(ByVal STR_SEND As String) As Boolean
         Try
             Call SMR_CLIENT_WRITER.WriteLine(STR_SEND)
+            Call Console.WriteLine(STR_SEND)
             Call SMR_CLIENT_WRITER.Flush()
+
+            Dim STR_TEMP As String
+            STR_TEMP = SMR_CLIENT_READER.ReadLine()
+            Call Console.WriteLine(STR_TEMP)
         Catch ex As Exception
             Return False
         End Try

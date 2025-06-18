@@ -5,79 +5,12 @@
 			 Title="">
 
 	<ScrollView>
-        <VerticalStackLayout
-            Padding="5,0"
-            Spacing="5"
-			Loaded="Layout_Loaded"
-			Unloaded="Layout_Unloaded">
-           
-			<VerticalStackLayout HorizontalOptions="Center">
-				<HorizontalStackLayout>
-
-					<VerticalStackLayout VerticalOptions="Center">
-						<HorizontalStackLayout Margin="1" HorizontalOptions="Center">
-							<Button x:Name="BTN_KEY_W" Margin="-5,-5,-5,-5" HorizontalOptions="Center" SemanticProperties.Hint="Send Key W" ImageSource="key_w.png" BackgroundColor="#00000000" BorderColor="#00000000" SemanticProperties.Description="EVENT SEND_KEY_W" Clicked="BTN_Clicked" WidthRequest="128">
-							</Button>
-						</HorizontalStackLayout>
-						<HorizontalStackLayout Margin="1" HorizontalOptions="Center">
-							<Button x:Name="BTN_KEY_A" Margin="-5,-5,-5,-5" HorizontalOptions="Center" SemanticProperties.Hint="Send Key A" ImageSource="key_a.png" BackgroundColor="#00000000" BorderColor="#00000000" SemanticProperties.Description="EVENT SEND_KEY_A" Clicked="BTN_Clicked" WidthRequest="128">
-							</Button>
-							<Button x:Name="BTN_KEY_D" Margin="-5,-5,-5,-5" HorizontalOptions="Center" SemanticProperties.Hint="Send Key D" ImageSource="key_d.png" BackgroundColor="#00000000" BorderColor="#00000000" SemanticProperties.Description="EVENT SEND_KEY_D" Clicked="BTN_Clicked" WidthRequest="128">
-							</Button>
-						</HorizontalStackLayout>
-						<HorizontalStackLayout Margin="1" HorizontalOptions="Center">
-							<Button x:Name="BTN_KEY_S" Margin="-5,-5,-5,-5" HorizontalOptions="Center" SemanticProperties.Hint="Send Key S" ImageSource="key_s.png" BackgroundColor="#00000000" BorderColor="#00000000" SemanticProperties.Description="EVENT SEND_KEY_S" Clicked="BTN_Clicked" WidthRequest="128">
-							</Button>
-						</HorizontalStackLayout>
-					</VerticalStackLayout>
-					
-					<VerticalStackLayout VerticalOptions="Center">
-						<HorizontalStackLayout Margin="1" HorizontalOptions="Center">
-							<Button x:Name="BTN_KEY_PAGE_UP" Margin="-5,-5,-5,-5" HorizontalOptions="Center" SemanticProperties.Hint="Send Key PageUp" ImageSource="key_page_up.png" BackgroundColor="#00000000" BorderColor="#00000000" SemanticProperties.Description="EVENT SEND_KEY_PAGE_UP" Clicked="BTN_Clicked" WidthRequest="128">
-							</Button>
-						</HorizontalStackLayout>
-						<HorizontalStackLayout Margin="1" HorizontalOptions="Center">
-							<Button x:Name="BTN_KEY_PAGE_DOWN" Margin="-5,-5,-5,-5" HorizontalOptions="Center" SemanticProperties.Hint="Send Key PageDown" ImageSource="key_page_down.png" BackgroundColor="#00000000" BorderColor="#00000000" SemanticProperties.Description="EVENT SEND_KEY_PAGE_DOWN" Clicked="BTN_Clicked" WidthRequest="128">
-							</Button>
-						</HorizontalStackLayout>
-					</VerticalStackLayout>
-				</HorizontalStackLayout>
-				
-				<HorizontalStackLayout>
-					
-					<VerticalStackLayout VerticalOptions="Center">
-						<HorizontalStackLayout Margin="1" HorizontalOptions="Center">
-							<Button x:Name="BTN_KEY_ALLOW_UP" Margin="-5,-5,-5,-5" HorizontalOptions="Center" SemanticProperties.Hint="Send Key AllowUp" ImageSource="key_allow_up.png" BackgroundColor="#00000000" BorderColor="#00000000" SemanticProperties.Description="EVENT SEND_KEY_ALLOW_UP" Clicked="BTN_Clicked" WidthRequest="128">
-							</Button>
-						</HorizontalStackLayout>
-						<HorizontalStackLayout Margin="1" HorizontalOptions="Center">
-							<Button x:Name="BTN_KEY_ALLOW_LEFT" Margin="-5,-5,-5,-5" HorizontalOptions="Center" SemanticProperties.Hint="Send Key AllowLeft" ImageSource="key_allow_left.png" BackgroundColor="#00000000" BorderColor="#00000000" SemanticProperties.Description="EVENT SEND_KEY_ALLOW_LEFT" Clicked="BTN_Clicked" WidthRequest="128">
-							</Button>
-							<Button x:Name="BTN_KEY_ALLOW_RIGHT" Margin="-5,-5,-5,-5" HorizontalOptions="Center" SemanticProperties.Hint="Send Key AllowRight" ImageSource="key_allow_right.png" BackgroundColor="#00000000" BorderColor="#00000000" SemanticProperties.Description="EVENT SEND_KEY_ALLOW_RIGHT" Clicked="BTN_Clicked" WidthRequest="128">
-							</Button>
-						</HorizontalStackLayout>
-						<HorizontalStackLayout Margin="1" HorizontalOptions="Center">
-							<Button x:Name="BTN_KEY_ALLOW_DOWN" Margin="-5,-5,-5,-5" HorizontalOptions="Center" SemanticProperties.Hint="Send Key AllowDown" ImageSource="key_allow_down.png" BackgroundColor="#00000000" BorderColor="#00000000" SemanticProperties.Description="EVENT SEND_KEY_ALLOW_DOWN" Clicked="BTN_Clicked" WidthRequest="128">
-							</Button>
-						</HorizontalStackLayout>
-					</VerticalStackLayout>
-
-					<VerticalStackLayout VerticalOptions="Center">
-						<HorizontalStackLayout Margin="1" HorizontalOptions="Center">
-							<Button x:Name="BTN_KEY_CAMERA_NORMAL" Margin="-5,-5,-5,-5" HorizontalOptions="Center" SemanticProperties.Hint="Capture Screenshots" ImageSource="camera_normal.png" BackgroundColor="#00000000" BorderColor="#00000000" SemanticProperties.Description="EVENT CAPTURE_IMAGE" Clicked="BTN_Clicked" WidthRequest="128">
-							</Button>
-						</HorizontalStackLayout>
-						<HorizontalStackLayout Margin="1" HorizontalOptions="Center">
-							<Button x:Name="BTN_KEY_CAMERA_JPEG" Margin="-5,-5,-5,-5" HorizontalOptions="Center" SemanticProperties.Hint="Capture Screenshots(jpeg)" ImageSource="camera_jpeg.png" BackgroundColor="#00000000" BorderColor="#00000000" SemanticProperties.Description="EVENT CAPTURE_IMAGE_JPEG" Clicked="BTN_Clicked" WidthRequest="128">
-							</Button>
-						</HorizontalStackLayout>
-					</VerticalStackLayout>
-					
-				</HorizontalStackLayout>
-				
-			</VerticalStackLayout>
-			
-			
+		<VerticalStackLayout x:Name="MAIN_LAYOUT" Padding="30,0" Spacing="20" HorizontalOptions="Center">
+			<HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+				<Label Text="IP:" />
+				<Entry x:Name="ENT_IP" WidthRequest="200"/>
+			</HorizontalStackLayout>
+			<Button Text="Connect" WidthRequest="120" />
 		</VerticalStackLayout>
     </ScrollView>
 

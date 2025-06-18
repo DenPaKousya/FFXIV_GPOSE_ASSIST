@@ -7,12 +7,7 @@
     Shell.FlyoutBehavior="Flyout"
     Title="GPOSE_ASSIST_MOBILE">
 
-    <ShellContent
-        Title="GP Operate"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
-    <ShellContent
-    Title="Hotbar2"
-    ContentTemplate="{DataTemplate local:PAGE_HOT_BAR_2}"
-    Route="PAGE_HOT_BAR_2" />
+    <ShellContent Title="Connect" ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage" />
+	<ShellContent Title="Group Pose" ContentTemplate="{DataTemplate local:PAGE_GPOSE}" Route="PAGE_GPOSE" />
+	<ShellContent Title="Hotbar2" ContentTemplate="{DataTemplate local:PAGE_HOT_BAR_2}" Route="PAGE_HOT_BAR_2" />
 </Shell>

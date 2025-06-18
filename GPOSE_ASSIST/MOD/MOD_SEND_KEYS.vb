@@ -422,6 +422,10 @@ Module MOD_SEND_KEYS
             Return True
         End If
 
+        If prcTARGET Is Nothing Then
+            Return True
+        End If
+
         ptrCHILD = IntPtr.Zero
         'ptrCHILD = FUNC_FIND_WINDOW_EX(prcTARGET.MainWindowHandle, 0, "Edit", "")
 

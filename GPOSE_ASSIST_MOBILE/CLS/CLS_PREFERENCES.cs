@@ -28,7 +28,7 @@ namespace GPOSE_ASSIST_MOBILE.CLS
 
         private String CST_KEY_IP="IP";
 
-        private String CST_DEFAULT_VALUE_IP = "192.168.1.101";
+        private String CST_DEFAULT_VALUE_IP = "192.168.52.212";
 
         #endregion
 

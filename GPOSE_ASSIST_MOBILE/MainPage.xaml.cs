@@ -10,8 +10,15 @@
 
         private void Layout_Loaded(object sender, EventArgs e)
         {
+
+            CLS.CLS_PREFERENCES CLS_PRE;
+            CLS_PRE = new CLS.CLS_PREFERENCES();
+
+            CLS.CLS_PREFERENCES.SRT_APPLICATION_PREFERENCES SRT_PRE;
+            SRT_PRE = CLS_PRE.FUNC_GET_MY_PREFERENCES();
+
             bool BLN_RET;
-            BLN_RET = GPOSE_ASSIST_LIB.MOD_NETWORK_TCP.FUNC_CLIENT_INIT("192.168.10.222", 1234);
+            BLN_RET = GPOSE_ASSIST_LIB.MOD_NETWORK_TCP.FUNC_CLIENT_INIT(SRT_PRE.IP, 1234);
             if (!BLN_RET)
             {
                 CloseApp();
