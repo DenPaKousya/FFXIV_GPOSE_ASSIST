@@ -2,15 +2,15 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GPOSE_ASSIST_MOBILE.MainPage"
-			 Title="">
-
+			 x:Name="ME"
+			 Title="Connect">
 	<ScrollView>
-		<VerticalStackLayout x:Name="MAIN_LAYOUT" Padding="30,0" Spacing="20" HorizontalOptions="Center">
+		<VerticalStackLayout x:Name="MAIN_LAYOUT" Padding="30,0" Spacing="20" HorizontalOptions="Center" Loaded="Layout_Loaded" Unloaded="Layout_Unloaded">
 			<HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
 				<Label Text="IP:" />
 				<Entry x:Name="ENT_IP" WidthRequest="200"/>
 			</HorizontalStackLayout>
-			<Button Text="Connect" WidthRequest="120" />
+			<Button Text="Connect" WidthRequest="120" Clicked="BTN_CONNECT_Clicked" />
 		</VerticalStackLayout>
     </ScrollView>
 

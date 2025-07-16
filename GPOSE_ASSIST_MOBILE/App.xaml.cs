@@ -11,5 +11,20 @@
         {
             return new Window(new AppShell());
         }
+        protected override void OnStart()
+        {
+            base.OnStart();
+        }
+
+        protected override void OnSleep()
+        {
+            base.OnSleep();
+        }
+
+        protected override void CleanUp()
+        {
+            base.CleanUp();
+        }
+
     }
 }

@@ -143,7 +143,7 @@ Public Class FRM_MAIN
             Exit Sub
         End If
         BLN_DONE_SUB_CHECK_PROCESS = True
-        Call Application.DoEvents()
+        Call System.Windows.Forms.Application.DoEvents()
 
         Call SUB_GET_PROCESS()
         Call SUB_REFRESH_PROCESS()

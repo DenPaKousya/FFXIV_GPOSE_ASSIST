@@ -3,6 +3,8 @@
   <PropertyGroup>
     <RootNamespace>GPOSE_ASSIST_LIB</RootNamespace>
     <TargetFramework>net9.0</TargetFramework>
+    <ImportedNamespaces>System.Windows.Threading=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,GPOSE_ASSIST_LIB=True</ImportedNamespaces>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -11,6 +13,9 @@
 
   <ItemGroup>
     <Folder Include="MOD_SYSTEM\" />
+  </ItemGroup>
+
+  <ItemGroup>
   </ItemGroup>
 
 </Project>

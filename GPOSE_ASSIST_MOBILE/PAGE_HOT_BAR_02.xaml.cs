@@ -6,4 +6,6 @@ public partial class PAGE_HOT_BAR_2 : ContentPage
 	{
 		InitializeComponent();
 	}
+
+
 }

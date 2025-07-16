@@ -8,7 +8,8 @@ Imports Microsoft.SqlServer
 Public Module MOD_NETWORK_TCP
 
 #Region "外部用・変数"
-    Public STR_SEVER_LAST_RECV As String
+    Public STR_SEVER_LAST_RECV As String = ""
+    Public STR_MODULE_LAST_ERROR As String = ""
 #End Region
 
 #Region "モジュール用・変数"
@@ -142,6 +143,7 @@ Public Module MOD_NETWORK_TCP
             TCC_CLIENT_SESSION = New TcpClient()
             Call TCC_CLIENT_SESSION.Connect(STR_IP, INT_NUMBER_PORT)
         Catch ex As Exception
+            STR_MODULE_LAST_ERROR = ex.Message
             Return False
         End Try
 
