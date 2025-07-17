@@ -6,18 +6,22 @@ namespace GPOSE_ASSIST_MOBILE
 {
     public partial class MainPage : ContentPage
     {
-        
+        #region 画面用列挙定数
         enum ENM_WINDOW_EXEC
         {
             CONNECT = 0,
             MAX
         }
+        #endregion
 
+        #region 画面用変数
         private bool BLN_WINDOW_EXEC_DO = false;
+        #endregion
 
+        #region 実行処理呼出元
         private void SUB_EXEC_DO(ENM_WINDOW_EXEC ENM_EXEC)
         {
-            if (BLN_WINDOW_EXEC_DO) 
+            if (BLN_WINDOW_EXEC_DO)
             {
                 return;
             }
@@ -35,14 +39,24 @@ namespace GPOSE_ASSIST_MOBILE
 
             BLN_WINDOW_EXEC_DO = false;
         }
+        #endregion
 
+        #region 実行処理群
         private void SUB_CONNECT()
         {
 
             string STR_IP;
             STR_IP = ENT_IP.Text;
+            GPOSE_ASSIST_LIB.MOD_NETWORK_TCP.SUB_CLIENT_INIT_VALUE(STR_IP, 1234);
+
+            if (MOD_APPL_COMMON.CONNECTED)
+            {
+                GPOSE_ASSIST_LIB.MOD_NETWORK_TCP.FUNC_CLIENT_FIN();
+                MOD_APPL_COMMON.CONNECTED = false;
+            }
+
             bool BLN_RET;
-            BLN_RET = GPOSE_ASSIST_LIB.MOD_NETWORK_TCP.FUNC_CLIENT_INIT(STR_IP, 1234);
+            BLN_RET = GPOSE_ASSIST_LIB.MOD_NETWORK_TCP.FUNC_CLIENT_INIT();
             if (!BLN_RET)
             {
                 string STR_MSG;
@@ -55,9 +69,9 @@ namespace GPOSE_ASSIST_MOBILE
             }
 
             MOD_APPL_COMMON.CONNECTED = true;
-
             Shell.Current.GoToAsync("////PAGE_GPOSE");
         }
+        #endregion
 
         public MainPage()
         {
@@ -78,7 +92,7 @@ namespace GPOSE_ASSIST_MOBILE
 
         private void Layout_Unloaded(object sender, EventArgs e)
         {
-            //GPOSE_ASSIST_LIB.MOD_NETWORK_TCP.FUNC_CLIENT_FIN();
+
         }
 
         private void CloseApp()

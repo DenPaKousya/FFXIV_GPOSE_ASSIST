@@ -1,4 +1,6 @@
-﻿namespace GPOSE_ASSIST_MOBILE
+﻿using Microsoft.Maui.LifecycleEvents;
+
+namespace GPOSE_ASSIST_MOBILE
 {
     public partial class App : Application
     {
@@ -16,8 +18,15 @@
             base.OnStart();
         }
 
+        protected override void OnResume()
+        {
+            MOD_APPL_COMMON.COMMON_RESUME();
+            base.OnResume();
+        }
+
         protected override void OnSleep()
         {
+            MOD_APPL_COMMON.COMMON_SLEEP();
             base.OnSleep();
         }
 

@@ -4,7 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net9.0-windows10.0.26100.0</TargetFramework>
     <RootNamespace>GPOSE_ASSIST</RootNamespace>
-    <StartupObject>Sub Main</StartupObject>
+    <StartupObject>GPOSE_ASSIST.My.MyApplication</StartupObject>
     <UseWindowsForms>true</UseWindowsForms>
     <UseWPF>true</UseWPF>
     <MyType>WindowsForms</MyType>
