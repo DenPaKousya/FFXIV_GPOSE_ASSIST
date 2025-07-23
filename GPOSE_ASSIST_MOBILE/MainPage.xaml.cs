@@ -59,6 +59,7 @@ namespace GPOSE_ASSIST_MOBILE
             BLN_RET = GPOSE_ASSIST_LIB.MOD_NETWORK_TCP.FUNC_CLIENT_INIT();
             if (!BLN_RET)
             {
+                MOD_APPL_COMMON.CONNECTED_DO = false;
                 string STR_MSG;
                 STR_MSG = "";
                 STR_MSG += "接続に失敗しました。" + System.Environment.NewLine;
@@ -69,6 +70,8 @@ namespace GPOSE_ASSIST_MOBILE
             }
 
             MOD_APPL_COMMON.CONNECTED = true;
+            MOD_APPL_COMMON.CONNECTED_DO = true;
+            MOD_APPL_COMMON.NEW_PAGE = true;
             Shell.Current.GoToAsync("////PAGE_GPOSE");
         }
         #endregion
@@ -92,7 +95,7 @@ namespace GPOSE_ASSIST_MOBILE
 
         private void Layout_Unloaded(object sender, EventArgs e)
         {
-
+            MOD_APPL_COMMON.COMMON_PAGE_UNLOAD();
         }
 
         private void CloseApp()

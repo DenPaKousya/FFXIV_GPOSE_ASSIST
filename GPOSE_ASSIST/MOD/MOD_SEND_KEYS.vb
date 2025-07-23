@@ -158,7 +158,7 @@ Module MOD_SEND_KEYS
             Dim INT_CODE As Integer
             INT_CODE = BYT_TEMP(0)
 
-            Call FUNC_SEND_KEYS(prcTARGET, INT_CODE,, True)
+            Call FUNC_SEND_KEYS(prcTARGET, INT_CODE, 10, True)
         Next
 
         Return True

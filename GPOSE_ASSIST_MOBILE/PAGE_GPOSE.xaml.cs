@@ -60,7 +60,6 @@ public partial class PAGE_GPOSE : ContentPage
             DisplayAlert(ME.Title, STR_MSG, "OK");
             return;
         }
-
         GPOSE_ASSIST_LIB.MOD_NETWORK_TCP.FUNC_CLIENT_SEND(STR_DESCRIPTION);
     }
     #endregion
@@ -76,6 +75,7 @@ public partial class PAGE_GPOSE : ContentPage
 
     private void Layout_Unloaded(object sender, EventArgs e)
     {
+        MOD_APPL_COMMON.COMMON_PAGE_UNLOAD();
     }
 
     private void BTN_Clicked(object sender, EventArgs e)

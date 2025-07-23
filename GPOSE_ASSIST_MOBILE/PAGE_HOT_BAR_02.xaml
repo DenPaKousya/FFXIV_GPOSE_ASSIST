@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GPOSE_ASSIST_MOBILE.PAGE_HOT_BAR_2"
              Title="Hotbar2">
-    <ScrollView>
+    <ScrollView
+		Loaded="Layout_Loaded"
+        Unloaded="Layout_Unloaded">
         <FlexLayout Direction="Row" AlignItems="Stretch" AlignContent="Stretch" Wrap ="Wrap" JustifyContent="SpaceEvenly">
             <Button Text="1" WidthRequest="128" HeightRequest="128"/>
             <Button Text="2" WidthRequest="128" HeightRequest="128"/>

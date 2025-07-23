@@ -33,6 +33,7 @@ Public Module MOD_NETWORK_TCP
     Private TCL_SERVER_LISTNER As System.Net.Sockets.TcpListener
     Private INT_COMMON_NUMBER_PORT As Integer
 
+    Private BLN_LISTENER_ENABLED As Boolean = False
 #End Region
 
     Public Function FUNC_SERVER_START(ByVal INT_NUMBER_PORT As Integer, ByRef OBJ_PARENT As Object) As Boolean
@@ -42,6 +43,7 @@ Public Module MOD_NETWORK_TCP
             INT_COMMON_NUMBER_PORT = INT_NUMBER_PORT
             TCL_SERVER_LISTNER = New System.Net.Sockets.TcpListener(IPAddress.Any, INT_COMMON_NUMBER_PORT)
             Call TCL_SERVER_LISTNER.Start()
+            BLN_LISTENER_ENABLED = True
         Catch ex As Exception
             Return False
         End Try
@@ -54,21 +56,29 @@ Public Module MOD_NETWORK_TCP
 
         STR_SEVER_LAST_RECV = ""
 
-        If TCL_SERVER_LISTNER Is Nothing Then
-            Return True
+        If Not SMR_SERVER_READER Is Nothing Then
+            Call SMR_SERVER_READER.BaseStream.Close()
+            Call SMR_SERVER_READER.Close()
         End If
 
-        Try
-            Call TCL_SERVER_LISTNER.Stop()
-        Catch ex As Exception
-            Return False
-        End Try
+        If Not SMR_SERVER_WRITER Is Nothing Then
+            'Call SMR_SERVER_WRITER.Close()
+            'Call SMR_SERVER_WRITER.Dispose()
+            SMR_SERVER_WRITER = Nothing
+        End If
+
+        If Not THR_SERVER Is Nothing Then
+            Call THR_SERVER.Interrupt()
+        End If
+        THR_SERVER = Nothing
+
         Call TCL_SERVER_LISTNER.Dispose()
         TCL_SERVER_LISTNER = Nothing
         Return True
     End Function
 
     Public Function FUNC_SERVER_INIT() As Boolean
+
         Try
 
             If Not THR_SERVER Is Nothing Then
@@ -77,7 +87,7 @@ Public Module MOD_NETWORK_TCP
 
             BLN_SERVER_THREAD_ENABLED = True
             THR_SERVER = New Thread(New ThreadStart(AddressOf SUB_SERVER_THREAD))
-            THR_SERVER.IsBackground = True
+            'THR_SERVER.IsBackground = True
             Call THR_SERVER.Start()
         Catch ex As Exception
 
@@ -89,22 +99,34 @@ Public Module MOD_NETWORK_TCP
 
     Public Function FUNC_SERVER_FIN(ByVal BLN_SLEEP As Boolean) As Boolean
 
-        BLN_SERVER_THREAD_ENABLED = False
-
-        If Not THR_SERVER Is Nothing Then
-            THR_SERVER.IsBackground = False
-            Call THR_SERVER.Interrupt()
+        If TCL_SERVER_LISTNER Is Nothing Then
+            Return True
         End If
 
         Try
-            If BLN_SLEEP Then
-                Call System.Threading.Thread.Sleep(100)
-            End If
+            Call TCL_SERVER_LISTNER.Stop()
+            BLN_LISTENER_ENABLED = False
         Catch ex As Exception
-
+            Return False
         End Try
 
-        THR_SERVER = Nothing
+        BLN_SERVER_THREAD_ENABLED = False
+
+        'If Not THR_SERVER Is Nothing Then
+        '    'THR_SERVER.IsBackground = False
+        '    Call THR_SERVER.Interrupt()
+        'End If
+        'THR_SERVER = Nothing
+
+        'Try
+        '    If BLN_SLEEP Then
+        '        Call System.Threading.Thread.Sleep(100)
+        '    End If
+        'Catch ex As Exception
+
+        'End Try
+
+
 
         Return True
     End Function
@@ -141,6 +163,10 @@ Public Module MOD_NETWORK_TCP
             If Not ProcessMessage(SMR_SERVER_READER, SMR_SERVER_WRITER) Then
                 Exit While
             End If
+
+            If Not BLN_LISTENER_ENABLED Then
+                Exit While
+            End If
             'Try
             '    Call 
             'Catch ex As ThreadInterruptedException
@@ -151,21 +177,23 @@ Public Module MOD_NETWORK_TCP
 
         End While
 
-        Try
-            Call SMR_SERVER_WRITER.Dispose()
-            Call SMR_SERVER_READER.Dispose()
-        Catch ex As Exception
+        'Try
+        '    Call SMR_SERVER_WRITER.Dispose()
+        '    Call SMR_SERVER_READER.Dispose()
+        'Catch ex As Exception
 
-        End Try
-        Call STM_N_STREAM.Close()
-        Call TCC_CLIENT.Close()
+        'End Try
+        'Call STM_N_STREAM.Close()
+        'Call TCC_CLIENT.Close()
 
-        SMR_SERVER_READER = Nothing
-        SMR_SERVER_WRITER = Nothing
-        STM_N_STREAM = Nothing
-        TCC_CLIENT = Nothing
+        'SMR_SERVER_READER = Nothing
+        'SMR_SERVER_WRITER = Nothing
+        'STM_N_STREAM = Nothing
+        'TCC_CLIENT = Nothing
 
-        Call FUNC_RE_START_SERVER()
+        If BLN_LISTENER_ENABLED Then
+            Call FUNC_RE_START_SERVER()
+        End If
     End Sub
 
     Private OBJ_THREAD_LOCK As New Object
@@ -229,8 +257,9 @@ Public Module MOD_NETWORK_TCP
 
         If Not SMR_CLIENT_WRITER Is Nothing Then
             Try
-                Call SMR_CLIENT_WRITER.Close()
-                Call SMR_CLIENT_WRITER.Dispose()
+                'Call SMR_CLIENT_WRITER.Close()
+                'Call SMR_CLIENT_WRITER.Dispose()
+                SMR_CLIENT_WRITER = Nothing
             Catch ex As Exception
 
             End Try

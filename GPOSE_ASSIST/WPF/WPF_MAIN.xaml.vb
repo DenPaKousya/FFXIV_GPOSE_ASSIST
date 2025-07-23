@@ -272,4 +272,7 @@ Public Class WPF_MAIN
         Call SUB_CTRL_VIEW_INIT()
     End Sub
 
+    Private Sub WPF_MAIN_Unloaded(sender As Object, e As RoutedEventArgs) Handles Me.Unloaded
+
+    End Sub
 End Class
