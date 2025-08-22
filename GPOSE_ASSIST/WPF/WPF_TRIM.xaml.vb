@@ -20,6 +20,7 @@ Public Class WPF_TRIM
         DO_KEY_PAGE_UP
         DO_KEY_PAGE_DOWN
         DO_FIT_WINDOW
+        DO_FIT_WINDOW_VERTICAL
     End Enum
 
     Private Enum ENM_DIVISION_PATTERN
@@ -221,6 +222,8 @@ Public Class WPF_TRIM
                 Call SUB_KEY_PAGE_DOWN()
             Case ENM_WINDOW_EXEC.DO_FIT_WINDOW
                 Call SUB_FIT_WINDOW()
+            Case ENM_WINDOW_EXEC.DO_FIT_WINDOW_VERTICAL
+                Call SUB_FIT_WINDOW_VERTICAL()
         End Select
 
         Call Me.DoEvents()
@@ -422,11 +425,20 @@ Public Class WPF_TRIM
         Dim INT_CLIENT_TOP As Integer
         INT_CLIENT_TOP = MOD_PROCESS_WINDOW.FUNC_GET_TOP_CLIENT(PRC_APP_TARGET)
 
-        Me.Left = INT_CLIENT_LEFT
-        Me.Top = INT_CLIENT_TOP
+        Dim INT_SET_WIDTH As Integer
+        INT_SET_WIDTH = INT_CLIENT_WIDTH
+        Dim INT_SET_HEIGHT As Integer
+        INT_SET_HEIGHT = INT_CLIENT_HEIGHT
+        Dim INT_SET_LEFT As Integer
+        INT_SET_LEFT = INT_CLIENT_LEFT
+        Dim INT_SET_TOP As Integer
+        INT_SET_TOP = INT_CLIENT_TOP
+
+        Me.Left = INT_SET_LEFT
+        Me.Top = INT_SET_TOP
         BLN_SET_SIZE = True
-        Me.Width = INT_CLIENT_WIDTH
-        Me.Height = INT_CLIENT_HEIGHT
+        Me.Width = INT_SET_WIDTH
+        Me.Height = INT_SET_HEIGHT
         BLN_SET_SIZE = False
         Call SUB_SET_RATE(ENM_RATE_CURRENT)
 
@@ -435,11 +447,73 @@ Public Class WPF_TRIM
         End If
 
         'アスペクト比フリー以外の場合は位置の調整を行う
+        Call SUB_FIT_MOVE(INT_SET_WIDTH, INT_SET_HEIGHT)
+    End Sub
+
+    Private Sub SUB_FIT_WINDOW_VERTICAL()
+
+        Dim SRT_CRIENT_RECT_WH As MOD_PROCESS_WINDOW.RECT_WH
+        SRT_CRIENT_RECT_WH = FUNC_GET_CRIENT_RECT_WH(PRC_APP_TARGET)
+
+        Dim INT_CLIENT_WIDTH As Integer
+        INT_CLIENT_WIDTH = SRT_CRIENT_RECT_WH.width
+
+        Dim INT_CLIENT_HEIGHT As Integer
+        INT_CLIENT_HEIGHT = SRT_CRIENT_RECT_WH.height
+
+        Dim INT_CLIENT_LEFT As Integer
+        INT_CLIENT_LEFT = MOD_PROCESS_WINDOW.FUNC_GET_LEFT_CLIENT(PRC_APP_TARGET)
+
+        Dim INT_CLIENT_TOP As Integer
+        INT_CLIENT_TOP = MOD_PROCESS_WINDOW.FUNC_GET_TOP_CLIENT(PRC_APP_TARGET)
+
+        '縦画面補助に置換
+        Dim INT_SET_WIDTH As Integer
+        Dim INT_SET_HEIGHT As Integer
+        Dim INT_SET_LEFT As Integer
+        Dim INT_SET_TOP As Integer
+
+        If INT_CLIENT_WIDTH > INT_CLIENT_HEIGHT Then '横＞縦（通常）
+            INT_SET_HEIGHT = INT_CLIENT_HEIGHT '高さをそのまま転送
+            Dim DEC_RATE As Decimal
+            DEC_RATE = CDec(CDec(INT_SET_HEIGHT) / CDec(INT_CLIENT_WIDTH)) '転送した高さの既存幅との比を産出
+
+            INT_SET_WIDTH = CInt(CDec(INT_SET_HEIGHT) * DEC_RATE)
+
+            INT_SET_TOP = INT_CLIENT_TOP '縦をそのまま転送
+            INT_SET_LEFT = INT_CLIENT_LEFT + CInt((INT_CLIENT_WIDTH - INT_SET_WIDTH) / 2)
+        Else
+            INT_SET_WIDTH = INT_CLIENT_WIDTH '幅をそのまま転送
+            Dim DEC_RATE As Decimal
+            DEC_RATE = CDec(CDec(INT_SET_WIDTH) / CDec(INT_CLIENT_HEIGHT)) '転送した幅の既存高さとの比を産出
+            INT_SET_HEIGHT = CInt(CDec(INT_SET_WIDTH) * DEC_RATE)
+
+            INT_SET_LEFT = INT_CLIENT_LEFT '横をそのまま転送
+            INT_SET_TOP = INT_CLIENT_TOP + CInt((INT_CLIENT_HEIGHT - INT_SET_HEIGHT) / 2)
+        End If
+
+        Me.Left = INT_SET_LEFT
+        Me.Top = INT_SET_TOP
+        BLN_SET_SIZE = True
+        Me.Width = INT_SET_WIDTH
+        Me.Height = INT_SET_HEIGHT
+        BLN_SET_SIZE = False
+        Call SUB_SET_RATE(ENM_RATE_CURRENT, INT_SET_WIDTH, INT_SET_HEIGHT)
+
+        If ENM_RATE_CURRENT = ENM_WINDOW_RATE.RATE_FREE Then
+            Exit Sub
+        End If
+
+        'アスペクト比フリー以外の場合は位置の調整を行う
+        Call SUB_FIT_MOVE(INT_SET_WIDTH, INT_SET_HEIGHT)
+    End Sub
+
+    Private Sub SUB_FIT_MOVE(ByVal INT_SET_WIDTH As Integer, ByVal INT_SET_HEIGHT As Integer)
         '余白部分を中央寄せ
         Dim INT_WIDTH_SUB As Integer
-        INT_WIDTH_SUB = INT_CLIENT_WIDTH - Me.Width
+        INT_WIDTH_SUB = INT_SET_WIDTH - Me.Width
         Dim INT_HEIGHT_SUB As Integer
-        INT_HEIGHT_SUB = INT_CLIENT_HEIGHT - Me.Height
+        INT_HEIGHT_SUB = INT_SET_HEIGHT - Me.Height
 
         If INT_WIDTH_SUB > INT_HEIGHT_SUB Then '左右中央寄せ
             Me.Left = Me.Left + Math.Truncate(INT_WIDTH_SUB / 2)
@@ -827,7 +901,7 @@ Public Class WPF_TRIM
     End Sub
 
     Private BLN_SET_SIZE As Boolean = False
-    Private Sub SUB_SET_RATE(ByVal ENM_RATE As ENM_WINDOW_RATE)
+    Private Sub SUB_SET_RATE(ByVal ENM_RATE As ENM_WINDOW_RATE, Optional ByVal INT_MATCH_WIDTH As Integer = 0, Optional ByVal INT_MATCH_HEIGHT As Integer = 0)
         If ENM_RATE < 0 Then
             Exit Sub
         End If
@@ -843,8 +917,16 @@ Public Class WPF_TRIM
         Dim intWIDTH_SET As Integer
         Dim intHEIGHT_SET As Integer
 
-        intWIDTH = Me.ActualWidth
-        intHEIGHT = Me.ActualHeight
+        If INT_MATCH_WIDTH <= 0 Then
+            intWIDTH = Me.ActualWidth
+        Else
+            intWIDTH = INT_MATCH_WIDTH
+        End If
+        If INT_MATCH_HEIGHT <= 0 Then
+            intHEIGHT = Me.ActualHeight
+        Else
+            intHEIGHT = INT_MATCH_HEIGHT
+        End If
 
         Select Case ENM_RATE
             Case ENM_WINDOW_RATE.RATE_FREE
@@ -924,13 +1006,21 @@ Public Class WPF_TRIM
 
         Dim SRT_RECT_WH As MOD_PROCESS_WINDOW.RECT_WH
         SRT_RECT_WH = FUNC_GET_CRIENT_RECT_WH(PRC_APP_TARGET)
-        Dim intWIDTH_CLIENT As Integer
-        Dim intHEIGHT_CLIENT As Integer
-        intWIDTH_CLIENT = SRT_RECT_WH.width
-        intHEIGHT_CLIENT = SRT_RECT_WH.height
+        Dim INT_CLIENT_WIDTH As Integer
+        INT_CLIENT_WIDTH = SRT_RECT_WH.width
+        Dim INT_CLIENT_HEIGHT As Integer
+        INT_CLIENT_HEIGHT = SRT_RECT_WH.height
+
+        If INT_MATCH_WIDTH <= 0 Then
+            INT_MATCH_WIDTH = INT_CLIENT_WIDTH
+        End If
+
+        If INT_MATCH_HEIGHT <= 0 Then
+            INT_MATCH_HEIGHT = INT_CLIENT_HEIGHT
+        End If
 
         If intAREA_01 <= intAREA_02 Then '基本的には大きい方を採用する
-            If intWIDTH_CLIENT >= intWIDTH_02 And intHEIGHT_CLIENT >= intHEIGHT_02 Then 'ただし画面サイズを超えていない場合だけ
+            If INT_MATCH_WIDTH >= intWIDTH_02 And INT_MATCH_HEIGHT >= intHEIGHT_02 Then 'ただし画面サイズを超えていない場合だけ
                 intWIDTH_SET = intWIDTH_02
                 intHEIGHT_SET = intHEIGHT_02
             Else
@@ -938,7 +1028,7 @@ Public Class WPF_TRIM
                 intHEIGHT_SET = intHEIGHT_01
             End If
         Else
-            If intWIDTH_CLIENT >= intWIDTH_01 And intHEIGHT_CLIENT >= intHEIGHT_01 Then 'ただし画面サイズを超えていない場合だけ
+            If INT_MATCH_WIDTH >= intWIDTH_01 And INT_MATCH_HEIGHT >= intHEIGHT_01 Then 'ただし画面サイズを超えていない場合だけ
                 intWIDTH_SET = intWIDTH_01
                 intHEIGHT_SET = intHEIGHT_01
             Else
@@ -1403,6 +1493,10 @@ Public Class WPF_TRIM
         Call SUB_EXEC_DO(ENM_WINDOW_EXEC.DO_FIT_WINDOW)
     End Sub
 
+    Private Sub MNI_FIT_WINDOW_VERTICAL_Click(sender As Object, e As RoutedEventArgs) Handles MNI_FIT_WINDOW_VERTICAL.Click
+        Call SUB_EXEC_DO(ENM_WINDOW_EXEC.DO_FIT_WINDOW_VERTICAL)
+    End Sub
+
 #Region "縦横比"
     Private Sub MNI_RATE_FREE_Click(sender As Object, e As RoutedEventArgs) Handles MNI_RATE_FREE.Click
         Call SUB_CHANGE_RATE(ENM_WINDOW_RATE.RATE_FREE)
@@ -1810,4 +1904,5 @@ Public Class WPF_TRIM
     Private Sub WPF_TRIM_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
 
     End Sub
+
 End Class

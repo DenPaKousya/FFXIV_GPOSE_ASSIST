@@ -16,14 +16,16 @@
             Return False
         End If
 
-        If Not GPOSE_ASSIST_LIB.MOD_NETWORK_TCP.FUNC_SERVER_START(1234, FRM_MAIN) Then
-            STR_ERROR_DETAIL = "aaa。"
-            Return False
-        End If
+        If FUNC_CAST_INT_TO_BOOL(SRT_APP_SETTINGS_VALUE.NETWORK_ENABLED) Then
+            If Not GPOSE_ASSIST_LIB.MOD_NETWORK_TCP.FUNC_SERVER_START(1234, FRM_MAIN) Then
+                STR_ERROR_DETAIL = "ネットワークの待ち受けに失敗しました。"
+                Return False
+            End If
 
-        If Not GPOSE_ASSIST_LIB.MOD_NETWORK_TCP.FUNC_SERVER_INIT() Then
-            STR_ERROR_DETAIL = "aaa。"
-            Return False
+            If Not GPOSE_ASSIST_LIB.MOD_NETWORK_TCP.FUNC_SERVER_INIT() Then
+                STR_ERROR_DETAIL = "サービススレッドの初期化に失敗しました。"
+                Return False
+            End If
         End If
 
         Return True
@@ -41,6 +43,9 @@
                 If .PROCESS_NAME = "" Then
                     Return False
                 End If
+
+                STR_TEMP = FUNC_GET_APP_SETTINGS(CST_APP_CONFIG_NETWORK_ENABLED)
+                .NETWORK_ENABLED = CInt(STR_TEMP)
 
                 'SAVE<
                 STR_TEMP = FUNC_GET_APP_SETTINGS(CST_APP_CONFIG_SAVE_DIRECTORY)

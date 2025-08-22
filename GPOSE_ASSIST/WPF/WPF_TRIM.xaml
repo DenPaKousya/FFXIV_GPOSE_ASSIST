@@ -19,7 +19,8 @@
                 <MenuItem x:Name="MNI_CAPT_SNS" Header="撮影(SNS向)" />
                 <Separator />
                 <MenuItem x:Name="MNI_FIT_WINDOW" Header="画面の位置に合わせる" />
-                <Separator />
+				<MenuItem x:Name="MNI_FIT_WINDOW_VERTICAL" Header="縦撮りプレビューの位置に合わせる" />
+				<Separator />
                 <MenuItem Header="アスペクト比">
                     <MenuItem x:Name="MNI_RATE_FREE" Header="フリー" IsCheckable="True" />
                     <MenuItem x:Name="MNI_RATE_1_1" Header="1:1" IsCheckable="True" />

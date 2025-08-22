@@ -3,6 +3,8 @@
 #Region "外部用・構造体"
     Public Structure SRT_APP_SETTINGS
         Public PROCESS_NAME As String
+        Public NETWORK_ENABLED As Integer
+
         Public SAVE As SRT_APP_SETTINGS_SAVE
         Public GUIDE As SRT_APP_SETTINGS_GUIDE
         Public TRIM As SRT_APP_SETTINGS_TRIM
